@@ -47,9 +47,25 @@ require "lazy".setup {
                 }
             }
         end
-        }
     },
+
+    -- auto-pairs
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true
+    },
+
+    -- lsp
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            -- TODO ENSURE that we need that
+            require "lspconfig".clangd.setup {}
+        end
+    }
 }
 
 require "aldivim.keys" -- key bindings
 require "aldivim.opt" -- basic settings
+require "aldivim.lsp"
