@@ -83,6 +83,42 @@ require "lazy".setup {
             -- https://github.com/zigtools/zls
             require "lspconfig".zls.setup {}
         end
+    },
+
+    -- completions
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = "hrsh7th/cmp-nvim-lsp",
+        config = function()
+            local cmp = require "cmp"
+            cmp.setup {
+                snippet = {
+                    expand = function(args)
+                        vim.snippet.expand(args.body)
+                    end
+                },
+                window = {
+                    completion = cmp.config.window.bordered()
+                    documentation = cmp.config.window.bordered()
+                },
+                mapping = cmp.mapping.preset.insert {
+                    ["<c-u>"] = cmp.mapping.scroll_docs(-4),
+                    ["<c-d>"] = cmp.mapping.scroll_docs(4),
+                    ["<c-Space>"] = cmp.mapping.complete(),
+                    ["<c-x>"] = cmp.mapping.abort(),
+                    ["<cr>"] = cmp.mapping.confirm { select = true }
+                },
+                sources = cmp.config.source (
+                    { { name = "nvim_lsp" } },
+                    { name = "buffer" }
+                )
+
+                local capabilities = require "cmp_nvim.lsp".default_capabilities()
+                require "lspconfig".clangd.setup {
+                    capabilities = capabilities
+                }
+            }
+        end
     }
 }
 
