@@ -1,3 +1,5 @@
+local vim = vim
+
 -- where nvim plugins are stored
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
