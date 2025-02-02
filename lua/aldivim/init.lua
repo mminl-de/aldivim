@@ -32,9 +32,22 @@ require "lazy".setup {
 
     -- telescope
     {
-        "nvim-telescope/telescope.nvim",
-        depenencies = "nvim-lua/plenary.nvim"
-    }
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim"
+        },
+        config = function()
+            local telescope = require "telescope"
+            local fb_actions = telescope.extensions.file_browser.actions
+            telescope.setup {
+                extensions = {
+                    hijack_netrw = true,
+                    -- TODO mappings
+                }
+            }
+        end
+    },
 }
 
 require "aldivim.keys" -- key bindings

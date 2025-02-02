@@ -6,6 +6,7 @@
   "nordic.nvim": { "branch": "main", "commit": "2e060bda700365af5ce936bec6bb2b8ff2daeb19" },
   "onedark.nvim": { "branch": "master", "commit": "67a74c275d1116d575ab25485d1bfa6b2a9c38a6" },
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
+  "telescope-file-browser.nvim": { "branch": "master", "commit": "626998e5c1b71c130d8bc6cf7abb6709b98287bb" },
   "telescope.nvim": { "branch": "master", "commit": "415af52339215926d705cccc08145f3782c4d132" },
   "tokyodark.nvim": { "branch": "master", "commit": "cc70a2fb809d5376f2bd8e5836f9bb3f5fb8ef43" }
 }
