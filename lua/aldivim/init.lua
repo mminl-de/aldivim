@@ -60,7 +60,28 @@ require "lazy".setup {
     {
         "neovim/nvim-lspconfig",
         config = function()
+            -- Link to the docs for all of these:
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server
+            -- https://github.com/bash-lsp/bash-language-server
+            require "lspconfig".bashls.setup {}
+            -- clang package
             require "lspconfig".clangd.setup {}
+            -- https://github.com/hrsh7th/vscode-langservers-extracted
+            require "lspconfig".html.setup {}
+            -- https://github.com/georgewfraser/java-language-server
+            require "lspconfig".java_language_server.setup {}
+            -- https://biomejs.dev/
+            require "lspconfig".biome.setup {}
+            -- https://github.com/hrsh7th/vscode-langservers-extracted
+            require "lspconfig".jsonls.setup {}
+            -- https://github.com/latex-lsp/texlab
+            require "lspconfig".texlab.setup {}
+            -- https://github.com/luals/lua-language-server
+            require "lspconfig".lua_ls.setup {}
+            -- https://github.com/mtshiba/pylyzer
+            require "lspconfig".pylyzer.setup {}
+            -- https://github.com/zigtools/zls
+            require "lspconfig".zls.setup {}
         end
     },
 
