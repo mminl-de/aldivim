@@ -108,13 +108,13 @@ require "lazy".setup {
                     ["<c-x>"] = cmp.mapping.abort(),
                     ["<cr>"] = cmp.mapping.confirm { select = true }
                 },
-                sources = cmp.config.source (
+                sources = cmp.config.sources (
                     { { name = "nvim_lsp" } },
                     { name = "buffer" }
                 )
             }
 
-            local capabilities = require "cmp_nvim.lsp".default_capabilities()
+            local capabilities = require "cmp_nvim_lsp".default_capabilities()
             require "lspconfig".clangd.setup {
                 capabilities = capabilities
             }
