@@ -68,4 +68,3 @@ require "lazy".setup {
 
 require "aldivim.keys" -- key bindings
 require "aldivim.opt" -- basic settings
-require "aldivim.lsp"
