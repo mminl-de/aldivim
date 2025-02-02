@@ -77,7 +77,7 @@ require "lazy".setup {
                     end
                 },
                 window = {
-                    completion = cmp.config.window.bordered()
+                    completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered()
                 },
                 mapping = cmp.mapping.preset.insert {
@@ -91,11 +91,11 @@ require "lazy".setup {
                     { { name = "nvim_lsp" } },
                     { name = "buffer" }
                 )
+            }
 
-                local capabilities = require "cmp_nvim.lsp".default_capabilities()
-                require "lspconfig".clangd.setup {
-                    capabilities = capabilities
-                }
+            local capabilities = require "cmp_nvim.lsp".default_capabilities()
+            require "lspconfig".clangd.setup {
+                capabilities = capabilities
             }
         end
     }
