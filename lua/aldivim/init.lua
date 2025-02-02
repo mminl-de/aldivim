@@ -30,7 +30,7 @@ require "lazy".setup {
     "tiagovla/tokyodark.nvim",
     { "catppuccin/nvim", name = "catppuccin" },
 
-    -- telescope
+    -- telescope (with file browser)
     {
         "nvim-telescope/telescope-file-browser.nvim",
         dependencies = {
@@ -47,6 +47,7 @@ require "lazy".setup {
                 }
             }
         end
+        }
     },
 }
 
