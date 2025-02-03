@@ -113,12 +113,68 @@ require "lazy".setup {
                 sources = cmp.config.sources (
                     { { name = "nvim_lsp" } },
                     { name = "buffer" }
-                )
+                ),
+                formatting = {
+                    fields = { "kind", "abbr", "menu" },
+                    format = function(entry, vim_item)
+                        local kind_icons = {
+                            Text = "",
+                            Method = "󰆧",
+                            Function = "󰊕",
+                            Constructor = "",
+                            Field = "󰇽",
+                            Variable = "󰂡",
+                            Class = "󰠱",
+                            Interface = "",
+                            Module = "",
+                            Property = "󰜢",
+                            Unit = "",
+                            Value = "󰎠",
+                            Enum = "",
+                            Keyword = "󰌋",
+                            Snippet = "",
+                            Color = "󰏘",
+                            File = "󰈙",
+                            Reference = "",
+                            Folder = "󰉋",
+                            EnumMember = "",
+                            Constant = "󰏿",
+                            Struct = "",
+                            Event = "",
+                            Operator = "󰆕",
+                            TypeParameter = "󰅲",
+                        }
+
+                        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+                        vim_item.menu = ({
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            nvim_lua = "[Lua]"
+                        })[entry.source.name]
+                        return vim_item
+                    end
+                },
+                view = { entries = "native" }
             }
 
+            -- necessary to make clangd completions not suck
             local capabilities = require "cmp_nvim_lsp".default_capabilities()
-            require "lspconfig".clangd.setup {
-                capabilities = capabilities
+            require "lspconfig".clangd.setup { capabilities = capabilities }
+        end
+    },
+
+    -- statusline
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require "lualine".setup {
+                options = {
+                    icons_enabled = true,
+                    theme = "auto",
+                    section_separators = { left = '', right = '' },
+                    component_separators = { left = '│', right = '│' }
+                }
             }
         end
     }
