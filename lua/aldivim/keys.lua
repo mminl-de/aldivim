@@ -1,7 +1,16 @@
 local vim = vim
-local function n(keys, cmd) vim.keymap.set("n", keys, cmd) end
-local function i(keys, cmd) vim.keymap.set("i", keys, cmd) end
+local ks = vim.keymap.set
+
+vim.g.mapleader = " "
+
+-- basic
+ks({ "n", }, "<leader><leader>", vim.cmd.write)
+ks({ "n" }, "<leader>z", vim.cmd.wq)
+ks({ "n" }, "<leader>q", vim.cmd.quit)
+ks({ "i" }, "<m-i>", "<esc>")
+ks({ "i" }, "<m-backspace>", "<c-w>")
+ks({ "n" }, "<esc>", vim.cmd.nohlsearch)
 
 -- snippets
-vim.keymap.set({ "i", "s" }, "<c-f>", function() vim.snippet.jump(1) end)
-vim.keymap.set({ "i", "s" }, "<c-b>", function() vim.snippet.jump(-1) end)
+ks({ "i", "s" }, "<c-f>", function() vim.snippet.jump(1) end)
+ks({ "i", "s" }, "<c-b>", function() vim.snippet.jump(-1) end)
