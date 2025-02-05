@@ -13,7 +13,7 @@ ks({ "i" }, "<m-backspace>", "<c-w>") -- delete the last word with Alt-Backspace
 -- writing
 ks({ "n" }, "<leader><leader>", vim.cmd.write) -- Space-Space saves the file
 ks({ "n" }, "<leader>z", vim.cmd.wq) -- Space-z saves and quits, like ZZ
-ks({ "n" }, "<leader>q", vim.cmd.quit) -- Space-q quits without saving
+ks({ "n" }, "<leader>q", ":q!<cr>") -- Space-q quits without saving
 
 -- snippets
 ks({ "i", "s" }, "<c-f>", function() vim.snippet.jump(1) end) -- jump between snippet placeholders Emacs-style
