@@ -85,6 +85,9 @@ require "lazy".setup {
     {
         "neovim/nvim-lspconfig",
         config = function()
+            vim.opt.signcolumn = "yes" -- line numbers don't shift around when errors
+            -- and warnings arise
+
             -- Link to the docs for all of these:
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server
             -- https://github.com/bash-lsp/bash-language-server
