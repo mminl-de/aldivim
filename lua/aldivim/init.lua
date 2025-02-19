@@ -190,7 +190,19 @@ require "lazy".setup {
                 }
             }
         end
-    }
+    },
+    -- refactoring
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        lazy = false,
+        config = function()
+            require("refactoring").setup()
+        end,
+    },
 }
 
 require "aldivim.keys" -- key bindings
