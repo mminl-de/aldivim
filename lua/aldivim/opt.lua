@@ -3,7 +3,7 @@ local o = vim.opt
 
 -- line numbers
 o.number = true
-o.relativenumber = true
+o.relativenumber = true -- disable this line to have "normal" line numbers
 
 -- tabs
 o.tabstop = 4

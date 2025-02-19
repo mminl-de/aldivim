@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 local vim = vim
 
 -- where nvim plugins are stored
@@ -31,7 +30,7 @@ require "lazy".setup {
     "rebelot/kanagawa.nvim",
     "sainnhe/gruvbox-material",
     "tiagovla/tokyodark.nvim",
-    { "catppuccin/nvim", name = "catppuccin" },
+    { "catppuccin/nvim", name = "catppuccin" }, -- this is how to rename plugins
 
     -- telescope (with file browser)
     {
@@ -42,11 +41,21 @@ require "lazy".setup {
         },
         config = function()
             local telescope = require "telescope"
+            local actions = require "telescope.actions"
             local fb_actions = telescope.extensions.file_browser.actions
             telescope.setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<esc>"] = actions.close -- Esc closes telescope
+                        }
+                    }
+                },
                 extensions = {
-                    hijack_netrw = true,
-                    -- TODO mappings
+                    file_browser = {
+                        hidden = true,
+                        hijack_netrw = true
+                    }
                 }
             }
         end
@@ -65,7 +74,7 @@ require "lazy".setup {
         build = ":TSUpdate",
         config = function()
             require "nvim-treesitter.configs".setup {
-                ensure_installed = { "lua", "vimdoc" },
+                ensure_installed = { "c", "lua", "vimdoc" },
                 highlight = { enable = true },
                 indent = { enable = true }
             }
@@ -76,6 +85,9 @@ require "lazy".setup {
     {
         "neovim/nvim-lspconfig",
         config = function()
+            vim.opt.signcolumn = "yes" -- line numbers don't shift around when errors
+            -- and warnings arise
+
             -- Link to the docs for all of these:
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server
             -- https://github.com/bash-lsp/bash-language-server
@@ -124,10 +136,10 @@ require "lazy".setup {
                     ["<c-x>"] = cmp.mapping.abort(),
                     ["<cr>"] = cmp.mapping.confirm { select = true }
                 },
-                sources = cmp.config.sources (
-                    { { name = "nvim_lsp" } },
+                sources = {
+                    { name = "nvim_lsp" },
                     { name = "buffer" }
-                ),
+                },
                 formatting = {
                     fields = { "kind", "abbr", "menu" },
                     format = function(entry, vim_item)
@@ -191,23 +203,5 @@ require "lazy".setup {
                 }
             }
         end
-    },
-    -- refactoring
-    {
-        "ThePrimeagen/refactoring.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        lazy = false,
-        config = function()
-            require("refactoring").setup()
-        end,
-    },
+    }
 }
-
-require "aldivim.keys" -- key bindings
-=======
-require "aldivim.lazy" -- plugins
-require "aldivim.opt" -- basic settings
-require "aldivim.keys" -- key bindings
