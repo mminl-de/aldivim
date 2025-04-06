@@ -203,5 +203,15 @@ require "lazy".setup {
                 }
             }
         end
+    },
+
+    -- Zen writing
+    -- Resizes your buffer to a narrow width. Useful for prose and continuous text.
+    {
+        "junegunn/goyo.vim",
+        init = function()
+            vim.g.goyo_width = 100
+            vim.g.goyo_linenr = true
+        end
     }
 }
