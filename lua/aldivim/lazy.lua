@@ -212,10 +212,12 @@ require "lazy".setup {
     -- Displays accurate RGB colors atop of hexcodes.
     {
         "norcalli/nvim-colorizer.lua",
-        config = function()
-            vim.opt.termguicolors = true
-            require "colorizer".setup()
-        end
+        -- -- If you want colorizing by default, uncomment the following.
+        -- -- Otherwise, toggle it for a buffer with `:ColorizerToggle`
+        -- config = function()
+        --     vim.opt.termguicolors = true
+        --     require "colorizer".setup()
+        -- end
     },
 
     -- zen writing
