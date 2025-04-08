@@ -208,7 +208,17 @@ require "lazy".setup {
         end
     },
 
-    -- Zen writing
+    -- colorizer
+    -- Displays accurate RGB colors atop of hexcodes.
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            vim.opt.termguicolors = true
+            require "colorizer".setup()
+        end
+    },
+
+    -- zen writing
     -- Resizes your buffer to a narrow width. Useful for prose and continuous text.
     {
         "junegunn/goyo.vim",
