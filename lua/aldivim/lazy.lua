@@ -26,11 +26,14 @@ vim.opt.rtp:prepend(lazypath)
 require "lazy".setup {
     -- themes
     "alexvzyl/nordic.nvim",
-    "navarasu/onedark.nvim",
+    "marko-cerovac/material.nvim",
+    "olimorris/onedarkpro.nvim",
+    "projekt0n/github-nvim-theme",
     "rebelot/kanagawa.nvim",
     "sainnhe/gruvbox-material",
     "tiagovla/tokyodark.nvim",
     { "catppuccin/nvim", name = "catppuccin" }, -- this is how to rename plugins
+    { "rose-pine/neovim", name = "rose-pine" },
 
     -- telescope (with file browser)
     {
