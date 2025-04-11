@@ -1,1 +1,1 @@
-require "aldivim" 
+require "aldivim"
