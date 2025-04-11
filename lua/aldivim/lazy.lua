@@ -32,6 +32,14 @@ require "lazy".setup {
     "tiagovla/tokyodark.nvim",
     { "catppuccin/nvim", name = "catppuccin" }, -- this is how to rename plugins
 
+    -- hex colorizer
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require 'colorizer'.setup()
+        end
+    },
+
     -- telescope (with file browser)
     {
         "nvim-telescope/telescope-file-browser.nvim",
