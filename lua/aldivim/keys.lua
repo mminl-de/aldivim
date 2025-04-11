@@ -1,20 +1,4 @@
 local vim = vim
-local ks = vim.keymap.set
-
--- Set <space> as leader key
-vim.g.mapleader = " "
-
--- snippets
-ks({ "i", "s" }, "<c-f>", function() vim.snippet.jump(1) end)
-ks({ "i", "s" }, "<c-b>", function() vim.snippet.jump(-1) end)
-
--- refactor
-ks("x", "<leader>re", ":Refactor extract ")
-ks("x", "<leader>rf", ":Refactor extract_to_file ")
-ks("x", "<leader>rv", ":Refactor extract_var ")
-ks({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
-ks( "n", "<leader>rI", ":Refactor inline_func")
-=======
 vim.g.mapleader = " "
 
 -- basic
@@ -33,6 +17,9 @@ ks("n", "<leader>q", ":q!<cr>") -- Space-q quits without saving
 ks("n", "<leader>x", vim.cmd.bdelete)
 ks("n", "<leader><tab>", vim.cmd.bnext)
 ks("n", "<leader><s-tab>", vim.cmd.bprev)
+
+-- lsp
+ks({ "n", "i" }, "<f2>", vim.lsp.buf.rename)
 
 -- panes
 for _, d in ipairs { "h", "j", "k", "l" } do

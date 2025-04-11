@@ -26,11 +26,14 @@ vim.opt.rtp:prepend(lazypath)
 require "lazy".setup {
     -- themes
     "alexvzyl/nordic.nvim",
-    "navarasu/onedark.nvim",
+    "marko-cerovac/material.nvim",
+    "olimorris/onedarkpro.nvim",
+    "projekt0n/github-nvim-theme",
     "rebelot/kanagawa.nvim",
     "sainnhe/gruvbox-material",
     "tiagovla/tokyodark.nvim",
     { "catppuccin/nvim", name = "catppuccin" }, -- this is how to rename plugins
+    { "rose-pine/neovim", name = "rose-pine" },
 
     -- hex colorizer
     {
@@ -210,6 +213,28 @@ require "lazy".setup {
                     component_separators = { left = '│', right = '│' }
                 }
             }
+        end
+    },
+
+    -- colorizer
+    -- Displays accurate RGB colors atop of hexcodes.
+    {
+        "norcalli/nvim-colorizer.lua",
+        -- -- If you want colorizing by default, uncomment the following.
+        -- -- Otherwise, toggle it for a buffer with `:ColorizerToggle`
+        -- config = function()
+        --     vim.opt.termguicolors = true
+        --     require "colorizer".setup()
+        -- end
+    },
+
+    -- zen writing
+    -- Resizes your buffer to a narrow width. Useful for prose and continuous text.
+    {
+        "junegunn/goyo.vim",
+        init = function()
+            vim.g.goyo_width = 100
+            vim.g.goyo_linenr = true
         end
     }
 }
