@@ -6,16 +6,20 @@ vim.g.mapleader = " "
 
 require "which-key".add {
     -- neovim config
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     { "<leader>n", group = "neovim" },
     { "<leader>ni", function() vim.cmd.edit "~/.config/nvim/init.lua" end, desc = "Open nvim's init.lua" },
     { "<leader>nk", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/keys.lua" end, desc = "Open nvim's key config" },
     { "<leader>nl", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/lazy.lua" end, desc = "Open nvim's plugin config" },
     { "<leader>no", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/opts.lua" end, desc = "Open nvim's core config" },
+    -- m4: >>>)
 
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     -- other configs
     { "<leader>c", group = "config" },
     { "<leader>cf", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
     { "<leader>cs", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+    -- m4: >>>)
 
     -- editing
     { "<leader><leader>", vim.cmd.write, desc = "Save file" },
@@ -46,6 +50,7 @@ require "which-key".add {
     { "<leader>t", builtin.colorscheme, desc = "Change colorscheme" },
 
     -- vimwiki
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     { "<leader>a", function() vim.cmd.edit "~/stuff/vimwiki/Aufgaben.wiki" end, desc = "Open tasks wiki page" },
     { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
     { "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
@@ -57,12 +62,14 @@ require "which-key".add {
     { "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
     { "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
     { "<leader>vr", vim.cmd.VimwikiRenameFile, desc = "Rename this wiki page" },
+    -- m4: >>>)
 
     -- etc
     { "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
     { "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
     { "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
 
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     {
         mode = "i",
 
@@ -72,6 +79,7 @@ require "which-key".add {
         { "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
         { "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
     },
+    -- m4: >>>)
 
     {
         mode = { "n", "i" },

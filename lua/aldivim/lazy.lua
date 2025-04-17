@@ -46,8 +46,9 @@ require "lazy".setup {
     { "catppuccin/nvim", name = "catppuccin" },
     { "rose-pine/neovim", name = "rose-pine" },
 
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     {
-        "aldivim/norsu.nvim",
+        "hiimsergey/norsu.nvim",
         config = function()
             require "norsu".setup {
                 wikis = {
@@ -57,7 +58,9 @@ require "lazy".setup {
             }
         end
     },
+    -- m4: >>>)
 
+    -- m4: ifdef(<<<SERGEY>>>, <<<
     {
         "vimwiki/vimwiki",
         init = function()
@@ -69,6 +72,7 @@ require "lazy".setup {
             }
         end
     },
+    -- m4: >>>)
 
     {
         "nvim-telescope/telescope-file-browser.nvim",
@@ -110,6 +114,7 @@ require "lazy".setup {
         config = function()
             vim.opt.signcolumn = "yes"
             local lspconfig = require "lspconfig"
+            -- TODO add other lsps
             lspconfig.clangd.setup {}
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
@@ -215,7 +220,12 @@ require "lazy".setup {
         config = true
     },
 
-    "norcalli/nvim-colorizer.lua",
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require 'colorizer'.setup()
+        end
+    },
 
     {
         "folke/which-key.nvim",

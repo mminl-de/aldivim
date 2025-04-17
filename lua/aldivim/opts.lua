@@ -5,18 +5,32 @@ local o = vim.opt
 o.number = true
 o.relativenumber = true
 
+-- m4: ifdef(<<<JULIAN>>>, <<<
+o.clipboard = "unnamedplus"
+-- m4: >>>)
+
 -- tabs
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
+-- m4: ifdef(<<<SERGEY>>>, <<<
 o.expandtab = true
+-- m4: >>>)
+-- m4: ifdef(<<<JULIAN>>>, <<<
+o.expandtab = false
+-- m4: >>>)
 
 -- wrap
 o.wrap = true
 o.linebreak = true
 
 -- colorscheme
+-- m4: ifdef(<<<JULIAN>>>, <<<
+vim.cmd.colorscheme "gruvbox-material"
+-- m4: >>>)
+-- m4: ifdef(<<<SERGEY>>>, <<<
 vim.cmd.colorscheme "catppuccin-mocha"
+-- m4: >>>)
 
 -- terminal colors
 o.termguicolors = true
@@ -26,7 +40,12 @@ o.swapfile = false
 o.backup = false
 
 -- scrolloff
+-- m4: ifdef(<<<SERGEY>>>, <<<
 o.scrolloff = 29
+-- m4: >>>)
+-- m4: ifdef(<<<JULIAN>>>, <<<
+o.scrolloff = 5
+-- m4: >>>)
 
 -- rulers
 o.colorcolumn = { 80, 90 }
@@ -37,5 +56,10 @@ o.colorcolumn = { 80, 90 }
 vim.g.zig_fmt_autosave = 0
 
 -- custom variables for lualine modules
+-- m4: ifdef(<<<JULIAN>>>, <<<
+vim.g.colorizer_on = true
+-- m4: >>>)
+-- m4: ifdef(<<<SERGEY>>>, <<<
 vim.g.colorizer_on = false
+-- m4: >>>)
 vim.g.goyo_on = false
