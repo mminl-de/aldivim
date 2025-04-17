@@ -1,3 +1,4 @@
+-- m4 changequote([, ])
 local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
@@ -5,23 +6,29 @@ local builtin = require "telescope.builtin"
 vim.g.mapleader = " "
 
 require "which-key".add {
+    -- m4 ifdef([HIIMSERGEY], [
     -- neovim config
     { "<leader>n", group = "neovim" },
     { "<leader>ni", function() vim.cmd.edit "~/.config/nvim/init.lua" end, desc = "Open nvim's init.lua" },
     { "<leader>nk", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/keys.lua" end, desc = "Open nvim's key config" },
     { "<leader>nl", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/lazy.lua" end, desc = "Open nvim's plugin config" },
     { "<leader>no", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/opts.lua" end, desc = "Open nvim's core config" },
+    -- m4 ])
 
+    -- m4 ifdef([HIIMSERGEY], [
     -- other configs
     { "<leader>c", group = "config" },
     { "<leader>cf", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
     { "<leader>cs", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+    -- m4 ])
 
     -- editing
     { "<leader><leader>", vim.cmd.write, desc = "Save file" },
+    -- m4 ifdef([HIIMSERGEY], [
     { "<leader>z", vim.cmd.wq, desc = "Save and quit" },
     { "<leader>q", ":q!<cr>", desc = "Quit without saving" },
     { "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
+    -- m4 ])
 
     -- buffers
     { "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
@@ -32,11 +39,13 @@ require "which-key".add {
     { "<leader>j", function() vim.cmd.split() vim.cmd.wincmd "j" end, desc = "Split pane down" },
     { "<leader>l", function() vim.cmd.vsplit() vim.cmd.wincmd "l" end, desc = "Split pane to the right" },
 
+    -- m4 ifdef([HIIMSERGEY], [
     -- resize panes
     { "<m-<>", function() vim.cmd "vertical resize -8" end, desc = "Shrink pane vertically" },
     { "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
     { "<m-->", function() vim.cmd "horizontal resize -4" end, desc = "Shrink pane horizontally" },
     { "<m-+>", function() vim.cmd "horizontal resize +4" end, desc = "Grow pane horizontally" },
+    -- m4 ])
 
     -- telescope
     { "<leader>.", builtin.oldfiles, desc = "View recent files" },
@@ -45,6 +54,7 @@ require "which-key".add {
     { "<leader>f", builtin.find_files, desc = "Find files in this directory" },
     { "<leader>t", builtin.colorscheme, desc = "Change colorscheme" },
 
+    -- m4 ifdef([HIIMSERGEY], [
     -- vimwiki
     { "<leader>a", function() vim.cmd.edit "~/stuff/vimwiki/Aufgaben.wiki" end, desc = "Open tasks wiki page" },
     { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
@@ -57,12 +67,16 @@ require "which-key".add {
     { "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
     { "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
     { "<leader>vr", vim.cmd.VimwikiRenameFile, desc = "Rename this wiki page" },
+    -- m4 ])
 
     -- etc
     { "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
     { "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
+    -- m4 ifdef([HIIMSERGEY], [
     { "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
+    -- m4 ])
 
+    -- m4 ifdef([HIIMSERGEY], [
     {
         mode = "i",
 
@@ -72,7 +86,9 @@ require "which-key".add {
         { "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
         { "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
     },
+    -- m4 ])
 
+    -- m4 ifdef([HIIMSERGEY], [
     {
         mode = { "n", "i" },
 
@@ -85,4 +101,5 @@ require "which-key".add {
         -- lsp
         { "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" }
     }
+    -- m4 ])
 }

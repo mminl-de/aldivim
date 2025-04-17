@@ -46,8 +46,10 @@ require "lazy".setup {
     { "catppuccin/nvim", name = "catppuccin" },
     { "rose-pine/neovim", name = "rose-pine" },
 
+
+    -- m4 ifdef([HIIMSERGEY], [
     {
-        "aldivim/norsu.nvim",
+        "hiimsergey/norsu.nvim",
         config = function()
             require "norsu".setup {
                 wikis = {
@@ -57,7 +59,9 @@ require "lazy".setup {
             }
         end
     },
+    -- m4 ])
 
+    -- m4 ifdef([HIIMSERGEY], [
     {
         "vimwiki/vimwiki",
         init = function()
@@ -69,6 +73,7 @@ require "lazy".setup {
             }
         end
     },
+    -- m4 ])
 
     {
         "nvim-telescope/telescope-file-browser.nvim",
@@ -188,6 +193,7 @@ require "lazy".setup {
                 sections = process_sections {
                     lualine_z = {
                         { "location" },
+                        -- m4 ifdef([HIIMSERGEY], [
                         {
                             function() return vim.wo.wrap and "wrap" or "" end,
                             icon = "󰖶",
@@ -198,6 +204,7 @@ require "lazy".setup {
                             icon = "",
                             color = "@comment.warning"
                         },
+                        -- m4 ])
                         {
                             function() return vim.g.goyo_on and "zen" or "" end,
                             icon = "󱅻",
@@ -215,7 +222,19 @@ require "lazy".setup {
         config = true
     },
 
+    -- m4 ifdef([HIIMSERGEY], [
     "norcalli/nvim-colorizer.lua",
+    -- m4 ])
+
+    -- m4 ifdef([MRMINEDE], [
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            vim.opt.termguicolors = true
+            require "colorizer".setup()
+        end
+    },
+    -- m4 ])
 
     {
         "folke/which-key.nvim",

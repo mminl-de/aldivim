@@ -18,15 +18,19 @@ o.linebreak = true
 -- colorscheme
 vim.cmd.colorscheme "catppuccin-mocha"
 
+-- m4 ifdef([HIIMSERGEY], [
 -- terminal colors
 o.termguicolors = true
+-- m4 ])
 
 -- backups
 o.swapfile = false
 o.backup = false
 
+-- m4 ifdef([HIIMSERGEY], [
 -- scrolloff
 o.scrolloff = 29
+-- m4 ])
 
 -- rulers
 o.colorcolumn = { 80, 90 }
@@ -37,5 +41,7 @@ o.colorcolumn = { 80, 90 }
 vim.g.zig_fmt_autosave = 0
 
 -- custom variables for lualine modules
+-- m4 ifdef([HIIMSERGEY], [
 vim.g.colorizer_on = false
+-- m4 ])
 vim.g.goyo_on = false
