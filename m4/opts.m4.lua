@@ -1,3 +1,4 @@
+-- m4 changequote(<<<, >>>)
 local vim = vim
 local o = vim.opt
 

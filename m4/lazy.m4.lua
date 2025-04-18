@@ -118,6 +118,7 @@ require "lazy".setup {
             local lspconfig = require "lspconfig"
             -- TODO add other lsps
             lspconfig.clangd.setup {}
+            lspconfig.html.setup {}
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
             lspconfig.zls.setup {}
@@ -228,6 +229,7 @@ require "lazy".setup {
     {
         "norcalli/nvim-colorizer.lua",
         config = function()
+			vim.opt.termguicolors = true
             require 'colorizer'.setup()
         end
     },

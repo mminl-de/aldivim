@@ -10,7 +10,7 @@ o.relativenumber = true
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
-o.expandtab = false
+o.expandtab = true
 
 -- wrap
 o.wrap = true
@@ -19,13 +19,15 @@ o.linebreak = true
 -- colorscheme
 vim.cmd.colorscheme "catppuccin-mocha"
 
+-- terminal colors
+o.termguicolors = true
 
 -- backups
 o.swapfile = false
 o.backup = false
 
 -- scrolloff
-o.scrolloff = 5
+o.scrolloff = 29
 
 -- rulers
 o.colorcolumn = { 80, 90 }
