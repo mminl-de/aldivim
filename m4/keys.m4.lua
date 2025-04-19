@@ -24,11 +24,9 @@ require "which-key".add {
 
     -- editing
     { "<leader><leader>", vim.cmd.write, desc = "Save file" },
-    -- m4 ifdef(<<<SERGEY>>>, <<<
     { "<leader>z", vim.cmd.wq, desc = "Save and quit" },
     { "<leader>q", ":q!<cr>", desc = "Quit without saving" },
     { "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
-    -- m4 >>>)
 
     -- buffers
     { "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
@@ -50,6 +48,7 @@ require "which-key".add {
     -- telescope
     { "<leader>.", builtin.oldfiles, desc = "View recent files" },
     { "<leader>b", builtin.buffers, desc = "View open buffers" },
+    { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
     { "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
     { "<leader>f", builtin.find_files, desc = "Find files in this directory" },
     { "<leader>t", builtin.colorscheme, desc = "Change colorscheme" },
@@ -57,7 +56,6 @@ require "which-key".add {
     -- m4 ifdef(<<<SERGEY>>>, <<<
     -- vimwiki
     { "<leader>a", function() vim.cmd.edit "~/stuff/vimwiki/Aufgaben.wiki" end, desc = "Open tasks wiki page" },
-    { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
     { "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
     { "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
     { "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },
