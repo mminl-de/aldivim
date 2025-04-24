@@ -111,6 +111,15 @@ require "lazy".setup {
         end
     },
 
+    -- m4 ifdef(<<<SERGEY>>>, <<<
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            require "treesitter-context".setup()
+        end
+    },
+    -- m4 >>>)
+
     {
         "neovim/nvim-lspconfig",
         config = function()

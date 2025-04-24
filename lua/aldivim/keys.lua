@@ -7,14 +7,15 @@ vim.g.mapleader = " "
 require "which-key".add {
     -- neovim config
     { "<leader>n", group = "neovim" },
-    { "<leader>ni", function() vim.cmd.edit "~/.config/nvim/init.lua" end, desc = "Open nvim's init.lua" },
     { "<leader>nk", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/keys.lua" end, desc = "Open nvim's key config" },
     { "<leader>nl", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/lazy.lua" end, desc = "Open nvim's plugin config" },
     { "<leader>no", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/opts.lua" end, desc = "Open nvim's core config" },
+
+    -- aldivim config
     { "<leader>nm", group = "aldivim" },
-    { "<leader>nmk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open nvim's key config" },
-    { "<leader>nml", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open nvim's plugin config" },
-    { "<leader>nmo", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open nvim's core config" },
+    { "<leader>nmk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
+    { "<leader>nml", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
+    { "<leader>nmo", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
 
     -- other configs
     { "<leader>c", group = "config" },
@@ -45,13 +46,13 @@ require "which-key".add {
     -- telescope
     { "<leader>.", builtin.oldfiles, desc = "View recent files" },
     { "<leader>b", builtin.buffers, desc = "View open buffers" },
+    { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
     { "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
     { "<leader>f", builtin.find_files, desc = "Find files in this directory" },
     { "<leader>t", builtin.colorscheme, desc = "Change colorscheme" },
 
     -- vimwiki
     { "<leader>a", function() vim.cmd.edit "~/stuff/vimwiki/Aufgaben.wiki" end, desc = "Open tasks wiki page" },
-    { "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
     { "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
     { "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
     { "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },

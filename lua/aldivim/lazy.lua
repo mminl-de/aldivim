@@ -106,6 +106,13 @@ require "lazy".setup {
     },
 
     {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            require "treesitter-context".setup()
+        end
+    },
+
+    {
         "neovim/nvim-lspconfig",
         config = function()
             vim.opt.signcolumn = "yes"
