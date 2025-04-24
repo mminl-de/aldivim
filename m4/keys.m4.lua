@@ -9,10 +9,15 @@ require "which-key".add {
     -- m4 ifdef(<<<SERGEY>>>, <<<
     -- neovim config
     { "<leader>n", group = "neovim" },
-    { "<leader>ni", function() vim.cmd.edit "~/.config/nvim/init.lua" end, desc = "Open nvim's init.lua" },
     { "<leader>nk", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/keys.lua" end, desc = "Open nvim's key config" },
     { "<leader>nl", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/lazy.lua" end, desc = "Open nvim's plugin config" },
     { "<leader>no", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/opts.lua" end, desc = "Open nvim's core config" },
+
+    -- aldivim config
+    { "<leader>nm", group = "aldivim" },
+    { "<leader>nmk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
+    { "<leader>nml", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
+    { "<leader>nmo", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
     -- m4 >>>)
 
     -- m4 ifdef(<<<SERGEY>>>, <<<
