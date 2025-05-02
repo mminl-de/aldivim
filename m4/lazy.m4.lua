@@ -37,7 +37,7 @@ end, { desc = "Bootstrap lazy.nvim" })
 vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup {
-    "folke/tokyonight.nvim",
+    "alexvzyl/nordic.nvim",
     "loctvl842/monokai-pro.nvim",
     "marko-cerovac/material.nvim",
     "mofiqul/vscode.nvim",
