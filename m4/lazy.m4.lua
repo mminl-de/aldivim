@@ -51,14 +51,7 @@ require "lazy".setup {
     -- m4 ifdef(<<<SERGEY>>>, <<<
     {
         "hiimsergey/norsu.nvim",
-        config = function()
-            require "norsu".setup {
-                wikis = {
-                    { name = "basic", path = "~/stuff/basic" },
-                    { name = "writing", path = "~/stuff/writing" }
-                }
-            }
-        end
+        config = function() require "norsu".setup() end
     },
     -- m4 >>>)
 
@@ -87,7 +80,13 @@ require "lazy".setup {
             local actions = require "telescope.actions"
             telescope.setup {
                 defaults = { mappings = { i = { ["<esc>"] = actions.close } } },
-                pickers = { colorscheme = { theme = "dropdown" } },
+                pickers = {
+                    colorscheme = { theme = "dropdown" },
+                    diagnostics = {
+                        theme = "dropdown",
+                        layout_config = { width = 0.8 }
+                    }
+                },
                 extensions = {
                     file_browser = {
                         hidden = true,
