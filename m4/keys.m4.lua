@@ -39,8 +39,8 @@ require "which-key".add {
     { "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
     -- split panes
-    { "<leader>j", function() vim.cmd.split() vim.cmd.wincmd "j" end, desc = "Split pane down" },
-    { "<leader>l", function() vim.cmd.vsplit() vim.cmd.wincmd "l" end, desc = "Split pane to the right" },
+    { "<leader>j", vim.cmd.split, desc = "Split pane down" },
+    { "<leader>l", vim.cmd.vsplit, desc = "Split pane to the right" },
 
     -- m4 ifdef(<<<SERGEY>>>, <<<
     -- resize panes

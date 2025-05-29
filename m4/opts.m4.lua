@@ -6,6 +6,10 @@ local o = vim.opt
 o.number = true
 o.relativenumber = true
 
+-- buffers
+o.splitright = true
+o.splitbelow = true
+
 -- clipboard
 o.clipboard = "unnamedplus"
 
