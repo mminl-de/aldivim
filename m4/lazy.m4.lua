@@ -104,21 +104,19 @@ require "lazy".setup {
         build = ":TSUpdate",
         config = function()
             require "nvim-treesitter.configs".setup {
-                ensure_installed = { "lua", "vimdoc" },
+                ensure_installed = { "lua", "vimdoc", "zig" },
                 highlight = { enable = true },
                 indent = { enable = true }
             }
         end
     },
 
-    -- m4 ifdef(<<<SERGEY>>>, <<<
     {
         "nvim-treesitter/nvim-treesitter-context",
         config = function()
             require "treesitter-context".setup()
         end
     },
-    -- m4 >>>)
 
     {
         "neovim/nvim-lspconfig",
@@ -131,6 +129,8 @@ require "lazy".setup {
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
             lspconfig.zls.setup {}
+            lspconfig.jdtls.setup {}
+            lspconfig.pyright.setup {}
         end
     },
 
