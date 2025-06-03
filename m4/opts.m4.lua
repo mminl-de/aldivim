@@ -6,9 +6,12 @@ local o = vim.opt
 o.number = true
 o.relativenumber = true
 
--- m4 ifdef(<<<JULIAN>>>, <<<
+-- buffers
+o.splitright = true
+o.splitbelow = true
+
+-- clipboard
 o.clipboard = "unnamedplus"
--- m4 >>>)
 
 -- tabs
 o.tabstop = 4
