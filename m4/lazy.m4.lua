@@ -37,7 +37,7 @@ end, { desc = "Bootstrap lazy.nvim" })
 vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup {
-    "folke/tokyonight.nvim",
+    "alexvzyl/nordic.nvim",
     "loctvl842/monokai-pro.nvim",
     "marko-cerovac/material.nvim",
     "mofiqul/vscode.nvim",
@@ -51,14 +51,7 @@ require "lazy".setup {
     -- m4 ifdef(<<<SERGEY>>>, <<<
     {
         "hiimsergey/norsu.nvim",
-        config = function()
-            require "norsu".setup {
-                wikis = {
-                    { name = "basic", path = "~/stuff/basic" },
-                    { name = "writing", path = "~/stuff/writing" }
-                }
-            }
-        end
+        config = function() require "norsu".setup() end
     },
     -- m4 >>>)
 
@@ -87,7 +80,13 @@ require "lazy".setup {
             local actions = require "telescope.actions"
             telescope.setup {
                 defaults = { mappings = { i = { ["<esc>"] = actions.close } } },
-                pickers = { colorscheme = { theme = "dropdown" } },
+                pickers = {
+                    colorscheme = { theme = "dropdown" },
+                    diagnostics = {
+                        theme = "dropdown",
+                        layout_config = { width = 0.8 }
+                    }
+                },
                 extensions = {
                     file_browser = {
                         hidden = true,
@@ -104,7 +103,7 @@ require "lazy".setup {
         build = ":TSUpdate",
         config = function()
             require "nvim-treesitter.configs".setup {
-                ensure_installed = { "lua", "vimdoc" },
+                ensure_installed = { "lua", "vimdoc", "zig" },
                 highlight = { enable = true },
                 indent = { enable = true }
             }
@@ -129,6 +128,8 @@ require "lazy".setup {
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
             lspconfig.zls.setup {}
+            lspconfig.jdtls.setup {}
+            lspconfig.pyright.setup {}
         end
     },
 
