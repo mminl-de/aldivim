@@ -78,6 +78,21 @@ require "which-key".add {
     -- m4 ifdef(<<<SERGEY>>>, <<<
     { "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
     -- m4 >>>)
+    { "<m-space>", function()
+        local line = vim.api.nvim_get_current_line()
+        local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"
+
+        if not subject then
+            vim.notify("No bible verse found", vim.log.levels.ERROR)
+            return
+        end
+
+        vim.system {
+            "zathura",
+            os.getenv "HOME" .. "/uni/" .. subject .. "/" .. doc .. ".pdf",
+            "--page=" .. page
+        }
+    end, desc = "Open the PDF of the referenced slide" },
 
     -- m4 ifdef(<<<SERGEY>>>, <<<
     {
