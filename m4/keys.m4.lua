@@ -24,7 +24,7 @@ require "which-key".add {
     -- other configs
     { "<leader>c", group = "config" },
     { "<leader>cf", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
-    { "<leader>cs", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+    { "<leader>cn", function() vim.cmd.edit "~/.config/niri/config.kdl" end, desc = "Open window manager config" },
     -- m4 >>>)
 
     -- editing
