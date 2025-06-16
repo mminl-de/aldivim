@@ -44,7 +44,15 @@ require "lazy".setup {
     "projekt0n/github-nvim-theme",
     "sainnhe/gruvbox-material",
     "tiagovla/tokyodark.nvim",
-    { "catppuccin/nvim", name = "catppuccin" },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        config = function()
+            require "catppuccin".setup {
+                integrations = { vimwiki = true }
+            }
+        end
+    },
     { "rose-pine/neovim", name = "rose-pine" },
 
     -- m4 ifdef(<<<SERGEY>>>, <<<
