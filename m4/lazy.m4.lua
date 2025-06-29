@@ -130,7 +130,9 @@ require "lazy".setup {
             vim.opt.signcolumn = "yes"
             local lspconfig = require "lspconfig"
             -- TODO add other lsps
-            lspconfig.clangd.setup {}
+            lspconfig.clangd.setup {
+                cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" }
+            }
             lspconfig.html.setup {}
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
