@@ -129,7 +129,6 @@ require "lazy".setup {
         config = function()
             vim.opt.signcolumn = "yes"
             local lspconfig = require "lspconfig"
-            -- TODO add other lsps
             lspconfig.clangd.setup {
                 cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" }
             }
@@ -137,8 +136,11 @@ require "lazy".setup {
             lspconfig.lua_ls.setup {}
             lspconfig.ts_ls.setup {}
             lspconfig.zls.setup {}
+            -- m4 ifdef(<<<JULIAN>>>, <<<
+            -- TODO add other lsps
             lspconfig.jdtls.setup {}
             lspconfig.pyright.setup {}
+            -- m4 >>>)
         end
     },
 
