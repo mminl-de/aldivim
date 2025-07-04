@@ -25,6 +25,11 @@ require "which-key".add {
     { "<leader>c", group = "config" },
     { "<leader>cf", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
     { "<leader>cs", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+
+    -- uni
+    { "<leader>u", group = "uni" },
+    { "<leader>um", function() vim.cmd.edit "~/uni/vimwiki/main.wiki" end, desc = "Open uni wiki page" },
+    { "<leader>uo", function() vim.cmd.Telescope("find_files", "cwd=~/uni/vimwiki") end, desc = "Find uni pages" },
     -- m4 >>>)
 
     -- editing
@@ -64,7 +69,6 @@ require "which-key".add {
     { "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
     { "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
     { "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },
-    { "<leader>u", function() vim.cmd.edit "~/stuff/vimwiki/Uni.wiki" end, desc = "Open uni wiki page" },
     { "<leader>w", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
     { "<leader>v", group = "vimwiki" },
     { "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
