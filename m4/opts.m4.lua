@@ -59,10 +59,11 @@ o.scrolloff = 5
 -- rulers
 o.colorcolumn = { 80, 90 }
 
--- for some reason, nvim autoformats zig code out of the box.
--- the worst thing is that it also does it in a bad fashion.
--- this line disables it.
+-- disable automatic zig formatting
 vim.g.zig_fmt_autosave = 0
+
+-- disable audacious tab logic overrides by Zig
+vim.g.zig_recommended_style = 0
 
 -- custom variables for lualine modules
 -- m4 ifdef(<<<JULIAN>>>, <<<

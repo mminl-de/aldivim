@@ -135,7 +135,7 @@ require "lazy".setup {
 			lspconfig.html.setup {}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
-			lspconfig.zls.setup {}
+			--lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
 			lspconfig.jdtls.setup {}
