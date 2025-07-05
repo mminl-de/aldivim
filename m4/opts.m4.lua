@@ -22,7 +22,7 @@ o.expandtab = false
 -- visualize tabs and spaces
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "▸ ",
+  tab = "| ",
   trail = "·",
   extends = "»",
   precedes = "«",
@@ -60,7 +60,7 @@ o.scrolloff = 5
 o.colorcolumn = { 80, 90 }
 
 -- for some reason, nvim autoformats zig code out of the box.
--- the worst thing is that it also does it in a bad manner.
+-- the worst thing is that it also does it in a bad fashion.
 -- this line disables it.
 vim.g.zig_fmt_autosave = 0
 
