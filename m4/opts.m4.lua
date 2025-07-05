@@ -17,11 +17,17 @@ o.clipboard = "unnamedplus"
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
--- m4 ifdef(<<<SERGEY>>>, <<<
-o.expandtab = true
--- m4 >>>, <<<
 o.expandtab = false
--- m4 >>>)
+
+-- visualize tabs and spaces
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "▸ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  nbsp = "␣"
+}
 
 -- wrap
 o.wrap = true
