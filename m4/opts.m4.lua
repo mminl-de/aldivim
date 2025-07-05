@@ -22,11 +22,11 @@ o.expandtab = false
 -- visualize tabs and spaces
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = "| ",
-  trail = "·",
-  extends = "»",
-  precedes = "«",
-  nbsp = "␣"
+	tab = "| ",
+	trail = "·",
+	extends = "»",
+	precedes = "«",
+	nbsp = "␣"
 }
 
 -- wrap
