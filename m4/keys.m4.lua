@@ -22,9 +22,9 @@ require "which-key".add {
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- other configs
-	{ "<leader>c", group = "config" },
-	{ "<leader>cf", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
-	{ "<leader>cs", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+	{ "<leader>,", group = "config" },
+	{ "<leader>,f", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
+	{ "<leader>,s", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
 
 	-- uni
 	{ "<leader>u", group = "uni" },
@@ -37,6 +37,12 @@ require "which-key".add {
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
+
+	-- tags
+	{ "<leader>t", group = "tags" },
+	{ "<leader>tb", "<c-t>",  desc = "Go back in the tag stack" },
+	{ "<leader>tg", "<c-]>",  desc = "Go to tag definition" },
+	{ "<leader>tt", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
 
 	-- buffers
 	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
@@ -61,7 +67,7 @@ require "which-key".add {
 	{ "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
-	{ "<leader>t", builtin.colorscheme, desc = "Change colorscheme" },
+	{ "<leader>c", builtin.colorscheme, desc = "Change colorscheme" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- vimwiki
