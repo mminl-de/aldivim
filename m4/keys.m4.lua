@@ -34,15 +34,10 @@ require "which-key".add {
 
 	-- editing
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
-	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
-	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
-
-	-- tags
-	{ "<leader>t", group = "tags" },
-	{ "<leader>tb", "<c-t>",  desc = "Go back in the tag stack" },
-	{ "<leader>tg", "<c-]>",  desc = "Go to tag definition" },
-	{ "<leader>tt", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
+	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
+	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
+	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
 	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
