@@ -111,7 +111,6 @@ require "which-key".add {
 	},
 	-- m4 >>>)
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{
 		mode = { "n", "i" },
 
@@ -124,5 +123,4 @@ require "which-key".add {
 		-- lsp
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" }
 	}
-	-- m4 >>>)
 }
