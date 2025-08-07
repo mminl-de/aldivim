@@ -188,7 +188,10 @@ require "lazy".setup {
 	-- LSP-based autocompletions
 	{
 		"hrsh7th/nvim-cmp",
-		dependencies = "hrsh7th/cmp-nvim-lsp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help"
+		},
 		config = function()
 			local cmp = require "cmp"
 			cmp.setup {
@@ -228,7 +231,8 @@ require "lazy".setup {
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
 				sources = {
 					{ name = "nvim_lsp" },
-					{ name = "buffer" }
+					{ name = "buffer" },
+					{ name = "nvim_lsp_signature_help" }
 				},
 				view = { entries = "native" },
 				window = {
@@ -243,11 +247,16 @@ require "lazy".setup {
 		end
 	},
 
-	{
-		"ray-x/lsp_signature.nvim", -- TODO NOW
-		event = "InsertEnter",
-		config = function() require "lsp_signature".setup() end
-	},
+	-- TODO NOTE julian and sergey wanted to decide between this and another plugin
+	-- {
+	-- 	"ray-x/lsp_signature.nvim", -- TODO NOW
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require "lsp_signature".setup {
+	-- 			hint_enable = false
+	-- 		}
+	-- 	end
+	-- },
 
 	-- bar
 	{
