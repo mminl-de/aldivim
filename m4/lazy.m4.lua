@@ -142,6 +142,17 @@ require "lazy".setup {
 			lspconfig.jdtls.setup {}
 			lspconfig.pyright.setup {}
 			-- m4 >>>)
+
+			-- show LSP errors inline
+			vim.diagnostic.config({
+				virtual_text = {
+					spacing = 2,
+					prefix = "●",
+				},
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+			})
 		end
 	},
 
