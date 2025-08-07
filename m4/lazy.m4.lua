@@ -243,6 +243,12 @@ require "lazy".setup {
 		end
 	},
 
+	{
+		"ray-x/lsp_signature.nvim", -- TODO NOW
+		event = "InsertEnter",
+		config = function() require "lsp_signature".setup() end
+	},
+
 	-- bar
 	{
 		"nvim-lualine/lualine.nvim",
