@@ -119,9 +119,7 @@ require "lazy".setup {
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require "treesitter-context".setup()
-		end
+		config = function() require "treesitter-context".setup() end
 	},
 
 	{
@@ -167,13 +165,19 @@ require "lazy".setup {
 		end
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 ifdef(<<<DANIN>>>, <<<
 	{
 		'mrcjkb/rustaceanvim',
 		version = '^6',
 		lazy = false
 	},
 	-- m4 >>>)
+
+	{
+		"j-hui/fidget.nvim",
+		lazy = false,
+		config = true
+	},
 
 	{
 		"hrsh7th/nvim-cmp",
