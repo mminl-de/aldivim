@@ -3,8 +3,6 @@ local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
 
-vim.g.mapleader = " "
-
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- neovim config
@@ -62,7 +60,11 @@ require "which-key".add {
 	{ "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
+	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{ "<leader>c", builtin.colorscheme, desc = "Change colorscheme" },
+	-- m4 >>>, <<<
+	{ "<leader>C", builtin.colorscheme, desc = "Change colorscheme" },
+	-- m4 >>>)
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- vimwiki
