@@ -146,18 +146,9 @@ require "lazy".setup {
 			lspconfig.html.setup {}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
-			lspconfig.rust_analyzer.setup {
-				settings = {
-					["rust-analyzer"] = {
-					  cargo = {
-						allFeatures = true,
-					  },
-					  checkOnSave = {
-						command = "clippy",
-					  },
-					},
-				},
-			}
+			-- m4 ifdef(<<<DANIEL>>>, <<<
+			lspconfig.rust_analyzer.setup {}
+			-- m4 >>>)
 			--lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
@@ -321,6 +312,52 @@ require "lazy".setup {
 		}
 	},
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 >>>, <<<
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			padding = true,
+			sticky = true,
+			toggler = {
+				line = '<leader>cc',
+				block = '<leader>bc',
+			},
+			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
+		    opleader = {
+				line = '<leader>cC',
+				block = '<leader>cb',
+			},
+			extra = {
+				-- Add comment on the line above
+				above = '<leader>cO',
+				-- Add comment on the line below
+				below = '<leader>co',
+				-- Add comment at the end of line
+				eol = '<leader>cA',
+			},
+			mappings = {
+				basic = true,
+				extra = true,
+			},
+		}
+	},
+	-- m4 >>>)
+
+
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 >>>, <<<
+	{
+		"RRethy/vim-illuminate",
+		config = function()
+			require('illuminate').configure({
+				min_count_to_highlight = 2
+			})
+		end
+	},
+	-- m4 >>>)
+
+	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- zen mode
 	{
 		"junegunn/goyo.vim",
@@ -330,4 +367,5 @@ require "lazy".setup {
 			vim.g.goyo_linenr = true
 		end
 	}
+	-- m4 >>>)
 }
