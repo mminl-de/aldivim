@@ -62,7 +62,9 @@ require "which-key".add {
 	{ "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
-	{ "<leader>c", builtin.colorscheme, desc = "Change colorscheme" },
+	{ "<leader>c", function()
+		builtin.colorscheme { ignore_builtins = true }
+	end, desc = "Change colorscheme" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- vimwiki
