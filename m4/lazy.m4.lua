@@ -135,7 +135,18 @@ require "lazy".setup {
 			lspconfig.html.setup {}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
-			--lspconfig.rust_analyzer.setup {}
+			lspconfig.rust_analyzer.setup {
+				settings = {
+					["rust-analyzer"] = {
+					  cargo = {
+						allFeatures = true,
+					  },
+					  checkOnSave = {
+						command = "clippy",
+					  },
+					},
+				},
+			}
 			--lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
