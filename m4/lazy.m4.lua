@@ -148,6 +148,7 @@ require "lazy".setup {
 			lspconfig.ts_ls.setup {}
 			-- m4 ifdef(<<<DANIEL>>>, <<<
 			lspconfig.rust_analyzer.setup {}
+			lspconfig.slint_lsp.setup {}
 			-- m4 >>>)
 			--lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
