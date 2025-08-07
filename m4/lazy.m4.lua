@@ -145,6 +145,14 @@ require "lazy".setup {
 		end
 	},
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	{
+		'mrcjkb/rustaceanvim',
+		version = '^6',
+		lazy = false
+	},
+	-- m4 >>>)
+
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = "hrsh7th/cmp-nvim-lsp",
