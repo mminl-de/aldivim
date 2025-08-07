@@ -146,7 +146,7 @@ require "lazy".setup {
 			lspconfig.html.setup {}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
-			-- m4 ifdef(<<<DANIEL>>>, <<<
+			-- m4 ifdef(<<<DANIN>>>, <<<
 			lspconfig.rust_analyzer.setup {}
 			lspconfig.slint_lsp.setup {}
 			-- m4 >>>)
