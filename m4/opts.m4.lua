@@ -36,8 +36,12 @@ o.linebreak = true
 
 -- colorscheme
 -- m4 ifdef(<<<JULIAN>>>, <<<
-vim.cmd.colorscheme "gruvbox-material"
--- m4 >>>, <<<
+vim.cmd.colorscheme "onedark"
+-- m4 >>>)
+-- m4 ifdef(<<<SERGEY>>>, <<<
+vim.cmd.colorscheme "catppuccin-mocha"
+-- m4 >>>)
+-- m4 ifdef(<<<DANIN>>>, <<<
 vim.cmd.colorscheme "catppuccin-mocha"
 -- m4 >>>)
 

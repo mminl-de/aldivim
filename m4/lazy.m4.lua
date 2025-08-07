@@ -313,7 +313,6 @@ require "lazy".setup {
 	},
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- test
 	-- m4 >>>, <<<
 	{
 		'numToStr/Comment.nvim',
@@ -342,6 +341,19 @@ require "lazy".setup {
 				extra = true,
 			},
 		}
+	},
+	-- m4 >>>)
+
+
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 >>>, <<<
+	{
+		"RRethy/vim-illuminate",
+		config = function()
+			require('illuminate').configure({
+				min_count_to_highlight = 2
+			})
+		end
 	},
 	-- m4 >>>)
 
