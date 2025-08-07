@@ -128,6 +128,12 @@ require "lazy".setup {
 		config = function() require "treesitter-context".setup() end
 	},
 
+	-- highlight scopes
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function() require "ibl".setup() end
+	},
+
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -175,8 +181,8 @@ require "lazy".setup {
 	-- m4 ifdef(<<<DANIN>>>, <<<
 	-- professional Rust activities
 	{
-		'mrcjkb/rustaceanvim',
-		version = '^6',
+		"mrcjkb/rustaceanvim",
+		version = "^6",
 		lazy = false
 	},
 	-- m4 >>>)
@@ -301,7 +307,7 @@ require "lazy".setup {
 			vim.opt.termguicolors = true
 			require "colorizer".setup()
 		end
-		-- m4 >>>
+		-- m4 >>>)
 	},
 
 	-- key bindings overview
