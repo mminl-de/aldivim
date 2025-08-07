@@ -171,15 +171,6 @@ require "lazy".setup {
 	},
 
 	-- m4 ifdef(<<<DANIN>>>, <<<
-	-- professional Rust activities
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^6",
-		lazy = false
-	},
-	-- m4 >>>)
-
-	-- m4 ifdef(<<<DANIN>>>, <<<
 	-- LSP loading notification
 	{
 		"j-hui/fidget.nvim",
