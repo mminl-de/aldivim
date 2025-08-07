@@ -3,7 +3,7 @@
 local vim = vim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
--- Put proper separators between custom lualine components
+-- put proper separators between custom lualine components
 ---@param sections table lualine section declarations
 ---@return table
 local function process_sections(sections)
@@ -37,6 +37,7 @@ end, { desc = "Bootstrap lazy.nvim" })
 vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup {
+	-- colorschemes/themes
 	"loctvl842/monokai-pro.nvim",
 	"marko-cerovac/material.nvim",
 	"mofiqul/vscode.nvim",
@@ -56,6 +57,7 @@ require "lazy".setup {
 	{ "rose-pine/neovim", name = "rose-pine" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- the plugin I'm developing, DO NOT TOUCH
 	{
 		"hiimsergey/norsu.nvim",
 		config = function() require "norsu".setup() end
@@ -63,6 +65,7 @@ require "lazy".setup {
 	-- m4 >>>)
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- personal knowledge management for me
 	{
 		"vimwiki/vimwiki",
 		init = function()
@@ -76,6 +79,20 @@ require "lazy".setup {
 	},
 	-- m4 >>>)
 
+	-- launchers, pickers, prompts ...
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			require "nvim-treesitter.configs".setup {
+				ensure_installed = { "lua", "vimdoc", "zig" },
+				highlight = { enable = true },
+				indent = { enable = true }
+			}
+		end
+	},
+
+	-- file browser
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = {
@@ -105,25 +122,13 @@ require "lazy".setup {
 		end
 	},
 
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			require "nvim-treesitter.configs".setup {
-				ensure_installed = { "lua", "vimdoc", "zig" },
-				highlight = { enable = true },
-				indent = { enable = true }
-			}
-		end
-	},
-
+	-- always show current scope you're in at the top
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require "treesitter-context".setup()
-		end
+		config = function() require "treesitter-context".setup() end
 	},
 
+	-- LSP
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -144,10 +149,22 @@ require "lazy".setup {
 			lspconfig.jdtls.setup {}
 			lspconfig.pyright.setup {}
 			-- m4 >>>)
+
+			-- show LSP errors inline
+			vim.diagnostic.config({
+				virtual_text = {
+					spacing = 2,
+					prefix = "●",
+				},
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+			})
 		end
 	},
 
-	-- m4 ifdef(<<<DANIEL>>>, <<<
+	-- m4 ifdef(<<<DANIN>>>, <<<
+	-- professional Rust activities
 	{
 		'mrcjkb/rustaceanvim',
 		version = '^6',
@@ -155,6 +172,16 @@ require "lazy".setup {
 	},
 	-- m4 >>>)
 
+	-- m4 ifdef(<<<DANIN>>>, <<<
+	-- LSP loading notification
+	{
+		"j-hui/fidget.nvim",
+		lazy = false,
+		config = true
+	},
+	-- m4 >>>)
+
+	-- LSP-based autocompletions
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = "hrsh7th/cmp-nvim-lsp",
@@ -212,6 +239,7 @@ require "lazy".setup {
 		end
 	},
 
+	-- bar
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
@@ -249,24 +277,25 @@ require "lazy".setup {
 		end
 	},
 
+	-- auto-pair brackets and quotes
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true
 	},
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<
+	-- paint hexcodes
 	{
 		"norcalli/nvim-colorizer.lua",
+		-- m4 ifdef(<<<JULIAN>>>, <<<
 		config = function()
 			vim.opt.termguicolors = true
-			require 'colorizer'.setup()
+			require "colorizer".setup()
 		end
+		-- m4 >>>)
 	},
-	-- m4 >>>, <<<
-	"norcalli/nvim-colorizer.lua",
-	-- m4 >>>)
 
+	-- key bindings overview
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -278,6 +307,7 @@ require "lazy".setup {
 	},
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- test
 	-- m4 >>>, <<<
 	{
 		'numToStr/Comment.nvim',
@@ -288,17 +318,17 @@ require "lazy".setup {
 				line = '<leader>cc',
 				block = '<leader>bc',
 			},
-			---LHS of operator-pending mappings in NORMAL and VISUAL mode
+			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
 		    opleader = {
 				line = '<leader>cC',
 				block = '<leader>cb',
 			},
 			extra = {
-				---Add comment on the line above
+				-- Add comment on the line above
 				above = '<leader>cO',
-				---Add comment on the line below
+				-- Add comment on the line below
 				below = '<leader>co',
-				---Add comment at the end of line
+				-- Add comment at the end of line
 				eol = '<leader>cA',
 			},
 			mappings = {
@@ -309,6 +339,8 @@ require "lazy".setup {
 	},
 	-- m4 >>>)
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- zen mode
 	{
 		"junegunn/goyo.vim",
 		init = function()
@@ -317,4 +349,5 @@ require "lazy".setup {
 			vim.g.goyo_linenr = true
 		end
 	}
+	-- m4 >>>)
 }
