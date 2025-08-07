@@ -19,17 +19,6 @@ o.softtabstop = 4
 o.shiftwidth = 4
 o.expandtab = false
 
--- TODO NOW
--- -- visualize tabs and spaces
--- vim.opt.list = true
--- vim.opt.listchars = {
--- 	tab = "| ",
--- 	trail = "·",
--- 	extends = "»",
--- 	precedes = "«",
--- 	nbsp = "␣"
--- }
-
 -- wrap
 o.wrap = true
 o.linebreak = true

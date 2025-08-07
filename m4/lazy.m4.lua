@@ -131,9 +131,11 @@ require "lazy".setup {
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		version = "v2.20.8",
 		config = function()
-			require "ibl".setup {
-				indent = { char = "▏" }
+			require "indent_blankline".setup {
+				indent = { char = "│" },
+				show_current_context = true
 			}
 		end
 	},
