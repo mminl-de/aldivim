@@ -62,10 +62,7 @@ require "which-key".add {
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
 	{ "<leader>d", function()
-		builtin.diagnostics {
-			bufnr = 0,
-			line_width = "full"
-		}
+		builtin.diagnostics { bufnr = 0, line_width = "full" }
 	end, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
@@ -99,10 +96,11 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
-	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
-	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
 	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
+	-- m4 >>>, <<<
+	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
 	-- m4 >>>)
 	{ "<m-space>", function()
 		local line = vim.api.nvim_get_current_line()
@@ -136,10 +134,10 @@ require "which-key".add {
 		mode = { "n", "i" },
 
 		-- focus panes
-		{ "<m-h>", function() vim.cmd.wincmd("h") end, desc = "Focus pane to the left" },
-		{ "<m-j>", function() vim.cmd.wincmd("j") end, desc = "Focus pane below" },
-		{ "<m-k>", function() vim.cmd.wincmd("k") end, desc = "Focus pane above" },
-		{ "<m-l>", function() vim.cmd.wincmd("l") end, desc = "Focus pane to the right" },
+		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane to the left" },
+		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane below" },
+		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane above" },
+		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" },
 
 		-- lsp
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },

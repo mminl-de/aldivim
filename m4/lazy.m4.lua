@@ -36,7 +36,7 @@ end, { desc = "Bootstrap lazy.nvim" })
 
 vim.opt.rtp:prepend(lazypath)
 
-require "lazy".setup {
+require "lazy".setup({
 	-- colorschemes/themes
 	"loctvl842/monokai-pro.nvim",
 	"marko-cerovac/material.nvim",
@@ -83,6 +83,7 @@ require "lazy".setup {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
+		lazy = false,
 		config = function()
 			require "lualine".setup {
 				options = {
@@ -124,7 +125,6 @@ require "lazy".setup {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim"
 		},
-		event = "VeryLazy",
 		config = function()
 			local telescope = require "telescope"
 			local actions = require "telescope.actions"
@@ -151,6 +151,7 @@ require "lazy".setup {
 	-- proper syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
 			require "nvim-treesitter.configs".setup {
@@ -170,6 +171,10 @@ require "lazy".setup {
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		-- TODO NOW
+		-- decide whether we want plugins to be lazy by default
+		-- and what need to be VeryLazy
+		event = "VeryLazy",
 		version = "v2.20.8",
 		config = function()
 			require "indent_blankline".setup {
@@ -417,4 +422,7 @@ require "lazy".setup {
 		end
 	},
 	-- m4 >>>)
-}
+}, {
+	defaults = { lazy = true },
+	install = { missing = true }
+})
