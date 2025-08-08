@@ -339,7 +339,7 @@ require "lazy".setup {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- m4 >>>, <<<
 	{
-		'numToStr/Comment.nvim',
+		'numtostr/comment.nvim',
 		opts = {
 			padding = true,
 			sticky = true,
@@ -353,12 +353,9 @@ require "lazy".setup {
 				block = '<leader>cb',
 			},
 			extra = {
-				-- Add comment on the line above
-				above = '<leader>cO',
-				-- Add comment on the line below
-				below = '<leader>co',
-				-- Add comment at the end of line
-				eol = '<leader>cA',
+				above = '<leader>cO', -- Add comment on the line above
+				below = '<leader>co', -- Add comment on the line below
+				eol = '<leader>cA',   -- Add comment at the end of line
 			},
 			mappings = {
 				basic = true,
@@ -374,9 +371,7 @@ require "lazy".setup {
 	{
 		"RRethy/vim-illuminate",
 		config = function()
-			require('illuminate').configure({
-				min_count_to_highlight = 2
-			})
+			require('illuminate').configure { min_count_to_highlight = 2 }
 		end
 	},
 	-- m4 >>>)
