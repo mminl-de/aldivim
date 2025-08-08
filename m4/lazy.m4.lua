@@ -423,14 +423,6 @@ require "lazy".setup {
         opts = {},
     },
 
-	-- This is experimental and probably not very useful... idk
-	{
-		"nvim-telescope/telescope-dap.nvim",
-		config = function()
-			require('telescope').load_extension('dap')
-		end,
-	},
-
 	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
 	{
 		"Weissle/persistent-breakpoints.nvim",
