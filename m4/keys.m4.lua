@@ -2,6 +2,7 @@
 local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
+local dap = require('dap')
 
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -85,6 +86,7 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
+	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
 	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
@@ -127,6 +129,24 @@ require "which-key".add {
 		{ "<m-l>", function() vim.cmd.wincmd("l") end, desc = "Focus pane to the right" },
 
 		-- lsp
-		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" }
-	}
+		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
+	},
+
+	-- DAP
+	{
+		{ "<leader>Dr", function() dap.run() end, desc = "DAP Run <F4>" },
+		{ "<leader>Ds", function() dap.step_over() end, desc = "DAP Step Over <F5>" },
+		{ "<leader>Di", function() dap.step_into() end, desc = "DAP Step Into <F6>" },
+		{ "<leader>Dc", function() dap.continue() end, desc = "DAP Continue <F7>" },
+		{ "<leader>Do", function() dap.step_out() end, desc = "DAP Step Out <F8>" },
+		{ "<leader>Db", function() dap.toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>Bb", function() dap.toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>Dt", function() dap.terminate() end, desc = "DAP Terminate" },
+		{ "<f4>", function() require('dap').run() end, desc = "DAP Run" },
+		{ "<f5>", function() require('dap').step_over() end, desc = "DAP step Over" },
+		{ "<f6>", function() require('dap').step_into() end, desc = "DAP Step Into" },
+		{ "<f7>", function() require('dap').continue() end, desc = "DAP Continue" },
+		{ "<f8>", function() require('dap').step_out() end, desc = "DAP Step Out" },
+		{ "<f1>", function() require('dap').run_last() end, desc = "DAP Run Last" },
+	},
 }

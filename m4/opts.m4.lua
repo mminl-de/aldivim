@@ -77,3 +77,5 @@ vim.g.colorizer_on = true
 vim.g.colorizer_on = false
 -- m4 >>>)
 vim.g.goyo_on = false
+
+vim.o.winborder = 'rounded'

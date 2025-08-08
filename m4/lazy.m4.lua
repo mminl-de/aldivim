@@ -362,6 +362,42 @@ require "lazy".setup {
 			vim.g.goyo_height = 100
 			vim.g.goyo_linenr = true
 		end
-	}
+	},
 	-- m4 >>>)
+
+	{
+		'mfussenegger/nvim-dap'
+	},
+
+	-- DAP UI
+    {
+        'igorlfs/nvim-dap-view',
+        opts = {},
+    },
+
+	-- This is experimental and probably not very useful... idk
+	{
+		"nvim-telescope/telescope-dap.nvim",
+		config = function()
+			require('telescope').load_extension('dap')
+		end,
+	},
+
+	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
+	{
+		"Weissle/persistent-breakpoints.nvim",
+		config = function()
+			require('persistent-breakpoints').setup {
+				load_breakpoints_event = { "BufReadPost"}
+			}
+		end,
+	},
+
+	{
+		"Carcuis/dap-breakpoints.nvim",
+		config = function()
+			require('dap-breakpoints').setup()
+		end
+	},
+
 }
