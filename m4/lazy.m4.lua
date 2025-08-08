@@ -106,12 +106,12 @@ require "lazy".setup({
 							icon = "",
 							color = "@comment.warning"
 						},
-						-- m4 >>>)
 						{
 							function() return vim.g.goyo_on and "zen" or "" end,
 							icon = "󱅻",
 							color = "@comment.error"
-						},
+						}
+						-- m4 >>>)
 					}
 				}
 			}
@@ -165,6 +165,7 @@ require "lazy".setup({
 	-- always show current scope you're in at the top
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		lazy = false,
 		config = function() require "treesitter-context".setup() end
 	},
 
@@ -187,6 +188,7 @@ require "lazy".setup({
 	-- lsp
 	{
 		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
 		config = function()
 			vim.opt.signcolumn = "yes"
 			local lspconfig = require "lspconfig"
@@ -238,6 +240,7 @@ require "lazy".setup({
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help"
 		},
+		event = "VeryLazy",
 		config = function()
 			local cmp = require "cmp"
 			cmp.setup {
@@ -312,8 +315,8 @@ require "lazy".setup({
 	-- 		}
 	-- 	end
 	-- },
-	-- auto-pair brackets and quotes
 
+	-- auto-pair brackets and quotes
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -323,6 +326,7 @@ require "lazy".setup({
 	-- paint hexcodes
 	{
 		"norcalli/nvim-colorizer.lua",
+		event = "VeryLazy", -- TODO NOW
 		-- m4 ifdef(<<<JULIAN>>>, <<<
 		config = function()
 			vim.opt.termguicolors = true
