@@ -2,7 +2,10 @@
 local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
-local dap = require('dap')
+-- m4 ifdef(<<<SERGEY>>>, <<<
+-- m4 >>>, <<<
+local dap = require "dap"
+-- m4 >>>)
 
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -142,21 +145,24 @@ require "which-key".add {
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
 	},
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 >>>, <<<
 	-- DAP
 	{
-		{ "<leader>Dr", function() dap.run() end, desc = "DAP Run <F4>" },
-		{ "<leader>Ds", function() dap.step_over() end, desc = "DAP Step Over <F5>" },
-		{ "<leader>Di", function() dap.step_into() end, desc = "DAP Step Into <F6>" },
-		{ "<leader>Dc", function() dap.continue() end, desc = "DAP Continue <F7>" },
-		{ "<leader>Do", function() dap.step_out() end, desc = "DAP Step Out <F8>" },
-		{ "<leader>Db", function() dap.toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
-		{ "<leader>Bb", function() dap.toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
-		{ "<leader>Dt", function() dap.terminate() end, desc = "DAP Terminate" },
-		{ "<f4>", function() require('dap').run() end, desc = "DAP Run" },
-		{ "<f5>", function() require('dap').step_over() end, desc = "DAP step Over" },
-		{ "<f6>", function() require('dap').step_into() end, desc = "DAP Step Into" },
-		{ "<f7>", function() require('dap').continue() end, desc = "DAP Continue" },
-		{ "<f8>", function() require('dap').step_out() end, desc = "DAP Step Out" },
-		{ "<f1>", function() require('dap').run_last() end, desc = "DAP Run Last" },
+		{ "<leader>Dr", dap.run, desc = "DAP Run <F4>" },
+		{ "<leader>Ds", dap.step_over, desc = "DAP Step Over <F5>" },
+		{ "<leader>Di", dap.step_into, desc = "DAP Step Into <F6>" },
+		{ "<leader>Dc", dap.continue, desc = "DAP Continue <F7>" },
+		{ "<leader>Do", dap.step_out, desc = "DAP Step Out <F8>" },
+		{ "<leader>Db", dap.toggle_breakpoint, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>Bb", dap.toggle_breakpoint, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>Dt", dap.terminate, desc = "DAP Terminate" },
+		{ "<f4>", dap.run, desc = "DAP Run" },
+		{ "<f5>", dap.step_over, desc = "DAP step Over" },
+		{ "<f6>", dap.step_into, desc = "DAP Step Into" },
+		{ "<f7>", dap.continue, desc = "DAP Continue" },
+		{ "<f8>", dap.step_out, desc = "DAP Step Out" },
+		{ "<f1>", dap.run_last, desc = "DAP Run Last" },
 	},
+	-- m4 >>>)
 }

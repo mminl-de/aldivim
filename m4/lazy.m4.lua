@@ -225,26 +225,6 @@ require "lazy".setup {
 		end
 	},
 
-	-- TODO NOW
-	-- {
-	-- 	"folke/trouble.nvim",
-	-- 	config = function()
-	-- 		require "trouble".setup()
-
-	-- 		local telescope = require("telescope")
-	-- 		local open_with_trouble = require("trouble.sources.telescope").open
-
-	-- 		telescope.setup({
-	-- 			defaults = {
-	-- 				mappings = {
-	-- 					i = { ["<c-t>"] = open_with_trouble },
-	-- 					n = { ["<c-t>"] = open_with_trouble },
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end
-	-- },
-
 	-- lsp-based autocompletions
 	{
 		"hrsh7th/nvim-cmp",
@@ -318,7 +298,7 @@ require "lazy".setup {
 
 	-- TODO NOTE julian and sergey wanted to decide between this and another plugin
 	-- {
-	-- 	"ray-x/lsp_signature.nvim", -- TODO NOW
+	-- 	"ray-x/lsp_signature.nvim",
 	-- 	event = "InsertEnter",
 	-- 	config = function()
 	-- 		require "lsp_signature".setup {
@@ -413,6 +393,8 @@ require "lazy".setup {
 	},
 	-- m4 >>>)
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 >>>, <<<
 	{
 		'mfussenegger/nvim-dap'
 	},
@@ -422,14 +404,6 @@ require "lazy".setup {
         'igorlfs/nvim-dap-view',
         opts = {},
     },
-
-	-- This is experimental and probably not very useful... idk
-	{
-		"nvim-telescope/telescope-dap.nvim",
-		config = function()
-			require('telescope').load_extension('dap')
-		end,
-	},
 
 	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
 	{
@@ -447,5 +421,6 @@ require "lazy".setup {
 			require('dap-breakpoints').setup()
 		end
 	},
+	-- m4 >>>)
 
 }
