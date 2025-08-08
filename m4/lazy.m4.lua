@@ -124,6 +124,7 @@ require "lazy".setup {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim"
 		},
+		event = "VeryLazy",
 		config = function()
 			local telescope = require "telescope"
 			local actions = require "telescope.actions"
@@ -339,7 +340,7 @@ require "lazy".setup {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- m4 >>>, <<<
 	{
-		'numtostr/comment.nvim',
+		"numtostr/comment.nvim",
 		opts = {
 			padding = true,
 			sticky = true,
@@ -369,7 +370,7 @@ require "lazy".setup {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- m4 >>>, <<<
 	{
-		"RRethy/vim-illuminate",
+		"rrethy/vim-illuminate",
 		config = function()
 			require('illuminate').configure { min_count_to_highlight = 2 }
 		end
@@ -380,6 +381,7 @@ require "lazy".setup {
 	-- zen mode
 	{
 		"junegunn/goyo.vim",
+		event = "VeryLazy",
 		init = function()
 			vim.g.goyo_width = 90
 			vim.g.goyo_height = 100
@@ -390,32 +392,29 @@ require "lazy".setup {
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- m4 >>>, <<<
-	{
-		'mfussenegger/nvim-dap'
-	},
+	"mfussenegger/nvim-dap",
 
 	-- DAP UI
     {
-        'igorlfs/nvim-dap-view',
+        "igorlfs/nvim-dap-view",
         opts = {},
     },
 
 	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
 	{
-		"Weissle/persistent-breakpoints.nvim",
+		"weissle/persistent-breakpoints.nvim",
 		config = function()
-			require('persistent-breakpoints').setup {
+			require "persistent-breakpoints".setup {
 				load_breakpoints_event = { "BufReadPost"}
 			}
 		end,
 	},
 
 	{
-		"Carcuis/dap-breakpoints.nvim",
+		"carcuis/dap-breakpoints.nvim",
 		config = function()
-			require('dap-breakpoints').setup()
+			require "dap-breakpoints".setup()
 		end
 	},
 	-- m4 >>>)
-
 }
