@@ -58,7 +58,12 @@ require "which-key".add {
 	-- telescope
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
-	{ "<leader>d", builtin.diagnostics, desc = "View LSP diagnostics" },
+	{ "<leader>d", function()
+		builtin.diagnostics {
+			bufnr = 0,
+			line_width = "full"
+		}
+	end, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -83,6 +88,11 @@ require "which-key".add {
 	{ "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
 	{ "<leader>vr", vim.cmd.VimwikiRenameFile, desc = "Rename this wiki page" },
 	-- m4 >>>)
+
+	-- lsp
+	{ "<leader>r", function()
+		vim.diagnostic.open_float(nil, { focus = false })
+	end, desc = "View the full LSP message on this line" },
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },

@@ -79,20 +79,45 @@ require "lazy".setup {
 	},
 	-- m4 >>>)
 
-	-- launchers, pickers, prompts ...
+	-- bar
 	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
+		"nvim-lualine/lualine.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
-			require "nvim-treesitter.configs".setup {
-				ensure_installed = { "lua", "vimdoc", "zig" },
-				highlight = { enable = true },
-				indent = { enable = true }
+			require "lualine".setup {
+				options = {
+					icons_enabled = true,
+					theme = "auto",
+					section_separators = { left = "𜷄", right = "𜵟" },
+					component_separators = { left = "𜹘", right = "𜹘" }
+				},
+				sections = process_sections {
+					lualine_z = {
+						{ "location" },
+						-- m4 ifdef(<<<SERGEY>>>, <<<
+						{
+							function() return vim.wo.wrap and "wrap" or "" end,
+							icon = "󰖶",
+							color = "@comment.todo"
+						},
+						{
+							function() return vim.g.colorizer_on and "colorizer" or "" end,
+							icon = "",
+							color = "@comment.warning"
+						},
+						-- m4 >>>)
+						{
+							function() return vim.g.goyo_on and "zen" or "" end,
+							icon = "󱅻",
+							color = "@comment.error"
+						},
+					}
+				}
 			}
 		end
 	},
 
-	-- file browser
+	-- launchers, pickers, prompts and file browser
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = {
@@ -122,6 +147,19 @@ require "lazy".setup {
 		end
 	},
 
+	-- proper syntax highlighting
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			require "nvim-treesitter.configs".setup {
+				ensure_installed = { "lua", "vimdoc", "zig" },
+				highlight = { enable = true },
+				indent = { enable = true }
+			}
+		end
+	},
+
 	-- always show current scope you're in at the top
 	{
 		"nvim-treesitter/nvim-treesitter-context",
@@ -131,14 +169,16 @@ require "lazy".setup {
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		version = "v2.20.8",
 		config = function()
-			require "ibl".setup {
-				indent = { char = "▏" }
+			require "indent_blankline".setup {
+				indent = { char = "│" },
+				show_current_context = true
 			}
 		end
 	},
 
-	-- LSP
+	-- lsp
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -161,32 +201,57 @@ require "lazy".setup {
 			lspconfig.pyright.setup {}
 			-- m4 >>>)
 
-			-- show LSP errors inline
+			-- show lsp errors inline
 			vim.diagnostic.config({
 				virtual_text = {
 					spacing = 2,
-					prefix = "●",
+					prefix = "󱈸",
 				},
-				signs = true,
+				float = {
+					source = "always",
+					border = "rounded"
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+						[vim.diagnostic.severity.HINT] = "",
+						[vim.diagnostic.severity.INFO] = "",
+					}
+				},
 				underline = true,
 				update_in_insert = false,
 			})
 		end
 	},
 
-	-- m4 ifdef(<<<DANIN>>>, <<<
-	-- LSP loading notification
-	{
-		"j-hui/fidget.nvim",
-		lazy = false,
-		config = true
-	},
-	-- m4 >>>)
+	-- TODO NOW
+	-- {
+	-- 	"folke/trouble.nvim",
+	-- 	config = function()
+	-- 		require "trouble".setup()
 
-	-- LSP-based autocompletions
+	-- 		local telescope = require("telescope")
+	-- 		local open_with_trouble = require("trouble.sources.telescope").open
+
+	-- 		telescope.setup({
+	-- 			defaults = {
+	-- 				mappings = {
+	-- 					i = { ["<c-t>"] = open_with_trouble },
+	-- 					n = { ["<c-t>"] = open_with_trouble },
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end
+	-- },
+
+	-- lsp-based autocompletions
 	{
 		"hrsh7th/nvim-cmp",
-		dependencies = "hrsh7th/cmp-nvim-lsp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help"
+		},
 		config = function()
 			local cmp = require "cmp"
 			cmp.setup {
@@ -226,7 +291,8 @@ require "lazy".setup {
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
 				sources = {
 					{ name = "nvim_lsp" },
-					{ name = "buffer" }
+					{ name = "buffer" },
+					{ name = "nvim_lsp_signature_help" }
 				},
 				view = { entries = "native" },
 				window = {
@@ -241,45 +307,27 @@ require "lazy".setup {
 		end
 	},
 
-	-- bar
+	-- m4 ifdef(<<<DANIN>>>, <<<
+	-- lsp loading notification
 	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require "lualine".setup {
-				options = {
-					icons_enabled = true,
-					theme = "auto",
-					section_separators = { left = "𜷄", right = "𜵟" },
-					component_separators = { left = "𜹘", right = "𜹘" }
-				},
-				sections = process_sections {
-					lualine_z = {
-						{ "location" },
-						-- m4 ifdef(<<<SERGEY>>>, <<<
-						{
-							function() return vim.wo.wrap and "wrap" or "" end,
-							icon = "󰖶",
-							color = "@comment.todo"
-						},
-						{
-							function() return vim.g.colorizer_on and "colorizer" or "" end,
-							icon = "",
-							color = "@comment.warning"
-						},
-						-- m4 >>>)
-						{
-							function() return vim.g.goyo_on and "zen" or "" end,
-							icon = "󱅻",
-							color = "@comment.error"
-						},
-					}
-				}
-			}
-		end
+		"j-hui/fidget.nvim",
+		lazy = false,
+		config = true
 	},
+	-- m4 >>>)
 
+	-- TODO NOTE julian and sergey wanted to decide between this and another plugin
+	-- {
+	-- 	"ray-x/lsp_signature.nvim", -- TODO NOW
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require "lsp_signature".setup {
+	-- 			hint_enable = false
+	-- 		}
+	-- 	end
+	-- },
 	-- auto-pair brackets and quotes
+
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
