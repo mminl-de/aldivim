@@ -19,6 +19,18 @@ o.softtabstop = 4
 o.shiftwidth = 4
 o.expandtab = false
 
+-- m4 ifdef(<<<SERGEY>>>, <<<
+-- visualize tabs and spaces
+o.list = true
+o.listchars = {
+	tab = "│ ",
+	trail = "·",
+	extends = "»",
+	precedes = "«",
+	nbsp = "␣"
+}
+-- m4 >>>)
+
 -- wrap
 o.wrap = true
 o.linebreak = true

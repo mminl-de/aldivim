@@ -169,6 +169,7 @@ require "lazy".setup({
 		config = function() require "treesitter-context".setup() end
 	},
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -184,6 +185,7 @@ require "lazy".setup({
 			}
 		end
 	},
+	-- m4 >>>)
 
 	-- lsp
 	{
