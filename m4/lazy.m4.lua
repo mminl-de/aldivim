@@ -48,11 +48,7 @@ require "lazy".setup({
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		config = function()
-			require "catppuccin".setup {
-				integrations = { vimwiki = true }
-			}
-		end
+		opts = { integrations = { vimwiki = true } }
 	},
 	{ "rose-pine/neovim", name = "rose-pine" },
 
@@ -68,6 +64,7 @@ require "lazy".setup({
 	-- personal knowledge management for me
 	{
 		"vimwiki/vimwiki",
+		event = "VeryLazy",
 		init = function()
 			vim.g.vimwiki_list = {
 				{
@@ -173,7 +170,6 @@ require "lazy".setup({
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		-- TODO NOW
 		-- decide whether we want plugins to be lazy by default
 		-- and what need to be VeryLazy
 		event = "VeryLazy",
@@ -204,7 +200,7 @@ require "lazy".setup({
 			lspconfig.rust_analyzer.setup {}
 			lspconfig.slint_lsp.setup {}
 			-- m4 >>>)
-			--lspconfig.zls.setup {}
+			lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
 			lspconfig.jdtls.setup {}
@@ -240,7 +236,9 @@ require "lazy".setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 			"hrsh7th/cmp-nvim-lsp-signature-help"
+			-- m4 >>>)
 		},
 		event = "VeryLazy",
 		config = function()
@@ -283,7 +281,9 @@ require "lazy".setup({
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
+					-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 					{ name = "nvim_lsp_signature_help" }
+					-- m4 >>>)
 				},
 				view = { entries = "native" },
 				window = {
@@ -298,7 +298,7 @@ require "lazy".setup({
 		end
 	},
 
-	-- m4 ifdef(<<<DANIN>>>, <<<
+	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
 	-- lsp loading notification
 	{
 		"j-hui/fidget.nvim",
@@ -307,16 +307,18 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 
-	-- TODO NOTE julian and sergey wanted to decide between this and another plugin
-	-- {
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	event = "InsertEnter",
-	-- 	config = function()
-	-- 		require "lsp_signature".setup {
-	-- 			hint_enable = false
-	-- 		}
-	-- 	end
-	-- },
+	-- TODO NOTE julian wanted to decide between this and another plugin
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		config = function()
+			require "lsp_signature".setup {
+				hint_enable = false
+			}
+		end
+	},
+	-- m4 >>>)
 
 	-- auto-pair brackets and quotes
 	{
@@ -348,8 +350,7 @@ require "lazy".setup({
 		}
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- m4 >>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{
 		"numtostr/comment.nvim",
 		opts = {
@@ -378,8 +379,7 @@ require "lazy".setup({
 	-- m4 >>>)
 
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- m4 >>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{
 		"rrethy/vim-illuminate",
 		config = function()
@@ -401,8 +401,7 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- m4 >>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	"mfussenegger/nvim-dap",
 
 	-- DAP UI
