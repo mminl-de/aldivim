@@ -64,7 +64,7 @@ require "lazy".setup({
 	-- personal knowledge management for me
 	{
 		"vimwiki/vimwiki",
-		event = "VeryLazy",
+		lazy = false,
 		init = function()
 			vim.g.vimwiki_list = {
 				{
@@ -148,7 +148,7 @@ require "lazy".setup({
 	-- proper syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
+		event = "VeryLazy",
 		build = ":TSUpdate",
 		config = function()
 			require "nvim-treesitter.configs".setup {
@@ -186,9 +186,10 @@ require "lazy".setup({
 	-- lsp
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
+		lazy = false,
 		config = function()
 			vim.opt.signcolumn = "yes"
+
 			local lspconfig = require "lspconfig"
 			lspconfig.clangd.setup {
 				cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" }
@@ -286,10 +287,10 @@ require "lazy".setup({
 					-- m4 >>>)
 				},
 				view = { entries = "native" },
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered()
-				},
+				--window = {
+				--	completion = cmp.config.window.bordered(),
+				--	documentation = cmp.config.window.bordered()
+				--},
 			}
 
 			-- necessary to make clangd completions not suck
@@ -312,11 +313,11 @@ require "lazy".setup({
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "InsertEnter",
-		config = function()
-			require "lsp_signature".setup {
-				hint_enable = false
-			}
-		end
+		opts = {
+			bind = true,
+			handler_opts = { border = "rounded" },
+			hint_enable = false
+		}
 	},
 	-- m4 >>>)
 
@@ -361,7 +362,7 @@ require "lazy".setup({
 				block = '<leader>bc',
 			},
 			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
-		    opleader = {
+			opleader = {
 				line = '<leader>cC',
 				block = '<leader>cb',
 			},
@@ -405,10 +406,10 @@ require "lazy".setup({
 	"mfussenegger/nvim-dap",
 
 	-- DAP UI
-    {
-        "igorlfs/nvim-dap-view",
-        opts = {},
-    },
+	{
+		"igorlfs/nvim-dap-view",
+		opts = {},
+	},
 
 	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
 	{
