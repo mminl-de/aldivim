@@ -152,7 +152,12 @@ require "lazy".setup({
 		build = ":TSUpdate",
 		config = function()
 			require "nvim-treesitter.configs".setup {
-				ensure_installed = { "lua", "vimdoc", "zig" },
+				ensure_installed = {
+					"lua",
+					"slint",
+					"vimdoc",
+					"zig"
+				},
 				highlight = { enable = true },
 				indent = { enable = true }
 			}
@@ -197,10 +202,8 @@ require "lazy".setup({
 			lspconfig.html.setup {}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
-			-- m4 ifdef(<<<DANIN>>>, <<<
 			lspconfig.rust_analyzer.setup {}
 			lspconfig.slint_lsp.setup {}
-			-- m4 >>>)
 			lspconfig.zls.setup {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
@@ -264,9 +267,9 @@ require "lazy".setup({
 							vim_item.kind
 						)
 						vim_item.menu = ({
-							buffer = "[Buffer]",
-							nvim_lsp = "[LSP]",
-							nvim_lua = "[Lua]"
+							buffer = "[buf]",
+							nvim_lsp = "[lsp]",
+							nvim_lua = "[lua]"
 						})[entry.source.name]
 						return vim_item
 					end
@@ -286,7 +289,7 @@ require "lazy".setup({
 					{ name = "nvim_lsp_signature_help" }
 					-- m4 >>>)
 				},
-				view = { entries = "native" },
+				view = { entries = "custom" },
 				--window = {
 				--	completion = cmp.config.window.bordered(),
 				--	documentation = cmp.config.window.bordered()
