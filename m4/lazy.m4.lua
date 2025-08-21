@@ -196,10 +196,17 @@ require "lazy".setup({
 			vim.opt.signcolumn = "yes"
 
 			local lspconfig = require "lspconfig"
+			local capabilities = require "cmp_nvim_lsp".default_capabilities()
+			capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 			lspconfig.clangd.setup {
-				cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" }
+				cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" },
+				capabilities = capabilities
 			}
-			lspconfig.html.setup {}
+			lspconfig.html.setup {
+				cmd = { "vscode-html-language-server", "--stdio" },
+				capabilities = capabilities
+			}
 			lspconfig.lua_ls.setup {}
 			lspconfig.ts_ls.setup {}
 			lspconfig.rust_analyzer.setup {}
@@ -295,10 +302,6 @@ require "lazy".setup({
 				--	documentation = cmp.config.window.bordered()
 				--},
 			}
-
-			-- necessary to make clangd completions not suck
-			local capabilities = require "cmp_nvim_lsp".default_capabilities()
-			require "lspconfig".clangd.setup { capabilities = capabilities }
 		end
 	},
 
@@ -313,6 +316,7 @@ require "lazy".setup({
 
 	-- TODO NOTE julian wanted to decide between this and another plugin
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- show function signatures when writing them out
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "InsertEnter",
@@ -330,6 +334,17 @@ require "lazy".setup({
 		event = "InsertEnter",
 		config = true
 	},
+
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- auto-pair html tags
+	{
+		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		opts = {
+			opts = { enable_close_on_slash = true }
+		}
+	},
+	-- m4 >>>)
 
 	-- paint hexcodes
 	{
@@ -408,7 +423,7 @@ require "lazy".setup({
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	"mfussenegger/nvim-dap",
 
-	-- DAP UI
+	-- dap UI
 	{
 		"igorlfs/nvim-dap-view",
 		opts = {},
