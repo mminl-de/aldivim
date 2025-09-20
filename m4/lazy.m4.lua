@@ -195,27 +195,27 @@ require "lazy".setup({
 		config = function()
 			vim.opt.signcolumn = "yes"
 
-			local lspconfig = require "lspconfig"
+			local lc = vim.lsp.config
 			local capabilities = require "cmp_nvim_lsp".default_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-			lspconfig.clangd.setup {
+			lc.clangd = {
 				cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" },
 				capabilities = capabilities
 			}
-			lspconfig.html.setup {
+			lc.html = {
 				cmd = { "vscode-html-language-server", "--stdio" },
 				capabilities = capabilities
 			}
-			lspconfig.lua_ls.setup {}
-			lspconfig.ts_ls.setup {}
-			lspconfig.rust_analyzer.setup {}
-			lspconfig.slint_lsp.setup {}
-			lspconfig.zls.setup {}
+			lc.lua_ls = {}
+			lc.ts_ls = {}
+			lc.rust_analyzer = {}
+			lc.slint_lsp = {}
+			lc.zls = {}
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
-			lspconfig.jdtls.setup {}
-			lspconfig.pyright.setup {}
+			lc.jdtls = {}
+			lc.pyright = {}
 			-- m4 >>>)
 
 			-- show lsp errors inline
