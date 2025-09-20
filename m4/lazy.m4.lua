@@ -195,27 +195,48 @@ require "lazy".setup({
 		config = function()
 			vim.opt.signcolumn = "yes"
 
-			local lc = vim.lsp.config
+			local lsp = vim.lsp
 			local capabilities = require "cmp_nvim_lsp".default_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-			lc.clangd = {
-				cmd = { "clangd", "--compile-commands-dir=build", "-x", "c" },
+			lsp.config.clangd = {
+				cmd = {
+					"clangd",
+					"--clang-tidy",
+					"--background-index",
+					"--offset-encoding=utf-8"
+				},
+				root_markers = {},
+				filetypes = { "c", "cpp", "h", "hpp" },
 				capabilities = capabilities
 			}
-			lc.html = {
+			lsp.config.html = {
 				cmd = { "vscode-html-language-server", "--stdio" },
 				capabilities = capabilities
 			}
-			lc.lua_ls = {}
-			lc.ts_ls = {}
-			lc.rust_analyzer = {}
-			lc.slint_lsp = {}
-			lc.zls = {}
+			lsp.config.lua_ls = {}
+			lsp.config.ts_ls = {}
+			lsp.config.rust_analyzer = {}
+			lsp.config.zls = {}
+
+			lsp.enable "clangd"
+			lsp.enable "html"
+			lsp.enable "lua_ls"
+			lsp.enable "ts_ls"
+			lsp.enable "rust_analyzer"
+			lsp.enable "zls"
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			-- TODO add other lsps
-			lc.jdtls = {}
-			lc.pyright = {}
+			lsp.config.jdtls = {}
+			lsp.config.pyright = {}
+
+			lsp.enable "jdtls"
+			lsp.enable "pyright"
+			-- m4 >>>)
+			-- m4 ifdef(<<<DANIEL>>>, <<<
+			lsp.config.slint_lsp = {}
+
+			lsp.enable "slint_lsp"
 			-- m4 >>>)
 
 			-- show lsp errors inline
