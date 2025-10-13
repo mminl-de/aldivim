@@ -214,6 +214,7 @@ require "lazy".setup({
 				cmd = { "vscode-html-language-server", "--stdio" },
 				capabilities = capabilities
 			}
+			lsp.config.hls = {}
 			lsp.config.lua_ls = {}
 			lsp.config.ts_ls = {}
 			lsp.config.rust_analyzer = {}
@@ -221,6 +222,7 @@ require "lazy".setup({
 
 			lsp.enable "clangd"
 			lsp.enable "html"
+			lsp.enable "hls"
 			lsp.enable "lua_ls"
 			lsp.enable "ts_ls"
 			lsp.enable "rust_analyzer"
