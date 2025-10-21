@@ -17,7 +17,11 @@ o.clipboard = "unnamedplus"
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
+-- m4 ifdef(<<<DANIN>>>, <<<
+o.expandtab = true
+-- m4 >>>, <<<
 o.expandtab = false
+-- m4 >>>)
 
 -- m4 ifdef(<<<SERGEY>>>, <<<
 -- visualize tabs and spaces

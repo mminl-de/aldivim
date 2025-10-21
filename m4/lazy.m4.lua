@@ -235,7 +235,7 @@ require "lazy".setup({
 			lsp.enable "jdtls"
 			lsp.enable "pyright"
 			-- m4 >>>)
-			-- m4 ifdef(<<<DANIEL>>>, <<<
+			-- m4 ifdef(<<<DANIN>>>, <<<
 			lsp.config.slint_lsp = {}
 
 			lsp.enable "slint_lsp"
