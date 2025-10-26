@@ -210,6 +210,14 @@ require "lazy".setup({
 				filetypes = { "c", "cpp", "h", "hpp" },
 				capabilities = capabilities
 			}
+			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+			lsp.config.dartls = {
+				cmd = { "dart", "language-server", "--protocol=lsp" },
+				init_options = { flutterOutline = true },
+				root_markers = { "pubspec.yaml" },
+				settings = { dart = { completeFunctionCalls = true } }
+			}
+			-- m4 >>>)
 			lsp.config.html = {
 				cmd = { "vscode-html-language-server", "--stdio" },
 				capabilities = capabilities
@@ -221,6 +229,9 @@ require "lazy".setup({
 			lsp.config.zls = {}
 
 			lsp.enable "clangd"
+			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+			lsp.enable "dartls"
+			-- m4 >>>)
 			lsp.enable "html"
 			lsp.enable "hls"
 			lsp.enable "lua_ls"
