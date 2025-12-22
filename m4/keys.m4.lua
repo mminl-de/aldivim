@@ -82,7 +82,7 @@ require "which-key".add {
 	{ "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
 	{ "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
 	{ "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },
-	{ "<leader>w", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
+	{ "<leader>wo", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
 	{ "<leader>v", group = "vimwiki" },
 	{ "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
 	{ "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
@@ -123,6 +123,7 @@ require "which-key".add {
 		mode = "i",
 
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
+		{ "<m-u>", "<esc>ui", desc = "Undo a change inline" },
 
 		-- vimwiki
 		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },

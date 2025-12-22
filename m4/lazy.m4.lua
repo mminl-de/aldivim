@@ -195,62 +195,7 @@ require "lazy".setup({
 		config = function()
 			vim.opt.signcolumn = "yes"
 
-			local lsp = vim.lsp
-			local capabilities = require "cmp_nvim_lsp".default_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-			lsp.config.clangd = {
-				cmd = {
-					"clangd",
-					"--clang-tidy",
-					"--background-index",
-					"--offset-encoding=utf-8"
-				},
-				root_markers = {},
-				filetypes = { "c", "cpp", "h", "hpp" },
-				capabilities = capabilities
-			}
-			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
-			lsp.config.dartls = {
-				cmd = { "dart", "language-server", "--protocol=lsp" },
-				init_options = { flutterOutline = true },
-				root_markers = { "pubspec.yaml" },
-				settings = { dart = { completeFunctionCalls = true } }
-			}
-			-- m4 >>>)
-			lsp.config.html = {
-				cmd = { "vscode-html-language-server", "--stdio" },
-				capabilities = capabilities
-			}
-			lsp.config.hls = {}
-			lsp.config.lua_ls = {}
-			lsp.config.ts_ls = {}
-			lsp.config.rust_analyzer = {}
-			lsp.config.zls = {}
-
-			lsp.enable "clangd"
-			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
-			lsp.enable "dartls"
-			-- m4 >>>)
-			lsp.enable "html"
-			lsp.enable "hls"
-			lsp.enable "lua_ls"
-			lsp.enable "ts_ls"
-			lsp.enable "rust_analyzer"
-			lsp.enable "zls"
-			-- m4 ifdef(<<<JULIAN>>>, <<<
-			-- TODO add other lsps
-			lsp.config.jdtls = {}
-			lsp.config.pyright = {}
-
-			lsp.enable "jdtls"
-			lsp.enable "pyright"
-			-- m4 >>>)
-			-- m4 ifdef(<<<DANIN>>>, <<<
-			lsp.config.slint_lsp = {}
-
-			lsp.enable "slint_lsp"
-			-- m4 >>>)
+			-- TODO NOW NOW
 
 			-- show lsp errors inline
 			vim.diagnostic.config({
