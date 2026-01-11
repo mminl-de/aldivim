@@ -34,7 +34,6 @@ load_lsps {
 			capabilities = capabilities
 		}
 	},
-	{ name = "hls" },
 	{ name = "lua_ls" },
 	{ name = "rust_analyzer" },
 	{ name = "ts_ls" },
