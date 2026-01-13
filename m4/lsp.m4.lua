@@ -50,6 +50,14 @@ load_lsps {
 			settings = { dart = { completeFunctionCalls = true } }
 		}
 	},
+	{
+		name = "tinymist",
+		config = {
+			cmd = { "tinymist" },
+			filetypes = { "typst" },
+			root_markers = { ".git" }
+		}
+	},
 	-- m4 >>>)
 
 	-- m4 ifdef(<<<JULIAN>>>, <<<
