@@ -36,7 +36,7 @@ require "which-key".add {
 
 	-- editing
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
-	{ "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
+	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
@@ -47,7 +47,9 @@ require "which-key".add {
 	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
 	-- split panes
+	{ "<leader>h", ":vs +wincmd\\ h<cr>", desc = "Split pane left" },
 	{ "<leader>j", vim.cmd.split, desc = "Split pane down" },
+	{ "<leader>k", ":sp +wincmd\\ k<cr>", desc = "Split pane up" },
 	{ "<leader>l", vim.cmd.vsplit, desc = "Split pane to the right" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -97,11 +99,12 @@ require "which-key".add {
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
-	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
-	-- m4 >>>, <<<
-	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
+	{ "<leader>y", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
 	-- m4 >>>)
+	{ "<leader>i", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		vim.g.inlay_hints_on = not vim.g.inlay_hints_on
+	end, desc = "Toggle inlay hints" },
 	{ "<m-space>", function()
 		local line = vim.api.nvim_get_current_line()
 		local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"

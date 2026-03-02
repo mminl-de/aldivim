@@ -102,8 +102,8 @@ require "lazy".setup({
 							color = "@comment.warning"
 						},
 						{
-							function() return vim.g.goyo_on and "zen" or "" end,
-							icon = "󱅻",
+							function() return vim.g.inlay_hints_on and "inlay hints" or "" end,
+							icon = "󰰤",
 							color = "@comment.error"
 						}
 						-- m4 >>>)
@@ -380,19 +380,6 @@ require "lazy".setup({
 		"rrethy/vim-illuminate",
 		config = function()
 			require('illuminate').configure { min_count_to_highlight = 2 }
-		end
-	},
-	-- m4 >>>)
-
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- zen mode
-	{
-		"junegunn/goyo.vim",
-		event = "VeryLazy",
-		init = function()
-			vim.g.goyo_width = 90
-			vim.g.goyo_height = 100
-			vim.g.goyo_linenr = true
 		end
 	},
 	-- m4 >>>)
