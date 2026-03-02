@@ -42,7 +42,7 @@ require "which-key".add {
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
-	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
+	{ "<leader>x", ":bp<bar>sp<bar>bn<bar>bd<cr>", desc = "Close buffer without closing window" },
 	{ "<leader><tab>", vim.cmd.bnext, desc = "Go to next buffer" },
 	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
@@ -122,8 +122,9 @@ require "which-key".add {
 	{
 		mode = "i",
 
+		-- insert-mode shell behavior
+		{ "<c-z>", "<esc>ui", desc = "Undo a change inline" },
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
-		{ "<m-u>", "<esc>ui", desc = "Undo a change inline" },
 
 		-- vimwiki
 		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },

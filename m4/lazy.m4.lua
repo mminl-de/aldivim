@@ -37,14 +37,12 @@ end, { desc = "Bootstrap lazy.nvim" })
 vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup({
-	-- colorschemes/themes
+	-- colorschemes
 	"loctvl842/monokai-pro.nvim",
-	"marko-cerovac/material.nvim",
 	"mofiqul/vscode.nvim",
 	"olimorris/onedarkpro.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
-	"tiagovla/tokyodark.nvim",
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -426,6 +424,10 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 }, {
-	defaults = { lazy = true },
-	install = { missing = true }
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	change_detection = { enabled = false },
+	checker = { enabled = false },
+	install = { missing = false },
+	-- m4 >>>)
+	defaults = { lazy = true }
 })
