@@ -36,7 +36,7 @@ o.listchars = {
 -- m4 >>>)
 
 -- wrap
-o.wrap = true
+o.wrap = false
 o.linebreak = true
 
 -- colorscheme

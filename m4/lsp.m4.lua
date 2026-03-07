@@ -60,13 +60,9 @@ load_lsps {
 	},
 	-- m4 >>>)
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	-- TODO add other lsps
 	{ name = "jdtls" },
 	{ name = "pyright" },
-	-- m4 >>>)
-
-	-- m4 ifdef(<<<DANIN>>>, <<<
-	{ name = "slint_lsp" }
 	-- m4 >>>)
 }

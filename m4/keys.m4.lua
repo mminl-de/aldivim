@@ -42,7 +42,7 @@ require "which-key".add {
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
-	{ "<leader>x", ":bp<bar>sp<bar>bn<bar>bd<cr>", desc = "Close buffer without closing window" },
+	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer without closing window" },
 	{ "<leader><tab>", vim.cmd.bnext, desc = "Go to next buffer" },
 	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
