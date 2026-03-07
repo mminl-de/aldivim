@@ -65,10 +65,7 @@ require "lazy".setup({
 		lazy = false,
 		init = function()
 			vim.g.vimwiki_list = {
-				{
-					path = "~/stuff/vimwiki",
-					index = "main"
-				}
+				{ path = "~/stuff/vimwiki", index = "main" }
 			}
 		end
 	},
@@ -151,7 +148,7 @@ require "lazy".setup({
 	-- proper syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
 			require "nvim-treesitter.configs".setup {
