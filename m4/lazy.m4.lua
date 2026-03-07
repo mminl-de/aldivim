@@ -358,33 +358,7 @@ require "lazy".setup({
 	},
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
-	{
-		-- TODO: funktioniert nicht
-		"numtostr/comment.nvim",
-		opts = {
-			padding = true,
-			sticky = true,
-			toggler = {
-				line = "<leader>cc",
-				block = "<leader>bc",
-			},
-			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
-			opleader = {
-				line = "<leader>cC",
-				block = "<leader>cb",
-			},
-			extra = {
-				above = "<leader>cO", -- Add comment on the line above
-				below = "<leader>co", -- Add comment on the line below
-				eol = "<leader>cA",   -- Add comment at the end of line
-			},
-			mappings = {
-				basic = true,
-				extra = true,
-			},
-		}
-	},
-
+    -- Highlights variable references
 	{
 		"rrethy/vim-illuminate",
 		lazy = false,
