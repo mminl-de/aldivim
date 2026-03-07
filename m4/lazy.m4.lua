@@ -193,8 +193,6 @@ require "lazy".setup({
 		config = function()
 			vim.opt.signcolumn = "yes"
 
-			-- TODO NOW NOW
-
 			-- show lsp errors inline
 			vim.diagnostic.config({
 				virtual_text = {
@@ -263,7 +261,11 @@ require "lazy".setup({
 					["<c-d>"] = cmp.mapping.scroll_docs(4),
 					["<c-space>"] = cmp.mapping.complete(),
 					["<c-x>"] = cmp.mapping.abort(),
-					["<cr>"] = cmp.mapping.confirm { select = true }
+					-- m4 ifdef(<<<JULIAN>>>, <<<
+					["<cr>"] = cmp.mapping.confirm { select = true },
+					-- m4 >>>, <<<
+					["<tab>"] = cmp.mapping.confirm { select = true }
+					-- m4 >>>)
 				},
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
 				sources = {
