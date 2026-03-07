@@ -6,7 +6,7 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 -- put proper separators between custom lualine components
 ---@param sections table lualine section declarations
 ---@return table
-local function process_sections(sections)
+local function separators_inbetween(sections)
 	for _, section in pairs(sections) do
 		for _, comp in ipairs(section) do
 			comp.separator = { left = "🬙" }
@@ -87,7 +87,7 @@ require "lazy".setup({
 					section_separators = { left = "𜷄", right = "𜵟" },
 					component_separators = { left = "𜹘", right = "𜹘" }
 				},
-				sections = process_sections {
+				sections = separators_inbetween {
 					lualine_z = {
 						{ "location" },
 						-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -152,7 +152,6 @@ require "lazy".setup({
 			require "nvim-treesitter.configs".setup {
 				ensure_installed = {
 					"lua",
-					"slint",
 					"vimdoc",
 					"zig"
 				},
@@ -179,7 +178,7 @@ require "lazy".setup({
 		version = "v2.20.8",
 		config = function()
 			require "indent_blankline".setup {
-				indent = { char = "│" },
+				indent = { char = "︳" },
 				show_current_context = true
 			}
 		end
@@ -314,7 +313,7 @@ require "lazy".setup({
 		config = true
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
 	-- auto-pair html tags
 	{
 		"windwp/nvim-ts-autotag",
@@ -328,8 +327,9 @@ require "lazy".setup({
 	-- paint hexcodes
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy", -- TODO NOW
-		-- m4 ifdef(<<<JULIAN>>>, <<<
+		-- m4 ifdef(<<<SERGEY>>>, <<<
+		event = "VeryLazy",
+		-- m4 >>>, <<<
 		config = function()
 			vim.opt.termguicolors = true
 			require "colorizer".setup()
@@ -355,18 +355,18 @@ require "lazy".setup({
 			padding = true,
 			sticky = true,
 			toggler = {
-				line = '<leader>cc',
-				block = '<leader>bc',
+				line = "<leader>cc",
+				block = "<leader>bc",
 			},
 			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
 			opleader = {
-				line = '<leader>cC',
-				block = '<leader>cb',
+				line = "<leader>cC",
+				block = "<leader>cb",
 			},
 			extra = {
-				above = '<leader>cO', -- Add comment on the line above
-				below = '<leader>co', -- Add comment on the line below
-				eol = '<leader>cA',   -- Add comment at the end of line
+				above = "<leader>cO", -- Add comment on the line above
+				below = "<leader>co", -- Add comment on the line below
+				eol = "<leader>cA",   -- Add comment at the end of line
 			},
 			mappings = {
 				basic = true,
@@ -374,14 +374,12 @@ require "lazy".setup({
 			},
 		}
 	},
-	-- m4 >>>)
 
-
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{
 		"rrethy/vim-illuminate",
+		lazy = false,
 		config = function()
-			require('illuminate').configure { min_count_to_highlight = 2 }
+			require "illuminate".configure { min_count_to_highlight = 2 }
 		end
 	},
 	-- m4 >>>)
@@ -395,7 +393,7 @@ require "lazy".setup({
 		opts = {},
 	},
 
-	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
+	-- This is a dependency for dap-breakpoints, but can be useful even without ig
 	{
 		"weissle/persistent-breakpoints.nvim",
 		config = function()
@@ -417,6 +415,6 @@ require "lazy".setup({
 	change_detection = { enabled = false },
 	checker = { enabled = false },
 	install = { missing = false },
-	-- m4 >>>)
 	defaults = { lazy = true }
+	-- m4 >>>)
 })
