@@ -10,13 +10,11 @@ local dap = require "dap"
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- aldivim config
-	{ "<leader>nm", group = "aldivim" },
-	{ "<leader>nmk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
-	{ "<leader>nml", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
-	{ "<leader>nmo", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
-	-- m4 >>>)
+	{ "<leader>n", group = "aldivim" },
+	{ "<leader>nk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
+	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
+	{ "<leader>no", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- other configs
 	{ "<leader>,", group = "config" },
 	{ "<leader>,f", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
@@ -32,7 +30,7 @@ require "which-key".add {
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
-	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
+	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end, desc = "Go to tag" },
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
@@ -86,9 +84,7 @@ require "which-key".add {
 	-- m4 >>>)
 
 	-- lsp
-	{ "<leader>r", function()
-		vim.diagnostic.open_float(nil, { focus = false })
-	end, desc = "View the full LSP message on this line" },
+	{ "<leader>r", function() vim.diagnostic.open_float(nil, { focus = false }) end, desc = "View the full LSP message on this line" },
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
