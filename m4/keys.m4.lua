@@ -96,9 +96,9 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
+	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
-	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
 	-- m4 >>>, <<<
 	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
 	-- m4 >>>)

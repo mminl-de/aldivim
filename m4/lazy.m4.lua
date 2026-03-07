@@ -90,6 +90,11 @@ require "lazy".setup({
 					component_separators = { left = "𜹘", right = "𜹘" }
 				},
 				sections = process_sections {
+					-- m4 ifdef(<<<JULIAN>>>), <<<
+					lualine_x = {
+						{ "filetype" }
+					},
+					-- m4 >>>)
 					lualine_z = {
 						{ "location" },
 						-- m4 ifdef(<<<SERGEY>>>, <<<
