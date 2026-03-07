@@ -65,10 +65,7 @@ require "lazy".setup({
 		lazy = false,
 		init = function()
 			vim.g.vimwiki_list = {
-				{
-					path = "~/stuff/vimwiki",
-					index = "main"
-				}
+				{ path = "~/stuff/vimwiki", index = "main" }
 			}
 		end
 	},
@@ -151,7 +148,7 @@ require "lazy".setup({
 	-- proper syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
 			require "nvim-treesitter.configs".setup {
@@ -206,11 +203,17 @@ require "lazy".setup({
 		-- decide whether we want plugins to be lazy by default
 		-- and what need to be VeryLazy
 		event = "VeryLazy",
-		version = "v2.20.8",
+		version = "v3.9.1",
 		config = function()
-			require "indent_blankline".setup {
-				indent = { char = "︳" },
-				show_current_context = true
+			require "ibl".setup {
+				scope = {
+					show_start = false,
+					show_end = false
+				},
+				indent = {
+					char = "▏", -- default is "▎"
+					repeat_linebreak = false,
+				}
 			}
 		end
 	},
@@ -252,7 +255,7 @@ require "lazy".setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+			-- m4 ifdef(<<<JULIAN>>>, <<<
 			"hrsh7th/cmp-nvim-lsp-signature-help"
 			-- m4 >>>)
 		},
@@ -324,7 +327,6 @@ require "lazy".setup({
 	-- m4 >>>)
 
 	-- TODO NOTE julian wanted to decide between this and another plugin
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- show function signatures when writing them out
 	{
 		"ray-x/lsp_signature.nvim",
@@ -335,7 +337,6 @@ require "lazy".setup({
 			hint_enable = false
 		}
 	},
-	-- m4 >>>)
 
 	-- auto-pair brackets and quotes
 	{
@@ -381,6 +382,7 @@ require "lazy".setup({
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{
+		-- TODO: funktioniert nicht
 		"numtostr/comment.nvim",
 		opts = {
 			padding = true,
