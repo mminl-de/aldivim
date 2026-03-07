@@ -6,7 +6,7 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 -- put proper separators between custom lualine components
 ---@param sections table lualine section declarations
 ---@return table
-local function process_sections(sections)
+local function separators_inbetween(sections)
 	for _, section in pairs(sections) do
 		for _, comp in ipairs(section) do
 			comp.separator = { left = "🬙" }
@@ -37,14 +37,12 @@ end, { desc = "Bootstrap lazy.nvim" })
 vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup({
-	-- colorschemes/themes
+	-- colorschemes
 	"loctvl842/monokai-pro.nvim",
-	"marko-cerovac/material.nvim",
 	"mofiqul/vscode.nvim",
 	"olimorris/onedarkpro.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
-	"tiagovla/tokyodark.nvim",
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -89,8 +87,8 @@ require "lazy".setup({
 					section_separators = { left = "𜷄", right = "𜵟" },
 					component_separators = { left = "𜹘", right = "𜹘" }
 				},
-				sections = process_sections {
-					-- m4 ifdef(<<<JULIAN>>>), <<<
+				sections = separators_inbetween {
+					-- m4 ifdef(<<<JULIAN>>>, <<<
 					lualine_x = {
 						{ "filetype" }
 					},
@@ -109,8 +107,8 @@ require "lazy".setup({
 							color = "@comment.warning"
 						},
 						{
-							function() return vim.g.goyo_on and "zen" or "" end,
-							icon = "󱅻",
+							function() return vim.g.inlay_hints_on and "inlay hints" or "" end,
+							icon = "󰰤",
 							color = "@comment.error"
 						}
 						-- m4 >>>)
@@ -159,7 +157,6 @@ require "lazy".setup({
 			require "nvim-treesitter.configs".setup {
 				ensure_installed = {
 					"lua",
-					"slint",
 					"vimdoc",
 					"zig"
 				},
@@ -186,7 +183,7 @@ require "lazy".setup({
 		version = "v2.20.8",
 		config = function()
 			require "indent_blankline".setup {
-				indent = { char = "│" },
+				indent = { char = "︳" },
 				show_current_context = true
 			}
 		end
@@ -199,63 +196,6 @@ require "lazy".setup({
 		lazy = false,
 		config = function()
 			vim.opt.signcolumn = "yes"
-
-			local lsp = vim.lsp
-			local capabilities = require "cmp_nvim_lsp".default_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-			lsp.config.clangd = {
-				cmd = {
-					"clangd",
-					"--clang-tidy",
-					"--background-index",
-					"--offset-encoding=utf-8"
-				},
-				root_markers = {},
-				filetypes = { "c", "cpp", "h", "hpp" },
-				capabilities = capabilities
-			}
-			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
-			lsp.config.dartls = {
-				cmd = { "dart", "language-server", "--protocol=lsp" },
-				init_options = { flutterOutline = true },
-				root_markers = { "pubspec.yaml" },
-				settings = { dart = { completeFunctionCalls = true } }
-			}
-			-- m4 >>>)
-			lsp.config.html = {
-				cmd = { "vscode-html-language-server", "--stdio" },
-				capabilities = capabilities
-			}
-			lsp.config.hls = {}
-			lsp.config.lua_ls = {}
-			lsp.config.ts_ls = {}
-			lsp.config.rust_analyzer = {}
-			lsp.config.zls = {}
-
-			lsp.enable "clangd"
-			-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
-			lsp.enable "dartls"
-			-- m4 >>>)
-			lsp.enable "html"
-			lsp.enable "hls"
-			lsp.enable "lua_ls"
-			lsp.enable "ts_ls"
-			lsp.enable "rust_analyzer"
-			lsp.enable "zls"
-			-- m4 ifdef(<<<JULIAN>>>, <<<
-			-- TODO add other lsps
-			lsp.config.jdtls = {}
-			lsp.config.pyright = {}
-
-			lsp.enable "jdtls"
-			lsp.enable "pyright"
-			-- m4 >>>)
-			-- m4 ifdef(<<<DANIN>>>, <<<
-			lsp.config.slint_lsp = {}
-
-			lsp.enable "slint_lsp"
-			-- m4 >>>)
 
 			-- show lsp errors inline
 			vim.diagnostic.config({
@@ -325,7 +265,11 @@ require "lazy".setup({
 					["<c-d>"] = cmp.mapping.scroll_docs(4),
 					["<c-space>"] = cmp.mapping.complete(),
 					["<c-x>"] = cmp.mapping.abort(),
-					["<cr>"] = cmp.mapping.confirm { select = true }
+					-- m4 ifdef(<<<JULIAN>>>, <<<
+					["<cr>"] = cmp.mapping.confirm { select = true },
+					-- m4 >>>, <<<
+					["<tab>"] = cmp.mapping.confirm { select = true }
+					-- m4 >>>)
 				},
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
 				sources = {
@@ -374,7 +318,7 @@ require "lazy".setup({
 		config = true
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
 	-- auto-pair html tags
 	{
 		"windwp/nvim-ts-autotag",
@@ -388,8 +332,9 @@ require "lazy".setup({
 	-- paint hexcodes
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy", -- TODO NOW
-		-- m4 ifdef(<<<JULIAN>>>, <<<
+		-- m4 ifdef(<<<SERGEY>>>, <<<
+		event = "VeryLazy",
+		-- m4 >>>, <<<
 		config = function()
 			vim.opt.termguicolors = true
 			require "colorizer".setup()
@@ -415,18 +360,18 @@ require "lazy".setup({
 			padding = true,
 			sticky = true,
 			toggler = {
-				line = '<leader>cc',
-				block = '<leader>bc',
+				line = "<leader>cc",
+				block = "<leader>bc",
 			},
 			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
 			opleader = {
-				line = '<leader>cC',
-				block = '<leader>cb',
+				line = "<leader>cC",
+				block = "<leader>cb",
 			},
 			extra = {
-				above = '<leader>cO', -- Add comment on the line above
-				below = '<leader>co', -- Add comment on the line below
-				eol = '<leader>cA',   -- Add comment at the end of line
+				above = "<leader>cO", -- Add comment on the line above
+				below = "<leader>co", -- Add comment on the line below
+				eol = "<leader>cA",   -- Add comment at the end of line
 			},
 			mappings = {
 				basic = true,
@@ -434,27 +379,12 @@ require "lazy".setup({
 			},
 		}
 	},
-	-- m4 >>>)
 
-
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{
 		"rrethy/vim-illuminate",
+		lazy = false,
 		config = function()
-			require('illuminate').configure { min_count_to_highlight = 2 }
-		end
-	},
-	-- m4 >>>)
-
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- zen mode
-	{
-		"junegunn/goyo.vim",
-		event = "VeryLazy",
-		init = function()
-			vim.g.goyo_width = 90
-			vim.g.goyo_height = 100
-			vim.g.goyo_linenr = true
+			require "illuminate".configure { min_count_to_highlight = 2 }
 		end
 	},
 	-- m4 >>>)
@@ -468,7 +398,7 @@ require "lazy".setup({
 		opts = {},
 	},
 
-	-- This is a dependencie for dap-breakpoints, but can be usefull even without ig
+	-- This is a dependency for dap-breakpoints, but can be useful even without ig
 	{
 		"weissle/persistent-breakpoints.nvim",
 		config = function()
@@ -486,6 +416,10 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 }, {
-	defaults = { lazy = true },
-	install = { missing = true }
+	-- m4 ifdef(<<<SERGEY>>>, <<<
+	change_detection = { enabled = false },
+	checker = { enabled = false },
+	install = { missing = false },
+	defaults = { lazy = true }
+	-- m4 >>>)
 })

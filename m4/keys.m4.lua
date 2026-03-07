@@ -9,12 +9,6 @@ local dap = require "dap"
 
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- neovim config
-	{ "<leader>n", group = "neovim" },
-	{ "<leader>nk", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/keys.lua" end, desc = "Open nvim's key config" },
-	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/lazy.lua" end, desc = "Open nvim's plugin config" },
-	{ "<leader>no", function() vim.cmd.edit "~/.config/nvim/lua/aldivim/opts.lua" end, desc = "Open nvim's core config" },
-
 	-- aldivim config
 	{ "<leader>nm", group = "aldivim" },
 	{ "<leader>nmk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
@@ -36,18 +30,20 @@ require "which-key".add {
 
 	-- editing
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
-	{ "<leader>k", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
+	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end,  desc = "Go to tag" },
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
-	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer" },
+	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer without closing window" },
 	{ "<leader><tab>", vim.cmd.bnext, desc = "Go to next buffer" },
 	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
 	-- split panes
+	{ "<leader>h", ":vs +wincmd\\ h<cr>", desc = "Split pane left" },
 	{ "<leader>j", vim.cmd.split, desc = "Split pane down" },
+	{ "<leader>k", ":sp +wincmd\\ k<cr>", desc = "Split pane up" },
 	{ "<leader>l", vim.cmd.vsplit, desc = "Split pane to the right" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -82,7 +78,7 @@ require "which-key".add {
 	{ "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
 	{ "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
 	{ "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },
-	{ "<leader>w", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
+	{ "<leader>wo", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
 	{ "<leader>v", group = "vimwiki" },
 	{ "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
 	{ "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
@@ -96,12 +92,11 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
-	{ "<leader>h", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	{ "<leader>g", function() vim.cmd.Goyo() vim.g.goyo_on = not vim.g.goyo_on end, desc = "Toggle zen mode" },
-	-- m4 >>>, <<<
-	{ "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, desc = "Toggle inlay hints" },
-	-- m4 >>>)
+	{ "<leader>y", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
+	{ "<leader>i", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		vim.g.inlay_hints_on = not vim.g.inlay_hints_on
+	end, desc = "Toggle inlay hints" },
 	{ "<m-space>", function()
 		local line = vim.api.nvim_get_current_line()
 		local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"
@@ -122,6 +117,8 @@ require "which-key".add {
 	{
 		mode = "i",
 
+		-- insert-mode shell behavior
+		{ "<c-z>", "<esc>ui", desc = "Undo a change inline" },
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
 
 		-- vimwiki

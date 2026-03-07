@@ -36,7 +36,7 @@ o.listchars = {
 -- m4 >>>)
 
 -- wrap
-o.wrap = true
+o.wrap = false
 o.linebreak = true
 
 -- colorscheme
@@ -81,6 +81,6 @@ vim.g.colorizer_on = true
 -- m4 >>>, <<<
 vim.g.colorizer_on = false
 -- m4 >>>)
-vim.g.goyo_on = false
+vim.g.inlay_hints_on = false
 
 vim.o.winborder = 'rounded'
