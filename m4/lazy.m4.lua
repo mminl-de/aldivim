@@ -156,9 +156,35 @@ require "lazy".setup({
 		config = function()
 			require "nvim-treesitter.configs".setup {
 				ensure_installed = {
+					"zig",
 					"lua",
+					"c",
+					-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+					"cpp",
+					"java",
+					"xml",
+					"json",
+					"make",
+					"dockerfile",
+					"bash",
+					"yaml",
+					-- m4 >>>)
+					"html",
+					"css",
+					"typescript",
+					"python",
 					"vimdoc",
-					"zig"
+					"rust",
+					-- m4 ifdef(<<<DANIEL>>>, <<<
+					"nix",
+					-- m4 >>>)
+					-- m4 ifdef(<<<JULIAN>>>, <<<
+					"editorconfig",
+					"regex",
+					"sxhkdrc",
+					"dart",
+					"diff",
+					-- m4 >>>)
 				},
 				highlight = { enable = true },
 				indent = { enable = true }
