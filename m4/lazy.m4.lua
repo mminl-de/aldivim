@@ -172,8 +172,9 @@ require "lazy".setup({
 					"python",
 					"vimdoc",
 					"rust",
-					-- m4 ifdef(<<<DANIEL>>>, <<<
+					-- m4 ifdef(<<<DANIN>>>, <<<
 					"nix",
+					"tsx",
 					-- m4 >>>)
 					-- m4 ifdef(<<<JULIAN>>>, <<<
 					"editorconfig",
@@ -292,10 +293,10 @@ require "lazy".setup({
 					["<c-d>"] = cmp.mapping.scroll_docs(4),
 					["<c-space>"] = cmp.mapping.complete(),
 					["<c-x>"] = cmp.mapping.abort(),
-					-- m4 ifdef(<<<JULIAN>>>, <<<
-					["<cr>"] = cmp.mapping.confirm { select = true },
+					-- m4 ifdef(<<<SERGEY>>>, <<<
+					["<tab>"] = cmp.mapping.confirm { select = true },
 					-- m4 >>>, <<<
-					["<tab>"] = cmp.mapping.confirm { select = true }
+					["<cr>"] = cmp.mapping.confirm { select = true },
 					-- m4 >>>)
 				},
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
