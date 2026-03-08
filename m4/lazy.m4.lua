@@ -345,7 +345,6 @@ require "lazy".setup({
 		config = true
 	},
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
 	-- auto-pair html tags
 	{
 		"windwp/nvim-ts-autotag",
@@ -354,7 +353,6 @@ require "lazy".setup({
 			opts = { enable_close_on_slash = true }
 		}
 	},
-	-- m4 >>>)
 
 	-- paint hexcodes
 	{
