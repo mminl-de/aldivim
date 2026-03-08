@@ -174,6 +174,7 @@ require "lazy".setup({
 					"rust",
 					-- m4 ifdef(<<<DANIEL>>>, <<<
 					"nix",
+					"tsx",
 					-- m4 >>>)
 					-- m4 ifdef(<<<JULIAN>>>, <<<
 					"editorconfig",
