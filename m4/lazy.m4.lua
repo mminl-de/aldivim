@@ -377,7 +377,7 @@ require "lazy".setup({
 	},
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
-    -- Highlights variable references
+    -- highlights variable references
 	{
 		"rrethy/vim-illuminate",
 		lazy = false,
@@ -414,11 +414,11 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 
+	-- collaborative coding
 	{
 		"azratul/live-share.nvim",
-		dependencies = {
-			"jbyuki/instant.nvim",
-		},
+		dependencies = "jbyuki/instant.nvim",
+		lazy = false,
 		config = function()
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			vim.g.instant_username = "julian"
@@ -429,8 +429,7 @@ require "lazy".setup({
 			-- m4 ifdef(<<<DANIN>>>, <<<
 			vim.g.instant_username = "danin"
 			-- m4 >>>)
-			require("live-share").setup({
-			})
+			require "live-share".setup {}
 		end
 	}
 }, {

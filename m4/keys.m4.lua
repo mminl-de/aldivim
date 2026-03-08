@@ -122,6 +122,14 @@ require "which-key".add {
 		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
 		{ "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
 	},
+
+	{
+		mode = "x", -- all visual modes
+
+		-- don't deselect indented blocks (like in helix)
+		{ ">", ">gv", desc = "Indent block and keep selection" },
+		{ "<", "<gv", desc = "Deindent block and keep selection" },
+	},
 	-- m4 >>>)
 
 	{
