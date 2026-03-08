@@ -172,7 +172,7 @@ require "lazy".setup({
 					"python",
 					"vimdoc",
 					"rust",
-					-- m4 ifdef(<<<DANIEL>>>, <<<
+					-- m4 ifdef(<<<DANIN>>>, <<<
 					"nix",
 					"tsx",
 					-- m4 >>>)
