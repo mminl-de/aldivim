@@ -201,8 +201,6 @@ require "lazy".setup({
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		-- decide whether we want plugins to be lazy by default
-		-- and what need to be VeryLazy
 		event = "VeryLazy",
 		version = "v3.9.1",
 		config = function()
@@ -346,7 +344,6 @@ require "lazy".setup({
 		config = true
 	},
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
 	-- auto-pair html tags
 	{
 		"windwp/nvim-ts-autotag",
@@ -355,7 +352,6 @@ require "lazy".setup({
 			opts = { enable_close_on_slash = true }
 		}
 	},
-	-- m4 >>>)
 
 	-- paint hexcodes
 	{
@@ -418,6 +414,26 @@ require "lazy".setup({
 		end
 	},
 	-- m4 >>>)
+
+	{
+		"azratul/live-share.nvim",
+		dependencies = {
+			"jbyuki/instant.nvim",
+		},
+		config = function()
+			-- m4 ifdef(<<<JULIAN>>>, <<<
+			vim.g.instant_username = "julian"
+			-- m4 >>>)
+			-- m4 ifdef(<<<SERGEY>>>, <<<
+			vim.g.instant_username = "sergey"
+			-- m4 >>>)
+			-- m4 ifdef(<<<DANIN>>>, <<<
+			vim.g.instant_username = "danin"
+			-- m4 >>>)
+			require("live-share").setup({
+			})
+		end
+	}
 }, {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	change_detection = { enabled = false },

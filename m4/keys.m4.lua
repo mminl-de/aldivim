@@ -14,6 +14,7 @@ require "which-key".add {
 	{ "<leader>nk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
 	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
 	{ "<leader>no", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
+	{ "<leader>np", function() vim.cmd.edit "~/.config/nvim/m4/lsp.m4.lua" end, desc = "Open aldivim's core config" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },
