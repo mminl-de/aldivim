@@ -2,8 +2,7 @@
 local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
--- m4 ifdef(<<<SERGEY>>>, <<<
--- m4 >>>, <<<
+-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 local dap = require "dap"
 -- m4 >>>)
 
@@ -12,9 +11,9 @@ require "which-key".add {
 	-- aldivim config
 	{ "<leader>n", group = "aldivim" },
 	{ "<leader>nk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
-	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
+	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/m4/lsp.m4.lua" end, desc = "Open aldivim's core config" },
 	{ "<leader>no", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
-	{ "<leader>np", function() vim.cmd.edit "~/.config/nvim/m4/lsp.m4.lua" end, desc = "Open aldivim's core config" },
+	{ "<leader>np", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },
@@ -31,7 +30,6 @@ require "which-key".add {
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
-	{ "<leader>t", function() vim.api.nvim_feedkeys(":tag ", "n", false) end, desc = "Go to tag" },
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
@@ -51,6 +49,9 @@ require "which-key".add {
 	{ "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
 	{ "<m-->", function() vim.cmd "horizontal resize -4" end, desc = "Shrink pane horizontally" },
 	{ "<m-+>", function() vim.cmd "horizontal resize +4" end, desc = "Grow pane horizontally" },
+
+	-- terminal
+	{ "<leader>t", vim.cmd.term, desc = "Open terminal" },
 	-- m4 >>>)
 
 	-- telescope
@@ -121,6 +122,11 @@ require "which-key".add {
 		-- vimwiki
 		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
 		{ "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
+	},
+
+	{
+		mode = "t",
+		{ "<c-t>", "<c-\\><c-n>",  desc = "Leave terminal mode" }
 	},
 
 	{
