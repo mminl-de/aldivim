@@ -132,9 +132,15 @@ require "which-key".add {
 	{
 		mode = "x", -- all visual modes
 
-		-- don't deselect indented blocks (like in helix)
 		{ ">", ">gv", desc = "Indent block and keep selection" },
 		{ "<", "<gv", desc = "Deindent block and keep selection" },
+		{ "<leader>r", function()
+			local keys = vim.api.nvim_replace_termcodes(
+				"\"hy:%s/<c-r>h//g<left><left>",
+				true, false, true
+			)
+			vim.api.nvim_feedkeys(keys, "n", false)
+		end, desc = "Replace selected text" }
 	},
 	-- m4 >>>)
 
@@ -151,8 +157,7 @@ require "which-key".add {
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- m4 >>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	-- DAP
 	{
 		{ "<leader>Dr", dap.run, desc = "DAP Run <F4>" },

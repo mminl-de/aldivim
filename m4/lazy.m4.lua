@@ -126,7 +126,7 @@ require "lazy".setup({
 			local telescope = require "telescope"
 			local actions = require "telescope.actions"
 			telescope.setup {
-				defaults = { mappings = { i = { ["<esc>"] = actions.close } } },
+				defaults = { mappings = { i = { ["<esc>"] = actions.close, } } },
 				pickers = {
 					colorscheme = { theme = "dropdown" },
 					diagnostics = {
