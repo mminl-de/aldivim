@@ -137,7 +137,8 @@ require "lazy".setup({
 				extensions = {
 					file_browser = {
 						hidden = true,
-						hijack_netrw = true
+						hijack_netrw = true,
+						create_from_prompt = false
 					},
 				}
 			}
