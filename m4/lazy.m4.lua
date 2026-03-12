@@ -51,14 +51,12 @@ require "lazy".setup({
 	{ "rose-pine/neovim", name = "rose-pine" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- the plugin I'm developing, DO NOT TOUCH
+	-- plugin i'm developing, DO NOT TOUCH
 	{
 		"hiimsergey/norsu.nvim",
 		config = function() require "norsu".setup() end
 	},
-	-- m4 >>>)
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- personal knowledge management for me
 	{
 		"vimwiki/vimwiki",
@@ -68,6 +66,15 @@ require "lazy".setup({
 				{ path = "~/stuff/vimwiki", index = "main" }
 			}
 		end
+	},
+
+	{
+		"m4xshen/hardtime.nvim",
+		lazy = false,
+		dependencies = "muniftanjim/nui.nvim",
+		opts = {
+			showmode = false
+		}
 	},
 	-- m4 >>>)
 
@@ -308,11 +315,7 @@ require "lazy".setup({
 					{ name = "nvim_lsp_signature_help" }
 					-- m4 >>>)
 				},
-				view = { entries = "custom" },
-				--window = {
-				--	completion = cmp.config.window.bordered(),
-				--	documentation = cmp.config.window.bordered()
-				--},
+				view = { entries = "custom" }
 			}
 		end
 	},
@@ -349,9 +352,7 @@ require "lazy".setup({
 	{
 		"windwp/nvim-ts-autotag",
 		event = "InsertEnter",
-		opts = {
-			opts = { enable_close_on_slash = true }
-		}
+		opts = { opts = { enable_close_on_slash = true } }
 	},
 
 	-- paint hexcodes
@@ -410,9 +411,7 @@ require "lazy".setup({
 
 	{
 		"carcuis/dap-breakpoints.nvim",
-		config = function()
-			require "dap-breakpoints".setup()
-		end
+		config = function() require "dap-breakpoints".setup() end
 	},
 	-- m4 >>>)
 

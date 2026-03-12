@@ -81,6 +81,8 @@ vim.g.colorizer_on = true
 -- m4 >>>, <<<
 vim.g.colorizer_on = false
 -- m4 >>>)
+-- m4 ifdef(<<<SERGEY>>>, <<<
 vim.g.inlay_hints_on = false
+-- m4 >>>)
 
-vim.o.winborder = 'rounded'
+o.winborder = "rounded"

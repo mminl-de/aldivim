@@ -33,7 +33,7 @@ require "which-key".add {
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
 
 	-- buffers
-	{ "<leader>x", vim.cmd.bdelete, desc = "Close buffer without closing window" },
+	{ "<leader>x", vim.cmd.bdelete, desc = "Delete buffer" },
 	{ "<leader><tab>", vim.cmd.bnext, desc = "Go to next buffer" },
 	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
@@ -86,7 +86,7 @@ require "which-key".add {
 	-- m4 >>>)
 
 	-- lsp
-	{ "<leader>r", function() vim.diagnostic.open_float(nil, { focus = false }) end, desc = "View the full LSP message on this line" },
+	{ "<leader>r", function() vim.diagnostic.open_float(nil, { focus = false }) end, desc = "View full LSP message" },
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
