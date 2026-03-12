@@ -67,15 +67,6 @@ require "lazy".setup({
 			}
 		end
 	},
-
-	{
-		"m4xshen/hardtime.nvim",
-		lazy = false,
-		dependencies = "muniftanjim/nui.nvim",
-		opts = {
-			showmode = false
-		}
-	},
 	-- m4 >>>)
 
 	-- bar
@@ -173,11 +164,11 @@ require "lazy".setup({
 					"dockerfile",
 					"bash",
 					"yaml",
-					-- m4 >>>)
 					"html",
 					"css",
-					"typescript",
+					-- m4 >>>)
 					"python",
+					"typescript",
 					"vimdoc",
 					"rust",
 					-- m4 ifdef(<<<DANIN>>>, <<<
