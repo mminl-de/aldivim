@@ -125,14 +125,23 @@ require "which-key".add {
 	},
 
 	{
-		mode = "t",
+		mode = "t", -- terminal mode
 
+		-- focus panes
 		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane to the left" },
 		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane below" },
 		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane above" },
-		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" }
-	},
+		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" },
 
+		-- resize panes
+		{ "<m-<>", function() vim.cmd "vertical resize -8" end, desc = "Shrink pane vertically" },
+		{ "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
+		{ "<m-->", function() vim.cmd "horizontal resize -4" end, desc = "Shrink pane horizontally" },
+		{ "<m-+>", function() vim.cmd "horizontal resize +4" end, desc = "Grow pane horizontally" },
+	},
+	-- m4 >>>)
+
+	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
 	{
 		mode = "x", -- all visual modes
 
