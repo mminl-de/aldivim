@@ -126,7 +126,11 @@ require "which-key".add {
 
 	{
 		mode = "t",
-		{ "<c-t>", "<c-\\><c-n>",  desc = "Leave terminal mode" }
+
+		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane to the left" },
+		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane below" },
+		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane above" },
+		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" }
 	},
 
 	{
