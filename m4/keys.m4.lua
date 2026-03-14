@@ -28,14 +28,10 @@ require "which-key".add {
 
 	-- editing
 	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
+	{ "<leader>g", ":%bd|e#<cr>", desc = "Close all other buffers" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
-
-	-- buffers
-	{ "<leader>x", vim.cmd.bdelete, desc = "Delete buffer" },
-	{ "<leader><tab>", vim.cmd.bnext, desc = "Go to next buffer" },
-	{ "<leader><s-tab>", vim.cmd.bprev, desc = "Go to previous buffer" },
 
 	-- split panes
 	{ "<leader>h", ":vs +wincmd\\ h<cr>", desc = "Split pane left" },
@@ -43,7 +39,6 @@ require "which-key".add {
 	{ "<leader>k", ":sp +wincmd\\ k<cr>", desc = "Split pane up" },
 	{ "<leader>l", vim.cmd.vsplit, desc = "Split pane to the right" },
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- resize panes
 	{ "<m-<>", function() vim.cmd "vertical resize -8" end, desc = "Shrink pane vertically" },
 	{ "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
@@ -57,19 +52,22 @@ require "which-key".add {
 	-- telescope
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
-	{ "<leader>d", function()
-		builtin.diagnostics { bufnr = 0, line_width = "full" }
-	end, desc = "View LSP diagnostics" },
+	{ "<leader>d",
+		function()
+			builtin.diagnostics { bufnr = 0, line_width = "full" }
+		end, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	{ "<leader>c", function()
-		builtin.colorscheme { ignore_builtins = true }
-	end, desc = "Change colorscheme" },
+	{ "<leader>c",
+		function()
+			builtin.colorscheme { ignore_builtins = true }
+		end, desc = "Change colorscheme" },
 	-- m4 >>>, <<<
-	{ "<leader>C", function()
-		builtin.colorscheme { ignore_builtins = true }
-	end, desc = "Change colorscheme" },
+	{ "<leader>C",
+		function()
+			builtin.colorscheme { ignore_builtins = true }
+		end, desc = "Change colorscheme" },
 	-- m4 >>>)
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -90,26 +88,35 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
+	{ "<leader>i",
+		function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
+		end, desc = "Toggle inlay hints" },
+	{ "<leader>x",
+		function()
+			local bufnr = vim.api.nvim_get_current_buf()
+			vim.cmd.bprev()
+			vim.cmd.bdelete(bufnr)
+		end, desc = "Delete buffer" },
 	{ "<leader>y", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
-	{ "<leader>i", function()
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		vim.g.inlay_hints_on = not vim.g.inlay_hints_on
-	end, desc = "Toggle inlay hints" },
-	{ "<m-space>", function()
-		local line = vim.api.nvim_get_current_line()
-		local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"
+	{ "<m-space>",
+		-- TODO CONSIDER REMOVE
+		function()
+			local line = vim.api.nvim_get_current_line()
+			local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"
 
-		if not subject then
-			vim.notify("No bible verse found", vim.log.levels.ERROR)
-			return
-		end
+			if not subject then
+				vim.notify("No bible verse found", vim.log.levels.ERROR)
+				return
+			end
 
-		vim.system {
-			"zathura",
-			os.getenv "HOME" .. "/uni/" .. subject .. "/" .. doc .. ".pdf",
-			"--page=" .. page
-		}
-	end, desc = "Open the PDF of the referenced slide" },
+			vim.system {
+				"zathura",
+				os.getenv "HOME" .. "/uni/" .. subject .. "/" .. doc .. ".pdf",
+				"--page=" .. page
+			}
+		end, desc = "Open the PDF of the referenced slide" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{
@@ -147,13 +154,14 @@ require "which-key".add {
 
 		{ ">", ">gv", desc = "Indent block and keep selection" },
 		{ "<", "<gv", desc = "Deindent block and keep selection" },
-		{ "<leader>r", function()
-			local keys = vim.api.nvim_replace_termcodes(
-				"\"hy:%s/<c-r>h//g<left><left>",
-				true, false, true
-			)
-			vim.api.nvim_feedkeys(keys, "n", false)
-		end, desc = "Replace selected text" }
+		{ "<leader>r",
+			function()
+				local keys = vim.api.nvim_replace_termcodes(
+					"\"hy:%s/<c-r>h//g<left><left>",
+					true, false, true
+				)
+				vim.api.nvim_feedkeys(keys, "n", false)
+			end, desc = "Replace selected text" }
 	},
 	-- m4 >>>)
 
