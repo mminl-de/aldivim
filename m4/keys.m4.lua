@@ -10,20 +10,23 @@ require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- aldivim config
 	{ "<leader>n", group = "aldivim" },
-	{ "<leader>nk", function() vim.cmd.edit "~/.config/nvim/m4/keys.m4.lua" end, desc = "Open aldivim's key config" },
-	{ "<leader>nl", function() vim.cmd.edit "~/.config/nvim/m4/lsp.m4.lua" end, desc = "Open aldivim's core config" },
-	{ "<leader>no", function() vim.cmd.edit "~/.config/nvim/m4/opts.m4.lua" end, desc = "Open aldivim's core config" },
-	{ "<leader>np", function() vim.cmd.edit "~/.config/nvim/m4/lazy.m4.lua" end, desc = "Open aldivim's plugin config" },
+	{ "<leader>nk", ":e ~/.config/nvim/m4/keys.m4.lua<cr>", desc = "Open aldivim's key config" },
+	{ "<leader>nl", ":e ~/.config/nvim/m4/lsp.m4.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>no", ":e ~/.config/nvim/m4/opts.m4.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>np", ":e ~/.config/nvim/m4/lazy.m4.lua<cr>", desc = "Open aldivim's plugin config" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },
-	{ "<leader>,f", function() vim.cmd.edit "~/.config/fish/config.fish" end, desc = "Open shell config" },
-	{ "<leader>,s", function() vim.cmd.edit "~/.config/sway/config" end, desc = "Open window manager config" },
+	{ "<leader>,f", ":e ~/.config/fish/config.fish<cr>", desc = "Open shell config" },
+	{ "<leader>,s", ":e ~/.config/sway/config<cr>", desc = "Open window manager config" },
 
 	-- uni
 	{ "<leader>u", group = "uni" },
-	{ "<leader>um", function() vim.cmd.edit "~/uni/vimwiki/main.wiki" end, desc = "Open uni wiki page" },
-	{ "<leader>uo", function() vim.cmd.Telescope("find_files", "cwd=~/uni/vimwiki") end, desc = "Find uni pages" },
+	{ "<leader>um", ":e ~/uni/vimwiki/main.wiki<cr>", desc = "Open uni wiki page" },
+	{ "<leader>uo",
+		function()
+			builtin.find_files { cwd = "~/uni/vimwiki" }
+		end, desc = "Find uni pages" },
 	-- m4 >>>)
 
 	-- editing
@@ -31,22 +34,16 @@ require "which-key".add {
 	{ "<leader>g", ":%bd|e#<cr>", desc = "Close all other buffers" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
-	{ "<leader>z", vim.cmd.wq, desc = "Save and quit" },
+	{ "<leader>z", ":wq<cr>", desc = "Save and quit" },
 
 	-- split panes
 	{ "<leader>h", ":vs +wincmd\\ h<cr>", desc = "Split pane left" },
-	{ "<leader>j", vim.cmd.split, desc = "Split pane down" },
+	{ "<leader>j", ":sp<cr>", desc = "Split pane down" },
 	{ "<leader>k", ":sp +wincmd\\ k<cr>", desc = "Split pane up" },
-	{ "<leader>l", vim.cmd.vsplit, desc = "Split pane to the right" },
-
-	-- resize panes
-	{ "<m-<>", function() vim.cmd "vertical resize -8" end, desc = "Shrink pane vertically" },
-	{ "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
-	{ "<m-->", function() vim.cmd "horizontal resize -4" end, desc = "Shrink pane horizontally" },
-	{ "<m-+>", function() vim.cmd "horizontal resize +4" end, desc = "Grow pane horizontally" },
+	{ "<leader>l", ":vs<cr>", desc = "Split pane right" },
 
 	-- terminal
-	{ "<leader>t", vim.cmd.term, desc = "Open terminal" },
+	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
 	-- m4 >>>)
 
 	-- telescope
@@ -72,34 +69,42 @@ require "which-key".add {
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- vimwiki
-	{ "<leader>a", function() vim.cmd.edit "~/stuff/vimwiki/Aufgaben.wiki" end, desc = "Open tasks wiki page" },
-	{ "<leader>m", function() vim.cmd.edit "~/stuff/vimwiki/main.wiki" end, desc = "Open main wiki page" },
-	{ "<leader>o", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/vimwiki") end, desc = "Find wiki pages" },
-	{ "<leader>p", function() vim.cmd.edit "~/stuff/vimwiki/Programmieren.wiki" end, desc = "Open programming wiki page" },
-	{ "<leader>wo", function() vim.cmd.Telescope("find_files", "cwd=~/stuff/writing") end, desc = "Find writing wiki pages" },
+	{ "<leader>a", ":e ~/stuff/vimwiki/Aufgaben.wiki<cr>", desc = "Open tasks wiki page" },
+	{ "<leader>m", ":e ~/stuff/vimwiki/main.wiki<cr>", desc = "Open main wiki page" },
+	{ "<leader>o",
+		function()
+			builtin.find_files { cwd = "~/stuff/vimwiki" }
+		end, desc = "Find wiki pages" },
+	{ "<leader>p", ":e ~/stuff/vimwiki/Programmieren.wiki<cr>", desc = "Open programming wiki page" },
+	{ "<leader>wo",
+		function()
+			builtin.find_files { cwd = "~/stuff/writing" }
+		end, desc = "Find writing wiki pages" },
 	{ "<leader>v", group = "vimwiki" },
-	{ "<leader>vb", vim.cmd.VimwikiBacklinks, desc = "Show this wiki page's backlinks" },
-	{ "<leader>vd", vim.cmd.VimwikiDeleteFile, desc = "Delete this wiki page" },
-	{ "<leader>vr", vim.cmd.VimwikiRenameFile, desc = "Rename this wiki page" },
+	{ "<leader>vb", ":e VimwikiBacklinks<cr>", desc = "Show this wiki page's backlinks" },
+	{ "<leader>vd", ":e VimwikiDeleteFile<cr>", desc = "Delete this wiki page" },
+	{ "<leader>vr", ":e VimwikiRenameFile<cr>", desc = "Rename this wiki page" },
 	-- m4 >>>)
 
 	-- lsp
-	{ "<leader>r", function() vim.diagnostic.open_float(nil, { focus = false }) end, desc = "View full LSP message" },
+	{ "<leader>r",
+		function()
+			vim.diagnostic.open_float(nil, { focus = false })
+		end, desc = "View full LSP message" },
 
 	-- etc
-	{ "<esc>", vim.cmd.nohlsearch, desc = "Remove search highlights" },
+	{ "<esc>", ":noh<cr>", desc = "Remove search highlights" },
 	{ "<leader>i",
 		function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
 		end, desc = "Toggle inlay hints" },
-	{ "<leader>x",
+	{ "<leader>x", ":bp|bd#<cr>", desc = "Delete buffer" },
+	{ "<leader>y",
 		function()
-			local bufnr = vim.api.nvim_get_current_buf()
-			vim.cmd.bprev()
-			vim.cmd.bdelete(bufnr)
-		end, desc = "Delete buffer" },
-	{ "<leader>y", function() vim.cmd.ColorizerToggle() vim.g.colorizer_on = not vim.g.colorizer_on end, desc = "Toggle hex colorizer" },
+			vim.cmd.ColorizerToggle()
+			vim.g.colorizer_on = not vim.g.colorizer_on
+		end, desc = "Toggle hex colorizer" },
 	{ "<m-space>",
 		-- TODO CONSIDER REMOVE
 		function()
@@ -116,7 +121,7 @@ require "which-key".add {
 				os.getenv "HOME" .. "/uni/" .. subject .. "/" .. doc .. ".pdf",
 				"--page=" .. page
 			}
-		end, desc = "Open the PDF of the referenced slide" },
+		end, desc = "Open PDF of referenced slide" },
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{
@@ -130,23 +135,14 @@ require "which-key".add {
 		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
 		{ "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
 	},
+	-- m4 >>>)
 
 	{
-		mode = "t", -- terminal mode
+		mode = { "n", "i" },
 
-		-- focus panes
-		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane to the left" },
-		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane below" },
-		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane above" },
-		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" },
-
-		-- resize panes
-		{ "<m-<>", function() vim.cmd "vertical resize -8" end, desc = "Shrink pane vertically" },
-		{ "<m-s-<>", function() vim.cmd "vertical resize +8" end, desc = "Grow pane vertically" },
-		{ "<m-->", function() vim.cmd "horizontal resize -4" end, desc = "Shrink pane horizontally" },
-		{ "<m-+>", function() vim.cmd "horizontal resize +4" end, desc = "Grow pane horizontally" },
+		-- lsp
+		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
 	},
-	-- m4 >>>)
 
 	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
 	{
@@ -166,35 +162,40 @@ require "which-key".add {
 	-- m4 >>>)
 
 	{
-		mode = { "n", "i" },
+		mode = { "n", "i", "t" },
+		-- NOTE here, vim.cmd must be used or else the Ex strings get passed
+		-- to the terminal directly
 
 		-- focus panes
-		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane to the left" },
-		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane below" },
-		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane above" },
-		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane to the right" },
+		{ "<m-h>", function() vim.cmd.wincmd "h" end, desc = "Focus pane left" },
+		{ "<m-j>", function() vim.cmd.wincmd "j" end, desc = "Focus pane down" },
+		{ "<m-k>", function() vim.cmd.wincmd "k" end, desc = "Focus pane up" },
+		{ "<m-l>", function() vim.cmd.wincmd "l" end, desc = "Focus pane right" },
 
-		-- lsp
-		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
+		-- resize panes
+		{ "<m-<>", function() vim.cmd "vert resize -8" end, desc = "Shrink pane vertically" },
+		{ "<m-s-<>", function() vim.cmd "vert resize +8" end, desc = "Grow pane vertically" },
+		{ "<m-->", function() vim.cmd "hor resize -4" end, desc = "Shrink pane horizontally" },
+		{ "<m-+>", function() vim.cmd "hor resize +4" end, desc = "Grow pane horizontally" }
 	},
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	-- DAP
 	{
-		{ "<leader>Dr", dap.run, desc = "DAP Run <F4>" },
-		{ "<leader>Ds", dap.step_over, desc = "DAP Step Over <F5>" },
-		{ "<leader>Di", dap.step_into, desc = "DAP Step Into <F6>" },
+		{ "<leader>Dr", dap.run, desc = "DAP run <F4>" },
+		{ "<leader>Ds", dap.step_over, desc = "DAP Step over <F5>" },
+		{ "<leader>Di", dap.step_into, desc = "DAP Step into <F6>" },
 		{ "<leader>Dc", dap.continue, desc = "DAP Continue <F7>" },
-		{ "<leader>Do", dap.step_out, desc = "DAP Step Out <F8>" },
-		{ "<leader>Db", dap.toggle_breakpoint, desc = "DAP Toggle Breakpoint" },
-		{ "<leader>Bb", dap.toggle_breakpoint, desc = "DAP Toggle Breakpoint" },
+		{ "<leader>Do", dap.step_out, desc = "DAP Step out <F8>" },
+		{ "<leader>Db", dap.toggle_breakpoint, desc = "DAP Toggle breakpoint" },
+		{ "<leader>Bb", dap.toggle_breakpoint, desc = "DAP Toggle breakpoint" },
 		{ "<leader>Dt", dap.terminate, desc = "DAP Terminate" },
 		{ "<f4>", dap.run, desc = "DAP Run" },
-		{ "<f5>", dap.step_over, desc = "DAP step Over" },
-		{ "<f6>", dap.step_into, desc = "DAP Step Into" },
+		{ "<f5>", dap.step_over, desc = "DAP Step over" },
+		{ "<f6>", dap.step_into, desc = "DAP Step into" },
 		{ "<f7>", dap.continue, desc = "DAP Continue" },
-		{ "<f8>", dap.step_out, desc = "DAP Step Out" },
-		{ "<f1>", dap.run_last, desc = "DAP Run Last" },
+		{ "<f8>", dap.step_out, desc = "DAP Step out" },
+		{ "<f1>", dap.run_last, desc = "DAP Run last" },
 	},
 	-- m4 >>>)
 }

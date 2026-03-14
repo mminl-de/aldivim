@@ -2,6 +2,9 @@
 local vim = vim
 local o = vim.opt
 
+-- window title
+o.title = true
+
 -- line numbers
 o.number = true
 o.relativenumber = true
@@ -13,7 +16,7 @@ o.splitbelow = true
 -- clipboard
 o.clipboard = "unnamedplus"
 
--- tabs
+-- indentation
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
@@ -69,11 +72,9 @@ o.scrolloff = 5
 -- rulers
 o.colorcolumn = { 80, 90 }
 
--- disable automatic zig formatting
-vim.g.zig_fmt_autosave = 0
-
--- disable audacious tab logic overrides by Zig
-vim.g.zig_recommended_style = 0
+-- zig?
+vim.g.zig_fmt_autosave = 0      -- disable automatic zig formatting
+vim.g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 
 -- custom variables for lualine modules
 -- m4 ifdef(<<<JULIAN>>>, <<<
@@ -85,4 +86,5 @@ vim.g.colorizer_on = false
 vim.g.inlay_hints_on = false
 -- m4 >>>)
 
+-- floating windows
 o.winborder = "rounded"
