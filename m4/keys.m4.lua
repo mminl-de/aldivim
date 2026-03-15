@@ -6,6 +6,36 @@ local builtin = require "telescope.builtin"
 local dap = require "dap"
 -- m4 >>>)
 
+-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+-- paste selected text into the search-n-replace Ex command
+---@param prefill boolean insert text into "replace field"
+local function replace_from_selection(prefill)
+	-- TODO DEBUG
+	vim.api.nvim_feedkeys("", "x", false)
+
+	local buf = 0
+	local s = vim.api.nvim_buf_get_mark(buf, "<")
+	local e = vim.api.nvim_buf_get_mark(buf, ">")
+
+	local input = table.concat(
+		vim.api.nvim_buf_get_text(buf, s[1] - 1, s[2], e[1] - 1, e[2] + 1, {}),
+		"\n"
+	)
+		:gsub("\\", "\\\\")
+		:gsub("/", "\\/")
+		:gsub("%*", "\\*")
+		:gsub("%[", "\\[")
+		:gsub("%]", "\\]")
+
+	local pat = ":%s/" .. input .. "/"
+	if prefill then pat = pat .. input end
+	pat = pat .. "/g<left><left>"
+
+	local keys = vim.api.nvim_replace_termcodes(pat, true, false, true)
+	vim.api.nvim_feedkeys(keys, "n", false)
+end
+-- m4 >>>)
+
 require "which-key".add {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- aldivim config
@@ -99,7 +129,15 @@ require "which-key".add {
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
 		end, desc = "Toggle inlay hints" },
-	{ "<leader>x", ":bp|bd#<cr>", desc = "Delete buffer" },
+	{ "<leader>x",
+		function()
+			-- this implementation doesnt close the window the buffer was on,
+			-- instead replacing it with another
+			-- ":bp|bd#" didnt work, cause it couldnt close the last buffer
+			local bufnr = vim.api.nvim_win_get_buf(0)
+			vim.cmd.bprev()
+			vim.cmd.bdelete(bufnr)
+		end, desc = "Delete buffer" },
 	{ "<leader>y",
 		function()
 			vim.cmd.ColorizerToggle()
@@ -152,12 +190,12 @@ require "which-key".add {
 		{ "<", "<gv", desc = "Deindent block and keep selection" },
 		{ "<leader>r",
 			function()
-				local keys = vim.api.nvim_replace_termcodes(
-					"\"hy:%s/<c-r>h//g<left><left>",
-					true, false, true
-				)
-				vim.api.nvim_feedkeys(keys, "n", false)
-			end, desc = "Replace selected text" }
+				replace_from_selection(false)
+			end, desc = "Replace selected text" },
+		{ "<leader>R",
+			function()
+				replace_from_selection(true)
+			end, desc = "Replace selected text (with suggestion)" }
 	},
 	-- m4 >>>)
 
