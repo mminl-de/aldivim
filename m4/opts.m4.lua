@@ -9,6 +9,9 @@ o.title = true
 o.number = true
 o.relativenumber = true
 
+-- cursor line
+o.cursorline = true
+
 -- buffers
 o.splitright = true
 o.splitbelow = true

@@ -60,7 +60,7 @@ require "which-key".add {
 	-- m4 >>>)
 
 	-- editing
-	{ "<leader><leader>", vim.cmd.write, desc = "Save file" },
+	{ "<leader><leader>", ":w<cr>", desc = "Save file" },
 	{ "<leader>g", ":%bd|e#<cr>", desc = "Close all other buffers" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
