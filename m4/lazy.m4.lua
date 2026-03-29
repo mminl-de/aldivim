@@ -43,6 +43,9 @@ require "lazy".setup({
 	"olimorris/onedarkpro.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
+	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+	"tiagovla/tokyodark.nvim",
+	-- m4 >>>)
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
