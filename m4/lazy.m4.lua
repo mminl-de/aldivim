@@ -423,7 +423,23 @@ require "lazy".setup({
 			-- m4 >>>)
 			require "live-share".setup {}
 		end
-	}
+	},
+
+	-- m4 ifdef(<<<JULIAN>>>, <<<
+	{
+		'nvim-orgmode/orgmode',
+		event = 'VeryLazy',
+		config = function()
+			require('orgmode').setup({
+				org_agenda_files = '~/doc/org/**/*',
+				org_default_notes_file = '~/doc/org/refile.org',
+			})
+			-- Experimental LSP support
+			vim.lsp.enable('org')
+		end,
+	},
+	-- m4 >>>)
+
 }, {
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	change_detection = { enabled = false },
