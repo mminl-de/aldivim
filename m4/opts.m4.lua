@@ -39,6 +39,9 @@ o.listchars = {
 	precedes = "«",
 	nbsp = "␣"
 }
+
+-- disable mouse
+o.mouse = {}
 -- m4 >>>)
 
 -- wrap

@@ -19,8 +19,7 @@ local function replace_from_selection(prefill)
 
 	local input = table.concat(
 		vim.api.nvim_buf_get_text(buf, s[1] - 1, s[2], e[1] - 1, e[2] + 1, {}),
-		"\n"
-	)
+		"\n")
 		:gsub("\\", "\\\\")
 		:gsub("/", "\\/")
 		:gsub("%*", "\\*")
@@ -64,6 +63,7 @@ require "which-key".add {
 	{ "<leader>g", ":%bd|e#<cr>", desc = "Close all other buffers" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
+	{ "<leader>Q", ":restart<cr>", desc = "Restart neovim" },
 	{ "<leader>z", ":wq<cr>", desc = "Save and quit" },
 
 	-- split panes
@@ -71,10 +71,6 @@ require "which-key".add {
 	{ "<leader>j", ":sp<cr>", desc = "Split pane down" },
 	{ "<leader>k", ":sp +wincmd\\ k<cr>", desc = "Split pane up" },
 	{ "<leader>l", ":vs<cr>", desc = "Split pane right" },
-
-	-- terminal
-	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
-	-- m4 >>>)
 
 	-- telescope
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
@@ -97,6 +93,10 @@ require "which-key".add {
 		end, desc = "Change colorscheme" },
 	-- m4 >>>)
 
+	-- terminal
+	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
+	-- m4 >>>)
+
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- vimwiki
 	{ "<leader>a", ":e ~/stuff/vimwiki/Aufgaben.wiki<cr>", desc = "Open tasks wiki page" },
@@ -106,29 +106,31 @@ require "which-key".add {
 			builtin.find_files { cwd = "~/stuff/vimwiki" }
 		end, desc = "Find wiki pages" },
 	{ "<leader>p", ":e ~/stuff/vimwiki/Programmieren.wiki<cr>", desc = "Open programming wiki page" },
+	{ "<leader>w", group = "vimwiki" },
 	{ "<leader>wo",
 		function()
 			builtin.find_files { cwd = "~/stuff/writing" }
 		end, desc = "Find writing wiki pages" },
-	{ "<leader>v", group = "vimwiki" },
-	{ "<leader>vb", ":e VimwikiBacklinks<cr>", desc = "Show this wiki page's backlinks" },
-	{ "<leader>vd", ":e VimwikiDeleteFile<cr>", desc = "Delete this wiki page" },
-	{ "<leader>vr", ":e VimwikiRenameFile<cr>", desc = "Rename this wiki page" },
+	{ "<leader>wb", ":e VimwikiBacklinks<cr>", desc = "Show this wiki page's backlinks" },
+	{ "<leader>wd", ":e VimwikiDeleteFile<cr>", desc = "Delete this wiki page" },
+	{ "<leader>wr", ":e VimwikiRenameFile<cr>", desc = "Rename this wiki page" },
 	-- m4 >>>)
 
 	-- lsp
+	-- m4 ifdef (<<<SERGEY>>>, <<<
+	{ "<leader>D",
+		function()
+			vim.diagnostic.open_float(nil, { focus = false })
+		end, desc = "View full LSP message" },
+	-- m4 >>>, <<<
 	{ "<leader>r",
 		function()
 			vim.diagnostic.open_float(nil, { focus = false })
 		end, desc = "View full LSP message" },
+	-- m4 >>>)
 
 	-- etc
 	{ "<esc>", ":noh<cr>", desc = "Remove search highlights" },
-	{ "<leader>i",
-		function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
-		end, desc = "Toggle inlay hints" },
 	{ "<leader>x",
 		function()
 			-- this implementation doesnt close the window the buffer was on,
@@ -138,40 +140,30 @@ require "which-key".add {
 			vim.cmd.bprev()
 			vim.cmd.bdelete(bufnr)
 		end, desc = "Delete buffer" },
+	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{ "<leader>y",
 		function()
 			vim.cmd.ColorizerToggle()
 			vim.g.colorizer_on = not vim.g.colorizer_on
 		end, desc = "Toggle hex colorizer" },
-	{ "<m-space>",
-		-- TODO CONSIDER REMOVE
+	{ "<leader>i",
 		function()
-			local line = vim.api.nvim_get_current_line()
-			local subject, doc, page = line:match "(%w+)%s+(%d+):(%d+)"
-
-			if not subject then
-				vim.notify("No bible verse found", vim.log.levels.ERROR)
-				return
-			end
-
-			vim.system {
-				"zathura",
-				os.getenv "HOME" .. "/uni/" .. subject .. "/" .. doc .. ".pdf",
-				"--page=" .. page
-			}
-		end, desc = "Open PDF of referenced slide" },
-
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
+		end, desc = "Toggle inlay hints" },
+	-- m4 >>>)
 	-- m4 ifdef(<<<SERGEY>>>, <<<
+	{ "<leader>i",
+		function()
+			vim.cmd.ColorizerToggle()
+			vim.g.colorizer_on = not vim.g.colorizer_on
+		end, desc = "Toggle hex colorizer" },
+
 	{
 		mode = "i",
 
 		-- insert-mode shell behavior
-		{ "<c-z>", "<esc>ui", desc = "Undo a change inline" },
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
-
-		-- vimwiki
-		{ "<c-8>", "[[]]<left><left>", desc = "Insert vimwiki link" },
-		{ "<m-0>", "==<left>", desc = "Insert vimwiki heading" },
 	},
 	-- m4 >>>)
 
@@ -182,7 +174,6 @@ require "which-key".add {
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
 	},
 
-	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
 	{
 		mode = "x", -- all visual modes
 
@@ -197,7 +188,6 @@ require "which-key".add {
 				replace_from_selection(true)
 			end, desc = "Replace selected text (with suggestion)" }
 	},
-	-- m4 >>>)
 
 	{
 		mode = { "n", "i", "t" },

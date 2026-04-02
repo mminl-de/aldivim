@@ -38,26 +38,42 @@ vim.opt.rtp:prepend(lazypath)
 
 require "lazy".setup({
 	-- colorschemes
+	"alexvzyl/nordic.nvim",
 	"loctvl842/monokai-pro.nvim",
 	"mofiqul/vscode.nvim",
-	"olimorris/onedarkpro.nvim",
+	"navarasu/onedark.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
-	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
-	"tiagovla/tokyodark.nvim",
-	-- m4 >>>)
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		opts = { integrations = { vimwiki = true } }
 	},
 	{ "rose-pine/neovim", name = "rose-pine" },
+	-- m4 ifdef(<<<JULIAN>>>, <<<
+	"olimorris/onedarkpro.nvim",
+	"tiagovla/tokyodark.nvim",
+	-- m4 >>>)
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- plugin i'm developing, DO NOT TOUCH
 	{
 		"hiimsergey/norsu.nvim",
-		config = function() require "norsu".setup() end
+		lazy = false,
+		dependencies = "hiimsergey/tree-sitter-norsu",
+		config = function()
+			require "norsu".setup()
+			-- m4 ifdef(<<<SERGEY>>>, <<<
+			require "nvim-treesitter.parsers".get_parser_configs().norsu = {
+				install_info = {
+					url = "https://github.com/hiimsergey/tree-sitter-norsu",
+					files = { "src/parser.c", "src/scanner.c" },
+					branch = "dev"
+				},
+			}
+			vim.filetype.add { extension = { no = "norsu" } }
+			-- m4 >>>)
+		end
 	},
 
 	-- personal knowledge management for me
@@ -158,6 +174,10 @@ require "lazy".setup({
 					"zig",
 					"lua",
 					"c",
+					"python",
+					"typescript",
+					"vimdoc",
+					"rust",
 					-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 					"cpp",
 					"java",
@@ -170,10 +190,6 @@ require "lazy".setup({
 					"html",
 					"css",
 					-- m4 >>>)
-					"python",
-					"typescript",
-					"vimdoc",
-					"rust",
 					-- m4 ifdef(<<<DANIN>>>, <<<
 					"nix",
 					"tsx",
@@ -188,6 +204,19 @@ require "lazy".setup({
 				},
 				highlight = { enable = true },
 				indent = { enable = true }
+			}
+		end
+	},
+
+	-- traverse syntax trees with treesitter
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		lazy = false, -- TODO
+		init = function() vim.g.no_plugin_maps = true end,
+		config = function()
+			require "nvim-treesitter-textobjects".setup {
+				move = { set_jumps = true }
 			}
 		end
 	},
@@ -398,7 +427,7 @@ require "lazy".setup({
 		"weissle/persistent-breakpoints.nvim",
 		config = function()
 			require "persistent-breakpoints".setup {
-				load_breakpoints_event = { "BufReadPost"}
+				load_breakpoints_event = { "BufReadPost" }
 			}
 		end,
 	},
@@ -413,7 +442,9 @@ require "lazy".setup({
 	{
 		"azratul/live-share.nvim",
 		dependencies = "jbyuki/instant.nvim",
+		-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 		lazy = false,
+		-- m4 >>>)
 		config = function()
 			-- m4 ifdef(<<<JULIAN>>>, <<<
 			vim.g.instant_username = "julian"
