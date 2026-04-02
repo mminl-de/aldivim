@@ -50,7 +50,7 @@ o.linebreak = true
 
 -- colorscheme
 -- m4 ifdef(<<<JULIAN>>>, <<<
-vim.cmd.colorscheme "onedark"
+vim.cmd.colorscheme "monokai-pro-spectrum"
 -- m4 >>>)
 -- m4 ifdef(<<<SERGEY>>>, <<<
 vim.cmd.colorscheme "catppuccin-mocha"
