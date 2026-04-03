@@ -83,7 +83,6 @@ require "which-key".add {
 
 	-- editing
 	{ "<leader><leader>", ":w<cr>", desc = "Save file" },
-	{ "<leader>g", ":%bd|e#<cr>", desc = "Close all other buffers" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
 	{ "<leader>Q", ":restart<cr>", desc = "Restart neovim" },
@@ -98,12 +97,6 @@ require "which-key".add {
 	-- telescope
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
-	{ "<leader>d",
-		function()
-			builtin.diagnostics { bufnr = 0, line_width = "full" }
-		end, desc = "View LSP diagnostics" },
-	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
-	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{ "<leader>c",
 		function()
@@ -115,6 +108,13 @@ require "which-key".add {
 			builtin.colorscheme { ignore_builtins = true }
 		end, desc = "Change colorscheme" },
 	-- m4 >>>)
+	{ "<leader>d",
+		function()
+			builtin.diagnostics { bufnr = 0, line_width = "full" }
+		end, desc = "View LSP diagnostics" },
+	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
+	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
+	{ "<leader>g", builtin.live_grep, desc = "Grep in this directory" },
 
 	-- terminal
 	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
@@ -144,6 +144,7 @@ require "which-key".add {
 			vim.cmd.bprev()
 			vim.cmd.bdelete(bufnr)
 		end, desc = "Delete buffer" },
+	{ "<leader>X", ":%bd|e#<cr>", desc = "Delete all other buffers" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	{ "<leader>y", vim.cmd.ColorizerToggle, desc = "Toggle hex colorizer" },
 	{ "<leader>i",

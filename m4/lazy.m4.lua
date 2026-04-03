@@ -29,7 +29,6 @@ require "lazy".setup({
 	"alexvzyl/nordic.nvim",
 	"loctvl842/monokai-pro.nvim",
 	"mofiqul/vscode.nvim",
-	"navarasu/onedark.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
 	{
@@ -41,6 +40,8 @@ require "lazy".setup({
 	-- m4 ifdef(<<<JULIAN>>>, <<<
 	"olimorris/onedarkpro.nvim",
 	"tiagovla/tokyodark.nvim",
+	-- m4 >>>, <<<
+	"navarasu/onedark.nvim",
 	-- m4 >>>)
 
 	-- m4 ifdef(<<<SERGEY>>>, <<<
@@ -179,6 +180,7 @@ require "lazy".setup({
 		end
 	},
 
+	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- traverse syntax trees with treesitter
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -192,6 +194,7 @@ require "lazy".setup({
 			}
 		end
 	},
+	-- m4 >>>)
 
 	-- always show current scope you're in at the top
 	{
@@ -413,19 +416,19 @@ require "lazy".setup({
 	-- collaborative coding
 	{
 		"azratul/live-share.nvim",
-		dependencies = "jbyuki/instant.nvim",
+		-- TODO dependencies = "jbyuki/instant.nvim",
 		-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 		lazy = false,
 		-- m4 >>>)
 		config = function()
 			-- m4 ifdef(<<<JULIAN>>>, <<<
-			vim.g.instant_username = "JULIAN"
+			vim.g.instant_username = "julian"
 			-- m4 >>>)
 			-- m4 ifdef(<<<SERGEY>>>, <<<
-			vim.g.instant_username = "SERGEY"
+			vim.g.instant_username = "sergey"
 			-- m4 >>>)
 			-- m4 ifdef(<<<DANIN>>>, <<<
-			vim.g.instant_username = "DANIN"
+			vim.g.instant_username = "danin"
 			-- m4 >>>)
 			require "live-share".setup {}
 		end
@@ -433,15 +436,13 @@ require "lazy".setup({
 
 	-- m4 ifdef(<<<JULIAN>>>, <<<
 	{
-		'nvim-orgmode/orgmode',
-		event = 'VeryLazy',
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
 		config = function()
-			require('orgmode').setup({
-				org_agenda_files = '~/doc/org/**/*',
-				org_default_notes_file = '~/doc/org/refile.org',
-			})
-			-- Experimental LSP support
-			vim.lsp.enable('org')
+			require("orgmode").setup {
+				org_agenda_files = "~/doc/org/**/*",
+				org_default_notes_file = "~/doc/org/refile.org",
+			}
 		end,
 	},
 	-- m4 >>>)

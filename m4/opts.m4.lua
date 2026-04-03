@@ -59,11 +59,6 @@ vim.cmd.colorscheme "catppuccin-mocha"
 vim.cmd.colorscheme "catppuccin-mocha"
 -- m4 >>>)
 
--- m4 ifdef(<<<SERGEY>>>, <<<
--- terminal colors
-o.termguicolors = true
--- m4 >>>)
-
 -- backups
 o.swapfile = false
 o.backup = false

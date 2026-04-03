@@ -65,4 +65,6 @@ load_lsps {
 	{ name = "jdtls" },
 	{ name = "pyright" },
 	-- m4 >>>)
+
+	{ name = "org" }
 }
