@@ -4,15 +4,15 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 -- bootstrap lazy.nvim for if i lose the nvim share directory
 vim.keymap.set("n", "<leader>l", function()
 	print "Installing lazy.nvim..."
-	local stat = vim.fn.system {
+	local status = vim.system({
 		"git", "clone", "--filter=blob:none", "--depth=1",
 		"https://github.com/folke/lazy.nvim",
 		lazypath
-	}
-	if vim.v.shell_error ~= 0 then
+	}, { text = true }):wait()
+	if status.code ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ stat, "WarningMsg" },
+			{ status.stderr, "ErrorMsg" },
 			{ "Press any key to exit..." }
 		}, true, {})
 		return
@@ -46,7 +46,9 @@ require "lazy".setup({
 		dependencies = "hiimsergey/tree-sitter-norsu",
 		config = function()
 			require "norsu".setup()
-			require "nvim-treesitter.parsers".get_parser_configs().norsu = {
+			-- NOTE from 0.12.0 on:
+			-- require "nvim-treesitter.parsers".get_parsed_configs().norsu = {
+			require "nvim-treesitter.parsers".norsu = {
 				install_info = {
 					url = "https://github.com/hiimsergey/tree-sitter-norsu",
 					files = { "src/parser.c", "src/scanner.c" },
@@ -102,6 +104,10 @@ require "lazy".setup({
 					diagnostics = {
 						theme = "dropdown",
 						layout_config = { width = 0.8 }
+					},
+					live_grep = {
+						theme = "dropdown",
+						layout_config = { width = 0.8 }
 					}
 				},
 				extensions = {
@@ -122,7 +128,7 @@ require "lazy".setup({
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require "nvim-treesitter.configs".setup {
+			require "nvim-treesitter.config".setup {
 				ensure_installed = {
 					"c",
 					"lua",
