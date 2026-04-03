@@ -1,10 +1,9 @@
--- m4 changequote(<<<, >>>)
 local lsp = vim.lsp
 local capabilities = require "cmp_nvim_lsp".default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- enable every lsp service listed in the input
---@param lsps table lsp service declarations
+--- enable every lsp service listed in the input
+--- @param lsps table lsp service declarations
 local function load_lsps(lsps)
 	for _, pair in ipairs(lsps) do
 		lsp.config[pair.name] = pair.config or {}
@@ -39,7 +38,7 @@ load_lsps {
 	{ name = "ts_ls" },
 	{ name = "zls" },
 
-	-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+	--+ if !danin
 	{
 		name = "dartls",
 		config = {
@@ -58,13 +57,14 @@ load_lsps {
 			root_markers = { ".git" }
 		}
 	},
-	-- m4 >>>)
+	--+ end
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
-	-- TODO add other lsps
+	--+ if !sergey
 	{ name = "jdtls" },
 	{ name = "pyright" },
-	-- m4 >>>)
+	--+ end
 
+	--+ if julian
 	{ name = "org" }
+	--+ end
 }

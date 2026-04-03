@@ -1,5 +1,3 @@
--- m4 undefine(`format')
--- m4 changequote(<<<, >>>)
 local vim = vim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -31,36 +29,34 @@ require "lazy".setup({
 	"mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
-	{ "catppuccin/nvim", name = "catppuccin" },
-	{ "rose-pine/neovim", name = "rose-pine" },
-	-- m4 ifdef(<<<JULIAN>>>, <<<
+	--+ if julian
 	"olimorris/onedarkpro.nvim",
 	"tiagovla/tokyodark.nvim",
-	-- m4 >>>, <<<
+	--+ else
 	"navarasu/onedark.nvim",
-	-- m4 >>>)
+	--+ end
+	{ "catppuccin/nvim", name = "catppuccin" },
+	{ "rose-pine/neovim", name = "rose-pine" },
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	--+ if sergey
 	-- plugin i'm developing, DO NOT TOUCH
 	{
-		"hiimSERGEY/norsu.nvim",
+		"hiimsergey/norsu.nvim",
 		lazy = false,
-		dependencies = "hiimSERGEY/tree-sitter-norsu",
+		dependencies = "hiimsergey/tree-sitter-norsu",
 		config = function()
 			require "norsu".setup()
-			-- m4 ifdef(<<<SERGEY>>>, <<<
 			require "nvim-treesitter.parsers".get_parser_configs().norsu = {
 				install_info = {
-					url = "https://github.com/hiimSERGEY/tree-sitter-norsu",
+					url = "https://github.com/hiimsergey/tree-sitter-norsu",
 					files = { "src/parser.c", "src/scanner.c" },
 					branch = "dev"
 				},
 			}
 			vim.filetype.add { extension = { no = "norsu" } }
-			-- m4 >>>)
 		end
 	},
-	-- m4 >>>)
+	--+ end
 
 	-- bar
 	{
@@ -75,16 +71,16 @@ require "lazy".setup({
 					section_separators = { left = "𜷄", right = "𜵟" },
 					component_separators = { left = "𜹘", right = "𜹘" }
 				},
-				-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+				--+ if !danin
 				sections = {
 					lualine_x = {
-						-- m4 ifdef(<<<SERGEY>>>, <<<
+						--+ if sergey
 						"encoding",
-						-- m4 >>>)
+						--+ end
 						"filetype"
 					}
 				}
-				-- m4 >>>)
+				--+ end
 			}
 		end
 	},
@@ -128,36 +124,35 @@ require "lazy".setup({
 		config = function()
 			require "nvim-treesitter.configs".setup {
 				ensure_installed = {
-					"zig",
-					"lua",
 					"c",
+					"lua",
 					"python",
+					"rust",
 					"typescript",
 					"vimdoc",
-					"rust",
-					-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+					"zig",
+					--+ if !sergey
+					"bash",
 					"cpp",
+					"css",
+					"dockerfile",
+					"html",
 					"java",
-					"xml",
 					"json",
 					"make",
-					"dockerfile",
-					"bash",
+					"xml",
 					"yaml",
-					"html",
-					"css",
-					-- m4 >>>)
-					-- m4 ifdef(<<<DANIN>>>, <<<
+					--+ end
+					--+ if danin
 					"nix",
 					"tsx",
-					-- m4 >>>)
-					-- m4 ifdef(<<<JULIAN>>>, <<<
+					--+ else if julian
+					"dart",
+					"diff",
 					"editorconfig",
 					"regex",
 					"sxhkdrc",
-					"dart",
-					"diff",
-					-- m4 >>>)
+					--+ end
 				},
 				highlight = { enable = true },
 				indent = { enable = true }
@@ -165,12 +160,10 @@ require "lazy".setup({
 		end
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- traverse syntax trees with treesitter
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
-		lazy = false, -- TODO
 		init = function() vim.g.no_plugin_maps = true end,
 		config = function()
 			require "nvim-treesitter-textobjects".setup {
@@ -179,7 +172,6 @@ require "lazy".setup({
 			}
 		end
 	},
-	-- m4 >>>)
 
 	-- always show current scope you're in at the top
 	{
@@ -188,7 +180,7 @@ require "lazy".setup({
 		config = function() require "treesitter-context".setup() end
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+	--+ if !sergey
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -207,7 +199,7 @@ require "lazy".setup({
 			}
 		end
 	},
-	-- m4 >>>)
+	--+ end
 
 	-- lsp
 	{
@@ -217,7 +209,7 @@ require "lazy".setup({
 			vim.opt.signcolumn = "yes"
 
 			-- show lsp errors inline
-			vim.diagnostic.config({
+			vim.diagnostic.config {
 				virtual_text = {
 					spacing = 2,
 					prefix = "󱈸",
@@ -236,7 +228,7 @@ require "lazy".setup({
 				},
 				underline = true,
 				update_in_insert = false,
-			})
+			}
 		end
 	},
 
@@ -245,9 +237,9 @@ require "lazy".setup({
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			-- m4 ifdef(<<<JULIAN>>>, <<<
+			--+ if julian
 			"hrsh7th/cmp-nvim-lsp-signature-help"
-			-- m4 >>>)
+			--+ end
 		},
 		event = "VeryLazy",
 		config = function()
@@ -284,35 +276,35 @@ require "lazy".setup({
 					["<c-d>"] = cmp.mapping.scroll_docs(4),
 					["<c-space>"] = cmp.mapping.complete(),
 					["<c-x>"] = cmp.mapping.abort(),
-					-- m4 ifdef(<<<SERGEY>>>, <<<
+					--+ if sergey
 					["<tab>"] = cmp.mapping.confirm { select = true },
-					-- m4 >>>, <<<
+					--+ else
 					["<cr>"] = cmp.mapping.confirm { select = true },
-					-- m4 >>>)
+					--+ end
 				},
 				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
-					-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+					--+ if !sergey
 					{ name = "nvim_lsp_signature_help" }
-					-- m4 >>>)
+					--+ end
 				},
 				view = { entries = "custom" }
 			}
 		end
 	},
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<>>>, <<<
+	--+ if !julian
 	-- lsp loading notification
 	{
 		"j-hui/fidget.nvim",
 		lazy = false,
 		config = true
 	},
-	-- m4 >>>)
+	--+ end
 
-	-- TODO NOTE JULIAN wanted to decide between this and another plugin
+	-- TODO NOTE julian wanted to decide between this and another plugin
 	-- show function signatures when writing them out
 	{
 		"ray-x/lsp_signature.nvim",
@@ -341,14 +333,14 @@ require "lazy".setup({
 	-- paint hexcodes
 	{
 		"norcalli/nvim-colorizer.lua",
-		-- m4 ifdef(<<<SERGEY>>>, <<<
+		--+ if sergey
 		event = "VeryLazy",
-		-- m4 >>>, <<<
+		--+ else
 		config = function()
 			vim.opt.termguicolors = true
 			require "colorizer".setup()
 		end
-		-- m4 >>>)
+		--+ end
 	},
 
 	-- key bindings overview
@@ -362,7 +354,7 @@ require "lazy".setup({
 		}
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+	--+ if !sergey
     -- highlights variable references
 	{
 		"rrethy/vim-illuminate",
@@ -371,9 +363,7 @@ require "lazy".setup({
 			require "illuminate".configure { min_count_to_highlight = 2 }
 		end
 	},
-	-- m4 >>>)
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
 	"mfussenegger/nvim-dap",
 
 	-- dap UI
@@ -396,47 +386,45 @@ require "lazy".setup({
 		"carcuis/dap-breakpoints.nvim",
 		config = function() require "dap-breakpoints".setup() end
 	},
-	-- m4 >>>)
+	--+ end
 
 	-- collaborative coding
 	{
 		"azratul/live-share.nvim",
 		-- TODO dependencies = "jbyuki/instant.nvim",
-		-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+		--+ if !sergey
 		lazy = false,
-		-- m4 >>>)
+		--+ end
 		config = function()
-			-- m4 ifdef(<<<JULIAN>>>, <<<
+			--+ if julian
 			vim.g.instant_username = "julian"
-			-- m4 >>>)
-			-- m4 ifdef(<<<SERGEY>>>, <<<
+			--+ else if sergey
 			vim.g.instant_username = "sergey"
-			-- m4 >>>)
-			-- m4 ifdef(<<<DANIN>>>, <<<
+			--+ else if danin
 			vim.g.instant_username = "danin"
-			-- m4 >>>)
+			--+ end
 			require "live-share".setup {}
 		end
 	},
 
-	-- m4 ifdef(<<<JULIAN>>>, <<<
+	--+ if julian
 	{
 		"nvim-orgmode/orgmode",
 		event = "VeryLazy",
 		config = function()
-			require("orgmode").setup {
+			require "orgmode".setup{
 				org_agenda_files = "~/doc/org/**/*",
 				org_default_notes_file = "~/doc/org/refile.org",
 			}
 		end,
 	},
-	-- m4 >>>)
+	--+ end
 
 }, {
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	--+ if sergey
 	change_detection = { enabled = false },
 	checker = { enabled = false },
 	install = { missing = false },
 	defaults = { lazy = true }
-	-- m4 >>>)
+	--+ end
 })

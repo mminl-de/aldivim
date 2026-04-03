@@ -1,14 +1,13 @@
--- m4 changequote(<<<, >>>)
 local vim = vim
 local telescope = require "telescope"
 local builtin = require "telescope.builtin"
--- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+--+ if !sergey
 local dap = require "dap"
--- m4 >>>)
+--+ end
 
--- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
--- paste selected text into the search-n-replace Ex command
----@param prefill boolean insert text into "replace field"
+--+ if !danin
+--- paste selected text into the search-n-replace Ex command
+--- @param prefill boolean insert text into "replace field"
 local function replace_from_selection(prefill)
 	-- TODO DEBUG
 	vim.api.nvim_feedkeys("", "x", false)
@@ -33,17 +32,17 @@ local function replace_from_selection(prefill)
 	local keys = vim.api.nvim_replace_termcodes(pat, true, false, true)
 	vim.api.nvim_feedkeys(keys, "n", false)
 end
--- m4 >>>)
+--+ end
 
 require "which-key".add {
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	--+ if sergey
 	-- aldivim config
 	{ "<leader>n", group = "aldivim" },
-	{ "<leader>nk", ":e ~/.config/nvim/m4/keys.m4.lua<cr>", desc = "Open aldivim's key config" },
-	{ "<leader>nl", ":e ~/.config/nvim/m4/lsp.m4.lua<cr>", desc = "Open aldivim's core config" },
-	{ "<leader>no", ":e ~/.config/nvim/m4/opts.m4.lua<cr>", desc = "Open aldivim's core config" },
-	{ "<leader>np", ":e ~/.config/nvim/m4/lazy.m4.lua<cr>", desc = "Open aldivim's plugin config" },
-	{ "<f4>", ":!aldi<cr>:q<cr>", desc = "Reload aldivim" },
+	{ "<leader>nk", ":e ~/.config/nvim/lt/keys.lt.lua<cr>", desc = "Open aldivim's key config" },
+	{ "<leader>nl", ":e ~/.config/nvim/lt/lsp.lt.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>no", ":e ~/.config/nvim/lt/opts.lt.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>np", ":e ~/.config/nvim/lt/lazy.lt.lua<cr>", desc = "Open aldivim's plugin config" },
+	{ "<f4>", ":!aldi<cr>:q<cr>", desc = "Reload aldivim" }, -- TODO while 0.12 is unstable
 
 	-- other configs
 	{ "<leader>,", group = "config" },
@@ -79,7 +78,7 @@ require "which-key".add {
 			builtin.find_files { cwd = "~/stuff/norsu" }
 		end, desc = "Find wiki pages" },
 	{ "<leader>p", ":e ~/stuff/norsu/Programmieren.no<cr>", desc = "Open programming wiki page" },
-	-- m4 >>>)
+	--+ end
 
 	-- editing
 	{ "<leader><leader>", ":w<cr>", desc = "Save file" },
@@ -97,17 +96,17 @@ require "which-key".add {
 	-- telescope
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	--+ if sergey
 	{ "<leader>c",
 		function()
 			builtin.colorscheme { ignore_builtins = true }
 		end, desc = "Change colorscheme" },
-	-- m4 >>>, <<<
+	--+ else
 	{ "<leader>C",
 		function()
 			builtin.colorscheme { ignore_builtins = true }
 		end, desc = "Change colorscheme" },
-	-- m4 >>>)
+	--+ end
 	{ "<leader>d",
 		function()
 			builtin.diagnostics { bufnr = 0, line_width = "full" }
@@ -115,22 +114,25 @@ require "which-key".add {
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
 	{ "<leader>g", builtin.live_grep, desc = "Grep in this directory" },
+	--+ if sergey
+	{ "<leader>r", builtin.resume, desc = "Open last Telescope picker" },
+	--+ end
 
 	-- terminal
 	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
 
 	-- lsp
-	-- m4 ifdef(<<<SERGEY>>>, <<<
+	--+ if sergey
 	{ "<leader>D",
 		function()
 			vim.diagnostic.open_float(nil, { focus = false })
 		end, desc = "View full LSP message" },
-	-- m4 >>>, <<<
+	--+ else
 	{ "<leader>r",
 		function()
 			vim.diagnostic.open_float(nil, { focus = false })
 		end, desc = "View full LSP message" },
-	-- m4 >>>)
+	--+ end
 
 	-- etc
 	{ "<esc>", ":noh<cr>", desc = "Remove search highlights" },
@@ -144,15 +146,8 @@ require "which-key".add {
 			vim.cmd.bdelete(bufnr)
 		end, desc = "Delete buffer" },
 	{ "<leader>X", ":%bd|e#<cr>", desc = "Delete all other buffers" },
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
-	{ "<leader>y", vim.cmd.ColorizerToggle, desc = "Toggle hex colorizer" },
-	{ "<leader>i",
-		function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		end, desc = "Toggle inlay hints" },
-	-- m4 >>>)
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	{ "<leader>i", vim.cmd.ColorizerToggle, desc = "Toggle hex colorizer" },
+	--+ if sergey
+	{ "<leader>i", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
 
 	{
 		mode = "i",
@@ -160,7 +155,13 @@ require "which-key".add {
 		-- insert-mode shell behavior
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
 	},
-	-- m4 >>>)
+	--+ else
+	{ "<leader>y", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
+	{ "<leader>i",
+		function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		end, desc = "Toggle inlay hints" },
+	--+ end
 
 	{
 		mode = { "n", "i" },
@@ -202,7 +203,7 @@ require "which-key".add {
 		{ "<m-+>", function() vim.cmd "hor resize +4" end, desc = "Grow pane horizontally" }
 	},
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
+	--+ if !sergey
 	-- DAP
 	{
 		{ "<leader>Dr", dap.run, desc = "DAP run <F4>" },
@@ -220,5 +221,5 @@ require "which-key".add {
 		{ "<f8>", dap.step_out, desc = "DAP Step out" },
 		{ "<f1>", dap.run_last, desc = "DAP Run last" },
 	},
-	-- m4 >>>)
+	--+ end
 }

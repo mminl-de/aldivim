@@ -1,5 +1,5 @@
 local vim = vim
-local dap = require('dap')
+local dap = require "dap"
 
 -- This is needed so dap doesnt overwrite every fucking buffer you have open as soon as you step or smth
 vim.o.switchbuf = "useopen,uselast"
@@ -16,10 +16,10 @@ dap.configurations.c = {
 		type = "gdb",
 		request = "launch",
 		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,
-		cwd = '${workspaceFolder}',
-		console = 'internalConsole',
+		cwd = "${workspaceFolder}",
+		console = "internalConsole",
 		stopAtBegginningOfMainSubprogram = false,
 	},
 	{
@@ -27,23 +27,23 @@ dap.configurations.c = {
 		type = "gdb",
 		request = "attach",
 		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,
 		pid = function()
-			local name = vim.fn.input('Executable name (filter): ')
+			local name = vim.fn.input("Executable name (filter): ")
 			return require("dap.utils").pick_process({filder = name})
 		end,
-		cwd = '${workspaceFolder}'
+		cwd = "${workspaceFolder}"
 	},
 	{
 		name = "Attach to gdbserver :1234",
-		type = 'gdb',
-		request = 'attach',
-		target = 'localhost:1234',
+		type = "gdb",
+		request = "attach",
+		target = "localhost:1234",
 		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,
-		cwd = '${workspaceFolder}'
+		cwd = "${workspaceFolder}"
 	}
 }
 

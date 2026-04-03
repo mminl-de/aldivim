@@ -1,25 +1,25 @@
-danin:
+d danin:
 	mkdir -p lua/aldivim
-	m4 -DDANIN m4/init.m4.lua | grep -v -- "-- m4" > lua/aldivim/init.lua
-	m4 -DDANIN m4/keys.m4.lua | grep -v -- "-- m4" > lua/aldivim/keys.lua
-	m4 -DDANIN m4/lazy.m4.lua | grep -v -- "-- m4" > lua/aldivim/lazy.lua
-	m4 -DDANIN m4/opts.m4.lua | grep -v -- "-- m4" > lua/aldivim/opts.lua
-	m4 -DDANIN m4/lsp.m4.lua | grep -v -- "-- m4" > lua/aldivim/lsp.lua
-	m4 -DDANIN m4/dap.m4.lua | grep -v -- "-- m4" > lua/aldivim/dap.lua
+	lt -p:--+ -d:danin lt/init.lt.lua -o:lua/aldivim/init.lua
+	lt -p:--+ -d:danin lt/keys.lt.lua -o:lua/aldivim/keys.lua
+	lt -p:--+ -d:danin lt/lazy.lt.lua -o:lua/aldivim/lazy.lua
+	lt -p:--+ -d:danin lt/opts.lt.lua -o:lua/aldivim/opts.lua
+	lt -p:--+ -d:danin lt/lsp.lt.lua -o:lua/aldivim/lsp.lua
+	lt -p:--+ -d:danin lt/dap.lt.lua -o:lua/aldivim/dap.lua
 
-julian:
+j julian:
 	mkdir -p lua/aldivim
-	m4 -DJULIAN m4/init.m4.lua | grep -v -- "-- m4" > lua/aldivim/init.lua
-	m4 -DJULIAN m4/keys.m4.lua | grep -v -- "-- m4" > lua/aldivim/keys.lua
-	m4 -DJULIAN m4/lazy.m4.lua | grep -v -- "-- m4" > lua/aldivim/lazy.lua
-	m4 -DJULIAN m4/opts.m4.lua | grep -v -- "-- m4" > lua/aldivim/opts.lua
-	m4 -DJULIAN m4/lsp.m4.lua | grep -v -- "-- m4" > lua/aldivim/lsp.lua
-	m4 -DJULIAN m4/dap.m4.lua | grep -v -- "-- m4" > lua/aldivim/dap.lua
+	lt -p:--+ -d:julian lt/init.lt.lua -o:lua/aldivim/init.lua
+	lt -p:--+ -d:julian lt/keys.lt.lua -o:lua/aldivim/keys.lua
+	lt -p:--+ -d:julian lt/lazy.lt.lua -o:lua/aldivim/lazy.lua
+	lt -p:--+ -d:julian lt/opts.lt.lua -o:lua/aldivim/opts.lua
+	lt -p:--+ -d:julian lt/lsp.lt.lua -o:lua/aldivim/lsp.lua
+	lt -p:--+ -d:julian lt/dap.lt.lua -o:lua/aldivim/dap.lua
 
-sergey:
+s sergey:
 	mkdir -p lua/aldivim
-	m4 -DSERGEY m4/init.m4.lua | grep -v -- "-- m4" > lua/aldivim/init.lua
-	m4 -DSERGEY m4/keys.m4.lua | grep -v -- "-- m4" > lua/aldivim/keys.lua
-	m4 -DSERGEY m4/lazy.m4.lua | grep -v -- "-- m4" > lua/aldivim/lazy.lua
-	m4 -DSERGEY m4/opts.m4.lua | grep -v -- "-- m4" > lua/aldivim/opts.lua
-	m4 -DSERGEY m4/lsp.m4.lua | grep -v -- "-- m4" > lua/aldivim/lsp.lua
+	lt -p:--+ -d:sergey lt/init.lt.lua -o:lua/aldivim/init.lua
+	lt -p:--+ -d:sergey lt/keys.lt.lua -o:lua/aldivim/keys.lua
+	lt -p:--+ -d:sergey lt/lazy.lt.lua -o:lua/aldivim/lazy.lua
+	lt -p:--+ -d:sergey lt/opts.lt.lua -o:lua/aldivim/opts.lua
+	lt -p:--+ -d:sergey lt/lsp.lt.lua -o:lua/aldivim/lsp.lua

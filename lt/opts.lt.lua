@@ -1,4 +1,3 @@
--- m4 changequote(<<<, >>>)
 local vim = vim
 local o = vim.opt
 
@@ -23,13 +22,13 @@ o.clipboard = "unnamedplus"
 o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
--- m4 ifdef(<<<DANIN>>>, <<<
+--+ if danin
 o.expandtab = true
--- m4 >>>, <<<
+--+ else
 o.expandtab = false
--- m4 >>>)
+--+ end
 
--- m4 ifdef(<<<SERGEY>>>, <<<
+--+ if sergey
 -- visualize tabs and spaces
 o.list = true
 o.listchars = {
@@ -42,37 +41,34 @@ o.listchars = {
 
 -- disable mouse
 o.mouse = {}
--- m4 >>>)
+--+ end
 
 -- wrap
 o.wrap = false
 o.linebreak = true
 
 -- colorscheme
--- m4 ifdef(<<<JULIAN>>>, <<<
+--+ if julian
 vim.cmd.colorscheme "monokai-pro-spectrum"
--- m4 >>>)
--- m4 ifdef(<<<SERGEY>>>, <<<
+--+ else
 vim.cmd.colorscheme "catppuccin-mocha"
--- m4 >>>)
--- m4 ifdef(<<<DANIN>>>, <<<
-vim.cmd.colorscheme "catppuccin-mocha"
--- m4 >>>)
+--+ end
 
 -- backups
 o.swapfile = false
 o.backup = false
 
 -- scrolloff
--- m4 ifdef(<<<SERGEY>>>, <<<
+--+ if sergey
 o.scrolloff = 29
--- m4 >>>, <<<
+--+ else
 o.scrolloff = 5
--- m4 >>>)
+--+ end
 
 -- rulers
 o.colorcolumn = { 80, 90 }
 
+-- TODO NOW TEST
 -- zig?
 vim.g.zig_fmt_autosave = 0      -- disable automatic zig formatting
 vim.g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
