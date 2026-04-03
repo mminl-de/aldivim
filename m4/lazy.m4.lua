@@ -3,18 +3,6 @@
 local vim = vim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
--- put proper separators between custom lualine components
----@param sections table lualine section declarations
----@return table
-local function separators_inbetween(sections)
-	for _, section in pairs(sections) do
-		for _, comp in ipairs(section) do
-			comp.separator = { left = "🬙" }
-		end
-	end
-	return sections
-end
-
 -- bootstrap lazy.nvim for if i lose the nvim share directory
 vim.keymap.set("n", "<leader>l", function()
 	print "Installing lazy.nvim..."
@@ -58,15 +46,15 @@ require "lazy".setup({
 	-- m4 ifdef(<<<SERGEY>>>, <<<
 	-- plugin i'm developing, DO NOT TOUCH
 	{
-		"hiimsergey/norsu.nvim",
+		"hiimSERGEY/norsu.nvim",
 		lazy = false,
-		dependencies = "hiimsergey/tree-sitter-norsu",
+		dependencies = "hiimSERGEY/tree-sitter-norsu",
 		config = function()
 			require "norsu".setup()
 			-- m4 ifdef(<<<SERGEY>>>, <<<
 			require "nvim-treesitter.parsers".get_parser_configs().norsu = {
 				install_info = {
-					url = "https://github.com/hiimsergey/tree-sitter-norsu",
+					url = "https://github.com/hiimSERGEY/tree-sitter-norsu",
 					files = { "src/parser.c", "src/scanner.c" },
 					branch = "dev"
 				},
@@ -101,33 +89,16 @@ require "lazy".setup({
 					section_separators = { left = "𜷄", right = "𜵟" },
 					component_separators = { left = "𜹘", right = "𜹘" }
 				},
-				sections = separators_inbetween {
-					-- m4 ifdef(<<<JULIAN>>>, <<<
+				-- m4 ifdef(<<<DANIN>>>, <<<>>>, <<<
+				sections = {
 					lualine_x = {
-						{ "filetype" }
-					},
-					-- m4 >>>)
-					lualine_z = {
-						{ "location" },
 						-- m4 ifdef(<<<SERGEY>>>, <<<
-						{
-							function() return vim.wo.wrap and "wrap" or "" end,
-							icon = "󰖶",
-							color = "@comment.todo"
-						},
-						{
-							function() return vim.g.colorizer_on and "colorizer" or "" end,
-							icon = "",
-							color = "@comment.warning"
-						},
-						{
-							function() return vim.g.inlay_hints_on and "inlay hints" or "" end,
-							icon = "󰰤",
-							color = "@comment.error"
-						}
+						"encoding",
 						-- m4 >>>)
+						"filetype"
 					}
 				}
+				-- m4 >>>)
 			}
 		end
 	},
@@ -216,7 +187,8 @@ require "lazy".setup({
 		init = function() vim.g.no_plugin_maps = true end,
 		config = function()
 			require "nvim-treesitter-textobjects".setup {
-				move = { set_jumps = true }
+				-- dont pollute the jumplist
+				move = { set_jumps = false }
 			}
 		end
 	},
@@ -352,7 +324,7 @@ require "lazy".setup({
 	},
 	-- m4 >>>)
 
-	-- TODO NOTE julian wanted to decide between this and another plugin
+	-- TODO NOTE JULIAN wanted to decide between this and another plugin
 	-- show function signatures when writing them out
 	{
 		"ray-x/lsp_signature.nvim",
@@ -447,13 +419,13 @@ require "lazy".setup({
 		-- m4 >>>)
 		config = function()
 			-- m4 ifdef(<<<JULIAN>>>, <<<
-			vim.g.instant_username = "julian"
+			vim.g.instant_username = "JULIAN"
 			-- m4 >>>)
 			-- m4 ifdef(<<<SERGEY>>>, <<<
-			vim.g.instant_username = "sergey"
+			vim.g.instant_username = "SERGEY"
 			-- m4 >>>)
 			-- m4 ifdef(<<<DANIN>>>, <<<
-			vim.g.instant_username = "danin"
+			vim.g.instant_username = "DANIN"
 			-- m4 >>>)
 			require "live-share".setup {}
 		end

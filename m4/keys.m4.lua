@@ -43,6 +43,7 @@ require "which-key".add {
 	{ "<leader>nl", ":e ~/.config/nvim/m4/lsp.m4.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>no", ":e ~/.config/nvim/m4/opts.m4.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>np", ":e ~/.config/nvim/m4/lazy.m4.lua<cr>", desc = "Open aldivim's plugin config" },
+	{ "<f4>", ":!aldi<cr>:restart<cr>", desc = "Reload aldivim" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },
@@ -51,11 +52,33 @@ require "which-key".add {
 
 	-- uni
 	{ "<leader>u", group = "uni" },
-	{ "<leader>um", ":e ~/uni/vimwiki/main.wiki<cr>", desc = "Open uni wiki page" },
+	{ "<leader>um", ":e ~/uni/vimwiki/main.no<cr>", desc = "Open uni wiki page" },
 	{ "<leader>uo",
 		function()
 			builtin.find_files { cwd = "~/uni/vimwiki" }
 		end, desc = "Find uni pages" },
+
+	-- norsu
+	{ "<leader>w", group = "norsu" },
+	{ "<leader>wo",
+		function()
+			builtin.find_files { cwd = "~/stuff/writing" }
+		end, desc = "Find writing wiki pages" },
+	{ "<leader>wb", ":e NorsuBacklinks<cr>", desc = "Show this notes's backlinks" },
+	{ "<leader>wd", ":e NorsuDelete<cr>", desc = "Delete this note" },
+	{ "<leader>wr", ":e NorsuRename<cr>", desc = "Rename this note" },
+
+	-- norsu etc.
+	{ "<tab>", ":NorsuLinkNext<cr>", desc = "Go to next Norsu link" },
+	{ "<s-tab>", ":NorsuLinkPrev<cr>", desc = "Go to previous Norsu link" },
+	{ "<cr>", ":NorsuLinkEnter<cr>", desc = "Follow Norsu link" },
+	{ "<bs>", "<c-o>", desc = "Jump back" },
+	{ "<leader>a", ":e ~/stuff/norsu/Aufgaben.no<cr>", desc = "Open tasks wiki page" },
+	{ "<leader>o",
+		function()
+			builtin.find_files { cwd = "~/stuff/norsu" }
+		end, desc = "Find wiki pages" },
+	{ "<leader>p", ":e ~/stuff/norsu/Programmieren.no<cr>", desc = "Open programming wiki page" },
 	-- m4 >>>)
 
 	-- editing
@@ -97,25 +120,6 @@ require "which-key".add {
 	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
 	-- m4 >>>)
 
-	-- m4 ifdef(<<<SERGEY>>>, <<<
-	-- vimwiki
-	{ "<leader>a", ":e ~/stuff/vimwiki/Aufgaben.wiki<cr>", desc = "Open tasks wiki page" },
-	{ "<leader>m", ":e ~/stuff/vimwiki/main.wiki<cr>", desc = "Open main wiki page" },
-	{ "<leader>o",
-		function()
-			builtin.find_files { cwd = "~/stuff/vimwiki" }
-		end, desc = "Find wiki pages" },
-	{ "<leader>p", ":e ~/stuff/vimwiki/Programmieren.wiki<cr>", desc = "Open programming wiki page" },
-	{ "<leader>w", group = "vimwiki" },
-	{ "<leader>wo",
-		function()
-			builtin.find_files { cwd = "~/stuff/writing" }
-		end, desc = "Find writing wiki pages" },
-	{ "<leader>wb", ":e VimwikiBacklinks<cr>", desc = "Show this wiki page's backlinks" },
-	{ "<leader>wd", ":e VimwikiDeleteFile<cr>", desc = "Delete this wiki page" },
-	{ "<leader>wr", ":e VimwikiRenameFile<cr>", desc = "Rename this wiki page" },
-	-- m4 >>>)
-
 	-- lsp
 	-- m4 ifdef (<<<SERGEY>>>, <<<
 	{ "<leader>D",
@@ -141,23 +145,14 @@ require "which-key".add {
 			vim.cmd.bdelete(bufnr)
 		end, desc = "Delete buffer" },
 	-- m4 ifdef(<<<SERGEY>>>, <<<>>>, <<<
-	{ "<leader>y",
-		function()
-			vim.cmd.ColorizerToggle()
-			vim.g.colorizer_on = not vim.g.colorizer_on
-		end, desc = "Toggle hex colorizer" },
+	{ "<leader>y", vim.cmd.ColorizerToggle, desc = "Toggle hex colorizer" },
 	{ "<leader>i",
 		function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			vim.g.inlay_hints_on = not vim.g.inlay_hints_on
 		end, desc = "Toggle inlay hints" },
 	-- m4 >>>)
 	-- m4 ifdef(<<<SERGEY>>>, <<<
-	{ "<leader>i",
-		function()
-			vim.cmd.ColorizerToggle()
-			vim.g.colorizer_on = not vim.g.colorizer_on
-		end, desc = "Toggle hex colorizer" },
+	{ "<leader>i", vim.cmd.ColorizerToggle, desc = "Toggle hex colorizer" },
 
 	{
 		mode = "i",

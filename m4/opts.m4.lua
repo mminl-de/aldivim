@@ -82,15 +82,5 @@ o.colorcolumn = { 80, 90 }
 vim.g.zig_fmt_autosave = 0      -- disable automatic zig formatting
 vim.g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 
--- custom variables for lualine modules
--- m4 ifdef(<<<JULIAN>>>, <<<
-vim.g.colorizer_on = true
--- m4 >>>, <<<
-vim.g.colorizer_on = false
--- m4 >>>)
--- m4 ifdef(<<<SERGEY>>>, <<<
-vim.g.inlay_hints_on = false
--- m4 >>>)
-
 -- floating windows
 o.winborder = "rounded"
