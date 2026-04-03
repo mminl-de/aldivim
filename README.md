@@ -6,6 +6,6 @@ An elegant way to settle differences.
 
 # FAQ
 
-## What is lt?
+## What is m5?
 - A text preprocessor, similar to GNU m4
 - See here: https://github.com/hiimsergey/m5

@@ -38,10 +38,10 @@ require "which-key".add {
 	--+ if sergey
 	-- aldivim config
 	{ "<leader>n", group = "aldivim" },
-	{ "<leader>nk", ":e ~/.config/nvim/lt/keys.lt.lua<cr>", desc = "Open aldivim's key config" },
-	{ "<leader>nl", ":e ~/.config/nvim/lt/lsp.lt.lua<cr>", desc = "Open aldivim's core config" },
-	{ "<leader>no", ":e ~/.config/nvim/lt/opts.lt.lua<cr>", desc = "Open aldivim's core config" },
-	{ "<leader>np", ":e ~/.config/nvim/lt/lazy.lt.lua<cr>", desc = "Open aldivim's plugin config" },
+	{ "<leader>nk", ":e ~/.config/nvim/m5/keys.m5.lua<cr>", desc = "Open aldivim's key config" },
+	{ "<leader>nl", ":e ~/.config/nvim/m5/lsp.m5.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>no", ":e ~/.config/nvim/m5/opts.m5.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>np", ":e ~/.config/nvim/m5/lazy.m5.lua<cr>", desc = "Open aldivim's plugin config" },
 	{ "<f4>", ":!aldi<cr>:q<cr>", desc = "Reload aldivim" }, -- TODO while 0.12 is unstable
 
 	-- other configs
