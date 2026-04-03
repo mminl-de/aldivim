@@ -31,11 +31,7 @@ require "lazy".setup({
 	"mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		opts = { integrations = { vimwiki = true } }
-	},
+	{ "catppuccin/nvim", name = "catppuccin" },
 	{ "rose-pine/neovim", name = "rose-pine" },
 	-- m4 ifdef(<<<JULIAN>>>, <<<
 	"olimorris/onedarkpro.nvim",
@@ -62,17 +58,6 @@ require "lazy".setup({
 			}
 			vim.filetype.add { extension = { no = "norsu" } }
 			-- m4 >>>)
-		end
-	},
-
-	-- personal knowledge management for me
-	{
-		"vimwiki/vimwiki",
-		lazy = false,
-		init = function()
-			vim.g.vimwiki_list = {
-				{ path = "~/stuff/vimwiki", index = "main" }
-			}
 		end
 	},
 	-- m4 >>>)

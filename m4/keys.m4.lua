@@ -43,7 +43,7 @@ require "which-key".add {
 	{ "<leader>nl", ":e ~/.config/nvim/m4/lsp.m4.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>no", ":e ~/.config/nvim/m4/opts.m4.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>np", ":e ~/.config/nvim/m4/lazy.m4.lua<cr>", desc = "Open aldivim's plugin config" },
-	{ "<f4>", ":!aldi<cr>:restart<cr>", desc = "Reload aldivim" },
+	{ "<f4>", ":!aldi<cr>:q<cr>", desc = "Reload aldivim" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },
@@ -118,10 +118,9 @@ require "which-key".add {
 
 	-- terminal
 	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
-	-- m4 >>>)
 
 	-- lsp
-	-- m4 ifdef (<<<SERGEY>>>, <<<
+	-- m4 ifdef(<<<SERGEY>>>, <<<
 	{ "<leader>D",
 		function()
 			vim.diagnostic.open_float(nil, { focus = false })
