@@ -105,6 +105,7 @@ require "which-key".add {
 	{ "<leader>l", ":vs<cr>", desc = "Split pane right" },
 
 	-- telescope
+	{ "<leader><f1>", builtin.help_tags, desc = "View all help pages" },
 	{ "<leader>.", builtin.oldfiles, desc = "View recent files" },
 	{ "<leader>b", builtin.buffers, desc = "View open buffers" },
 	--+ if sergey

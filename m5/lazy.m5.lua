@@ -46,14 +46,19 @@ require "lazy".setup({
 		dependencies = "hiimsergey/tree-sitter-norsu",
 		config = function()
 			require "norsu".setup()
-			require "nvim-treesitter.parsers".get_norsu = {
-				install_info = {
-					url = "https://github.com/hiimsergey/tree-sitter-norsu",
-					files = { "src/parser.c", "src/scanner.c" },
-					branch = "dev"
-				},
-			}
 			vim.filetype.add { extension = { no = "norsu" } }
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "TSUpdate",
+				callback = function()
+					require "nvim-treesitter.parsers".norsu = {
+						install_info = {
+							url = "https://github.com/hiimsergey/tree-sitter-norsu",
+							branch = "dev",
+							queries = "queries/norsu"
+						},
+					}
+				end
+			})
 		end
 	},
 	--+ end
@@ -126,44 +131,49 @@ require "lazy".setup({
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require "nvim-treesitter.configs".setup {
-				ensure_installed = {
-					"c",
-					"lua",
-					"python",
-					"rust",
-					"typescript",
-					"vimdoc",
-					"zig",
-					--+ if !sergey
-					"bash",
-					"cpp",
-					"css",
-					"dockerfile",
-					"html",
-					"java",
-					"json",
-					"make",
-					"xml",
-					"yaml",
-					--+ end
-					--+ if danin
-					"nix",
-					"tsx",
-					--+ else if julian
-					"dart",
-					"diff",
-					"editorconfig",
-					"regex",
-					"sxhkdrc",
-					--+ end
-				},
-				highlight = { enable = true },
-				indent = { enable = true }
+			local langs = {
+				"c",
+				"lua",
+				"python",
+				"rust",
+				"typescript",
+				"vimdoc",
+				"zig",
+				--+ if sergey
+				"norsu",
+				--+ else
+				"bash",
+				"cpp",
+				"css",
+				"dockerfile",
+				"html",
+				"java",
+				"json",
+				"make",
+				"xml",
+				"yaml",
+				--+ end
+				--+ if danin
+				"nix",
+				"tsx",
+				--+ else if julian
+				"dart",
+				"diff",
+				"editorconfig",
+				"regex",
+				"sxhkdrc",
+				--+ end
 			}
+			require "nvim-treesitter".install(langs)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = langs,
+				callback = function() vim.treesitter.start() end
+			})
 		end
 	},
 
+	--+ if sergey
+	-- TODO REMOVE
 	-- traverse syntax trees with treesitter
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -176,6 +186,7 @@ require "lazy".setup({
 			}
 		end
 	},
+	--+ end
 
 	-- always show current scope you're in at the top
 	{
@@ -205,7 +216,7 @@ require "lazy".setup({
 	},
 	--+ end
 
-	-- lsp
+	-- default lsp configs
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
