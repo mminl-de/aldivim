@@ -6,29 +6,44 @@ local dap = require "dap"
 --+ end
 
 --+ if !danin
---- paste selected text into the search-n-replace Ex command
---- @param prefill boolean insert text into "replace field"
-local function replace_from_selection(prefill)
-	-- TODO DEBUG
-	vim.api.nvim_feedkeys("", "x", false)
+--- returns visual mode selection as string
+--- @return string
+local function get_selection()
+	local s = vim.fn.getpos "v"
+	local e = vim.fn.getpos "."
+	local lines = vim.fn.getregion(s, e, { type = vim.fn.mode() })
+	return table.concat(lines, "\n")
+end
 
-	local buf = 0
-	local s = vim.api.nvim_buf_get_mark(buf, "<")
-	local e = vim.api.nvim_buf_get_mark(buf, ">")
-
-	local input = table.concat(
-		vim.api.nvim_buf_get_text(buf, s[1] - 1, s[2], e[1] - 1, e[2] + 1, {}),
-		"\n")
+--- escapes special characters that wouldn't be matched by /-search by themselves
+--- @param str string
+--- @return string
+local function escape(str)
+	local result = str
 		:gsub("\\", "\\\\")
 		:gsub("/", "\\/")
 		:gsub("%*", "\\*")
 		:gsub("%[", "\\[")
 		:gsub("%]", "\\]")
+	return result
+end
 
-	local pat = ":%s/" .. input .. "/"
-	if prefill then pat = pat .. input end
-	pat = pat .. "/g<left><left>"
+--- pastes selected text into the search-n-replace ex command
+--- @return nil
+local function replace_from_sel()
+	local sel = get_selection()
+	local input = escape(sel)
+	local pat = "<esc>:%s/" .. input .. "/" .. "/g<left><left>"
+	local keys = vim.api.nvim_replace_termcodes(pat, true, false, true)
+	vim.api.nvim_feedkeys(keys, "n", false)
+end
 
+--- pastes selected text into the search-n-replace ex command
+--- @return nil
+local function replace_from_sel_prefilled()
+	local sel = get_selection()
+	local input = escape(sel)
+	local pat = "<esc>:%s/" .. input .. "/" .. input .. "/g<left><left>"
 	local keys = vim.api.nvim_replace_termcodes(pat, true, false, true)
 	vim.api.nvim_feedkeys(keys, "n", false)
 end
@@ -42,20 +57,11 @@ require "which-key".add {
 	{ "<leader>nl", ":e ~/.config/nvim/m5/lsp.m5.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>no", ":e ~/.config/nvim/m5/opts.m5.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>np", ":e ~/.config/nvim/m5/lazy.m5.lua<cr>", desc = "Open aldivim's plugin config" },
-	{ "<f4>", ":!aldi<cr>:q<cr>", desc = "Reload aldivim" }, -- TODO while 0.12 is unstable
 
 	-- other configs
 	{ "<leader>,", group = "config" },
 	{ "<leader>,f", ":e ~/.config/fish/config.fish<cr>", desc = "Open shell config" },
 	{ "<leader>,s", ":e ~/.config/sway/config<cr>", desc = "Open window manager config" },
-
-	-- uni
-	{ "<leader>u", group = "uni" },
-	{ "<leader>um", ":e ~/uni/vimwiki/main.no<cr>", desc = "Open uni wiki page" },
-	{ "<leader>uo",
-		function()
-			builtin.find_files { cwd = "~/uni/vimwiki" }
-		end, desc = "Find uni pages" },
 
 	-- norsu
 	{ "<leader>w", group = "norsu" },
@@ -72,12 +78,17 @@ require "which-key".add {
 	{ "<s-tab>", ":NorsuLinkPrev<cr>", desc = "Go to previous Norsu link" },
 	{ "<cr>", ":NorsuLinkEnter<cr>", desc = "Follow Norsu link" },
 	{ "<bs>", "<c-o>", desc = "Jump back" },
+	{ "<c-bs>", "<c-i>", desc = "Jump forward" },
 	{ "<leader>a", ":e ~/stuff/norsu/Aufgaben.no<cr>", desc = "Open tasks wiki page" },
 	{ "<leader>o",
 		function()
 			builtin.find_files { cwd = "~/stuff/norsu" }
 		end, desc = "Find wiki pages" },
 	{ "<leader>p", ":e ~/stuff/norsu/Programmieren.no<cr>", desc = "Open programming wiki page" },
+	{ "<leader>u",
+		function()
+			builtin.find_files { cwd = "~/uni/vimwiki" }
+		end, desc = "Find uni pages" },
 	--+ end
 
 	-- editing
@@ -164,25 +175,29 @@ require "which-key".add {
 	--+ end
 
 	{
+		mode = "x", -- all visual modes
+
+		--+ if sergey
+		{ "<f1>",
+			function()
+				vim.cmd.help(get_selection())
+			end, desc = "Open help page for selection" },
+		--+ end
+		{ ">", ">gv", desc = "Indent block and keep selection" },
+		{ "<", "<gv", desc = "Deindent block and keep selection" },
+		{ "<leader>r", replace_from_sel, desc = "Replace selected text" },
+		{ "<leader>R", replace_from_sel_prefilled,
+			desc = "Replace selected text (with suggestion)" }
+	},
+
+	{
 		mode = { "n", "i" },
 
 		-- lsp
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
-	},
-
-	{
-		mode = "x", -- all visual modes
-
-		{ ">", ">gv", desc = "Indent block and keep selection" },
-		{ "<", "<gv", desc = "Deindent block and keep selection" },
-		{ "<leader>r",
-			function()
-				replace_from_selection(false)
-			end, desc = "Replace selected text" },
-		{ "<leader>R",
-			function()
-				replace_from_selection(true)
-			end, desc = "Replace selected text (with suggestion)" }
+		{ "<f1>", function()
+				vim.cmd.help(vim.fn.expand "<cword>")
+			end, desc = "Open help page for word under cursor" }
 	},
 
 	{

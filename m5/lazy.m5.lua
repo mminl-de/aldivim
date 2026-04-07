@@ -46,9 +46,7 @@ require "lazy".setup({
 		dependencies = "hiimsergey/tree-sitter-norsu",
 		config = function()
 			require "norsu".setup()
-			-- NOTE from 0.12.0 on:
-			-- require "nvim-treesitter.parsers".get_parsed_configs().norsu = {
-			require "nvim-treesitter.parsers".norsu = {
+			require "nvim-treesitter.parsers".get_norsu = {
 				install_info = {
 					url = "https://github.com/hiimsergey/tree-sitter-norsu",
 					files = { "src/parser.c", "src/scanner.c" },
@@ -128,7 +126,7 @@ require "lazy".setup({
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			require "nvim-treesitter.config".setup {
+			require "nvim-treesitter.configs".setup {
 				ensure_installed = {
 					"c",
 					"lua",
@@ -310,18 +308,6 @@ require "lazy".setup({
 	},
 	--+ end
 
-	-- TODO NOTE julian wanted to decide between this and another plugin
-	-- show function signatures when writing them out
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "InsertEnter",
-		opts = {
-			bind = true,
-			handler_opts = { border = "rounded" },
-			hint_enable = false
-		}
-	},
-
 	-- auto-pair brackets and quotes
 	{
 		"windwp/nvim-autopairs",
@@ -397,18 +383,18 @@ require "lazy".setup({
 	-- collaborative coding
 	{
 		"azratul/live-share.nvim",
-		-- TODO dependencies = "jbyuki/instant.nvim",
+		-- dependencies = "jbyuki/instant.nvim",
 		--+ if !sergey
 		lazy = false,
 		--+ end
 		config = function()
-			--+ if julian
-			vim.g.instant_username = "julian"
-			--+ else if sergey
-			vim.g.instant_username = "sergey"
-			--+ else if danin
-			vim.g.instant_username = "danin"
-			--+ end
+			-- --+ if julian
+			-- vim.g.instant_username = "julian"
+			-- --+ else if sergey
+			-- vim.g.instant_username = "sergey"
+			-- --+ else if danin
+			-- vim.g.instant_username = "danin"
+			-- --+ end
 			require "live-share".setup {}
 		end
 	},

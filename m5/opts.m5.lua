@@ -68,9 +68,7 @@ o.scrolloff = 5
 -- rulers
 o.colorcolumn = { 80, 90 }
 
--- TODO NOW TEST
 -- zig?
-vim.g.zig_fmt_autosave = 0      -- disable automatic zig formatting
 vim.g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 
 -- floating windows
