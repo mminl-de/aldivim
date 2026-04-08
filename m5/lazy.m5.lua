@@ -63,6 +63,7 @@ require "lazy".setup({
 	},
 	--+ end
 
+	--+ if !julian
 	-- bar
 	{
 		"nvim-lualine/lualine.nvim",
@@ -89,6 +90,7 @@ require "lazy".setup({
 			}
 		end
 	},
+	--+ end
 
 	-- launchers, pickers, prompts and file browser
 	{
