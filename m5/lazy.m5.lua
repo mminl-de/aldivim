@@ -44,6 +44,7 @@ require "lazy".setup({
 		"hiimsergey/norsu.nvim",
 		lazy = false,
 		dependencies = "hiimsergey/tree-sitter-norsu",
+		ft = "norsu",
 		config = function()
 			require "norsu".setup()
 			vim.filetype.add { extension = { no = "norsu" } }
@@ -323,7 +324,26 @@ require "lazy".setup({
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = true
+		config = function()
+			local ap = require "nvim-autopairs"
+			local Rule = require "nvim-autopairs.rule"
+
+			ap.setup { check_ts = true }
+
+			-- space expansion: {|} -> { | }
+			local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+			ap.add_rules {
+				Rule(" ", " ")
+				:with_pair(function (opts)
+					local pair = opts.line:sub(opts.col - 1, opts.col)
+					return vim.tbl_contains({
+						brackets[1][1] .. brackets[1][2],
+						brackets[2][1] .. brackets[2][2],
+						brackets[3][1] .. brackets[3][2],
+					}, pair)
+				end)
+			}
+		end
 	},
 
 	-- auto-pair html tags
