@@ -29,6 +29,9 @@ require "lazy".setup({
 	"mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
+	--+ if sergey
+	"blazkowolf/gruber-darker.nvim",
+	--+ end
 	--+ if julian
 	"olimorris/onedarkpro.nvim",
 	"tiagovla/tokyodark.nvim",
@@ -60,6 +63,7 @@ require "lazy".setup({
 					}
 				end
 			})
+			vim.opt.conceallevel = 2
 		end
 	},
 	--+ end
@@ -134,6 +138,9 @@ require "lazy".setup({
 		config = function()
 			local langs = {
 				"c",
+				"css",
+				"html",
+				"javascript",
 				"lua",
 				"python",
 				"rust",
@@ -145,9 +152,7 @@ require "lazy".setup({
 				--+ else
 				"bash",
 				"cpp",
-				"css",
 				"dockerfile",
-				"html",
 				"java",
 				"json",
 				"make",
