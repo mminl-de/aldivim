@@ -45,11 +45,12 @@ require "lazy".setup({
 	-- plugin i'm developing, DO NOT TOUCH
 	{
 		"hiimsergey/norsu.nvim",
-		lazy = false,
 		dependencies = "hiimsergey/tree-sitter-norsu",
+		lazy = false,
 		ft = "norsu",
 		config = function()
 			require "norsu".setup()
+			vim.opt.conceallevel = 2
 			vim.filetype.add { extension = { no = "norsu" } }
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "TSUpdate",
@@ -63,7 +64,6 @@ require "lazy".setup({
 					}
 				end
 			})
-			vim.opt.conceallevel = 2
 		end
 	},
 	--+ end
@@ -98,6 +98,8 @@ require "lazy".setup({
 	-- launchers, pickers, prompts and file browser
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
+		event = "VeryLazy",
+		keys = "<leader>e",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim"
