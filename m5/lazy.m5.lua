@@ -32,7 +32,7 @@ local kind_icons = {
 	TypeParameter = "󰅲",
 }
 
---+ if sergey
+--+ if !danin
 --- recolors nvim-cmp windows to use proper colors across colorschemes
 --- @return nil
 local function recolor_cmp()
@@ -144,13 +144,13 @@ require "lazy".setup({
 		config = function()
 			local telescope = require "telescope"
 			local actions = require "telescope.actions"
-			--+ if sergey
+			--+ if !danin
 			local borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
 			--+ end
 
 			telescope.setup {
 				defaults = {
-					--+ if sergey
+					--+ if !danin
 					borderchars = borderchars,
 					layout_config = { height = 0.7 },
 					--+ end
@@ -295,7 +295,7 @@ require "lazy".setup({
 				},
 				float = {
 					source = "always",
-					--+ if sergey
+					--+ if !danin
 					border = "single"
 					--+ end
 				},
@@ -329,12 +329,12 @@ require "lazy".setup({
 				formatting = {
 					fields = {
 						"kind", "abbr",
-						--+ if !sergey
+						--+ if danin
 						"menu"
 						--+ end
 					},
 					format = function(entry, item)
-						--+ if sergey
+						--+ if !danin
 						local icon = kind_icons[item.kind] or ""
 						item.kind = " " .. icon .. " "
 						--+ else
@@ -371,7 +371,7 @@ require "lazy".setup({
 					--+ end
 				},
 				view = { entries = "custom" },
-				--+ if sergey
+				--+ if !danin
 				window = {
 					completion = { border = "single", side_padding = 0, col_offset = 1 },
 					documentation = { border = "single" }
@@ -388,7 +388,7 @@ require "lazy".setup({
 		event = "InsertEnter",
 		opts = {
 			bind = true,
-			--+ if sergey
+			--+ if !danin
 			handler_opts = { border = "single" },
 			--+ end
 			hint_enable = false
@@ -459,14 +459,14 @@ require "lazy".setup({
 			preset = "helix",
 			icons = { mappings = false },
 			delay = 300,
-			--+ if sergey
+			--+ if !danin
 			win = { border = "single" }
 			--+ end
 		}
 	},
 
 	--+ if !sergey
-    -- highlights variable references
+    -- highlights all occurences of current word
 	{
 		"rrethy/vim-illuminate",
 		lazy = false,
