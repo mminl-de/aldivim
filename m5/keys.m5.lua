@@ -53,8 +53,9 @@ require "which-key".add {
 	--+ if sergey
 	-- aldivim config
 	{ "<leader>n", group = "aldivim" },
+	{ "<leader>ni", ":e ~/.config/nvim/m5/init.m5.lua<cr>", desc = "Open aldivim's imports config" },
 	{ "<leader>nk", ":e ~/.config/nvim/m5/keys.m5.lua<cr>", desc = "Open aldivim's key config" },
-	{ "<leader>nl", ":e ~/.config/nvim/m5/lsp.m5.lua<cr>", desc = "Open aldivim's core config" },
+	{ "<leader>nl", ":e ~/.config/nvim/m5/lsp.m5.lua<cr>", desc = "Open aldivim's lsp config" },
 	{ "<leader>no", ":e ~/.config/nvim/m5/opts.m5.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>np", ":e ~/.config/nvim/m5/lazy.m5.lua<cr>", desc = "Open aldivim's plugin config" },
 
@@ -87,7 +88,7 @@ require "which-key".add {
 	{ "<leader>p", ":e ~/stuff/norsu/Programmieren.no<cr>", desc = "Open programming wiki page" },
 	{ "<leader>u",
 		function()
-			builtin.find_files { cwd = "~/uni/vimwiki" }
+			builtin.find_files { cwd = "~/uni/norsu" }
 		end, desc = "Find uni pages" },
 	--+ end
 
@@ -148,6 +149,7 @@ require "which-key".add {
 
 	-- etc
 	{ "<esc>", ":noh<cr>", desc = "Remove search highlights" },
+	{ "<leader>m", ":make<cr>", desc = "Run compiler command" },
 	{ "<leader>x",
 		function()
 			-- this implementation doesnt close the window the buffer was on,
@@ -166,6 +168,12 @@ require "which-key".add {
 
 		-- insert-mode shell behavior
 		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
+
+		-- navigation
+		{ "<c-h>", "<left>", desc = "Move left" },
+		{ "<c-j>", "<down>", desc = "Move down" },
+		{ "<c-k>", "<up>", desc = "Move up" },
+		{ "<c-l>", "<right>", desc = "Move right" }
 	},
 	--+ else
 	{ "<leader>y", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
@@ -239,3 +247,6 @@ require "which-key".add {
 	},
 	--+ end
 }
+
+-- TODO NOW
+-- keep clipboard content after pasing in line-visual mode

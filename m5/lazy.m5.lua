@@ -69,10 +69,14 @@ require "lazy".setup({
 	--+ end
 
 	--+ if !julian
+	-- icons for other plugins
+	"nvim-tree/nvim-web-devicons",
+	--+ end
+
+	--+ if danin
 	-- bar
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
 		lazy = false,
 		config = function()
 			require "lualine".setup {
@@ -307,7 +311,9 @@ require "lazy".setup({
 					["<cr>"] = cmp.mapping.confirm { select = true },
 					--+ end
 				},
-				snippet = { expand = function(args) vim.snippet.expand(args.body) end },
+				snippet = {
+					expand = function(args) vim.snippet.expand(args.body) end
+				},
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
@@ -315,9 +321,30 @@ require "lazy".setup({
 					{ name = "nvim_lsp_signature_help" }
 					--+ end
 				},
-				view = { entries = "custom" }
+				view = { entries = "custom" },
+				-- TODO NOW
+				--+ if sergey
+				window = {
+					completion = cmp.config.window.bordered {
+						border = "none",
+						winhighlight = "Normal:NormalFloat,CursorLine:PmenuSel,Search:None"
+					},
+					documentation = cmp.config.window.bordered { border = "none" }
+				}
+				--+ end
 			}
 		end
+	},
+
+	-- show function signature when writing them out
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "InsertEnter",
+		opts = {
+			bind = true,
+			handler_opts = { border = "rounded" },
+			hint_enable = false
+		}
 	},
 
 	--+ if !julian
