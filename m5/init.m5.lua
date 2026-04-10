@@ -1,3 +1,4 @@
+local vim = vim
 vim.g.mapleader = " "
 
 require "aldivim.lazy"

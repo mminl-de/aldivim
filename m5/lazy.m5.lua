@@ -1,6 +1,8 @@
 local vim = vim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
+vim.opt.rtp:prepend(lazypath)
+
 -- bootstrap lazy.nvim for if i lose the nvim share directory
 vim.keymap.set("n", "<leader>l", function()
 	print "Installing lazy.nvim..."
@@ -20,7 +22,36 @@ vim.keymap.set("n", "<leader>l", function()
 	print "Installed lazy.nvim successfully! Please restart nvim!"
 end, { desc = "Bootstrap lazy.nvim" })
 
-vim.opt.rtp:prepend(lazypath)
+local kind_icons = {
+	Text = "", Method = "󰆧", Function = "󰊕", Constructor = "",
+	Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "",
+	Module = "", Property = "󰜢", Unit = "", Value = "󰎠",
+	Enum = "", Keyword = "󰌋", Snippet = "󰅪", Color = "󰏘",
+	File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "",
+	Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕",
+	TypeParameter = "󰅲",
+}
+
+--+ if sergey
+--- recolors nvim-cmp windows to use proper colors across colorschemes
+--- @return nil
+local function recolor_cmp()
+	local normal = vim.api.nvim_get_hl(
+		0,
+		{ name = "NormalFloat", link = false}
+	)
+	local bg = normal.bg
+
+	for kind in pairs(kind_icons) do
+		local hl_name = "CmpItemKind" .. kind
+		local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+		if hl.fg then
+			vim.api.nvim_set_hl(0, hl_name, { fg = bg, bg = hl.fg })
+		end
+	end
+end
+vim.api.nvim_create_autocmd("ColorScheme", { callback = recolor_cmp })
+--+ end
 
 require "lazy".setup({
 	-- colorschemes
@@ -245,6 +276,7 @@ require "lazy".setup({
 				},
 				float = {
 					source = "always",
+					-- TODO
 					border = "rounded"
 				},
 				signs = {
@@ -275,29 +307,26 @@ require "lazy".setup({
 			local cmp = require "cmp"
 			cmp.setup {
 				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						local kind_icons = {
-							Text = "", Method = "󰆧", Function = "󰊕", Constructor = "",
-							Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "",
-							Module = "", Property = "󰜢", Unit = "", Value = "󰎠",
-							Enum = "", Keyword = "󰌋", Snippet = "", Color = "󰏘",
-							File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "",
-							Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕",
-							TypeParameter = "󰅲",
-						}
-
-						vim_item.kind = string.format(
-							"%s %s",
-							kind_icons[vim_item.kind],
-							vim_item.kind
-						)
-						vim_item.menu = ({
+					fields = {
+						"kind", "abbr",
+						--+ if !sergey
+						"menu"
+						--+ end
+					},
+					format = function(entry, item)
+						--+ if sergey
+						local icon = kind_icons[item.kind] or ""
+						item.kind = " " .. icon .. " "
+						--+ else
+						item.kind = kind_icons[item.kind] .. " " .. item.kind
+						item.menu = ({
 							buffer = "[buf]",
 							nvim_lsp = "[lsp]",
 							nvim_lua = "[lua]"
 						})[entry.source.name]
-						return vim_item
+						--+ end
+
+						return item
 					end
 				},
 				mapping = cmp.mapping.preset.insert {
@@ -322,20 +351,17 @@ require "lazy".setup({
 					--+ end
 				},
 				view = { entries = "custom" },
-				-- TODO NOW
 				--+ if sergey
 				window = {
-					completion = cmp.config.window.bordered {
-						border = "none",
-						winhighlight = "Normal:NormalFloat,CursorLine:PmenuSel,Search:None"
-					},
-					documentation = cmp.config.window.bordered { border = "none" }
+					completion = { border = "single", side_padding = 0, col_offset = 1 },
+					documentation = { border = "single" }
 				}
 				--+ end
 			}
 		end
 	},
 
+	--+ if !julian
 	-- show function signature when writing them out
 	{
 		"ray-x/lsp_signature.nvim",
@@ -346,6 +372,7 @@ require "lazy".setup({
 			hint_enable = false
 		}
 	},
+	--+ end
 
 	--+ if !julian
 	-- lsp loading notification
