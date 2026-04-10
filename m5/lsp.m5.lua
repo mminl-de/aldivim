@@ -1,6 +1,6 @@
+local vim = vim
 local lsp = vim.lsp
 local capabilities = require "cmp_nvim_lsp".default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 --- enable every lsp service listed in the input
 --- @param lsps table lsp service declarations
@@ -10,6 +10,8 @@ local function load_lsps(lsps)
 		lsp.enable(pair.name)
 	end
 end
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 load_lsps {
 	{

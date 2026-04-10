@@ -295,8 +295,9 @@ require "lazy".setup({
 				},
 				float = {
 					source = "always",
-					-- TODO
-					border = "rounded"
+					--+ if sergey
+					border = "single"
+					--+ end
 				},
 				signs = {
 					text = {
@@ -387,7 +388,9 @@ require "lazy".setup({
 		event = "InsertEnter",
 		opts = {
 			bind = true,
-			handler_opts = { border = "rounded" },
+			--+ if sergey
+			handler_opts = { border = "single" },
+			--+ end
 			hint_enable = false
 		}
 	},

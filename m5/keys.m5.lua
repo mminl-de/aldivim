@@ -136,6 +136,10 @@ require "which-key".add {
 
 	-- lsp
 	--+ if sergey
+	{ "K",
+		function()
+			vim.lsp.buf.hover { border = "single" }
+		end, desc = "Show symbol information" },
 	{ "<leader>D",
 		function()
 			vim.diagnostic.open_float(nil, { focus = false })
