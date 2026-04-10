@@ -1,40 +1,57 @@
 local vim = vim
-local o = vim.opt
+local opt = vim.opt
 local g = vim.g
 
 -- appearance
-o.title = true
-o.number = true
-o.relativenumber = true
+opt.title = true
+opt.number = true
+opt.relativenumber = true
 --+ if sergey
-o.laststatus = 3 -- only one status line per session
-o.showmode = false -- dont print "-- INSERT --"
+opt.laststatus = 3 -- only one status line per session
+opt.showmode = false -- dont print "-- INSERT --"
+--+ end
+--+ if !danin
+vim.o.statusline =
+	" %<%f %h%w%m%r %{%"
+	.. " v:lua.require('vim._core.util').term_exitcode() %}%=%{%"
+	.. " luaeval('(package.loaded[''vim.ui''] and"
+		.. " vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin or -1) and"
+		.. " vim.ui.progress_status()) or"
+		.. " '''' ')%}%{%"
+	.. " &showcmdloc == 'statusline' ? '%-10.S ' : '' %}%{%"
+	.. " exists('b:keymap_name') ? '<'..b:keymap_name..'> ' : '' %}%{%"
+	.. " &busy > 0 ? '◐ ' : '' %}%{%"
+	.. " luaeval('(package.loaded[''vim.diagnostic''] and"
+		.. " next(vim.diagnostic.count()) and"
+		.. " vim.diagnostic.status() .. '' '') or"
+		.. " '''' ') %}%{%"
+	.. " &ruler ? ( &rulerformat == '' ? '%-14.(%l,%c%V%) %P' : &rulerformat ) : '' %} "
 --+ end
 
 -- cursor line
-o.cursorline = true
+opt.cursorline = true
 
 -- buffers
-o.splitright = true
-o.splitbelow = true
+opt.splitright = true
+opt.splitbelow = true
 
 -- clipboard
-o.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus"
 
 -- indentation
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
 --+ if danin
-o.expandtab = true
+opt.expandtab = true
 --+ else
-o.expandtab = false
+opt.expandtab = false
 --+ end
 
 --+ if sergey
 -- visualize tabs and spaces
-o.list = true
-o.listchars = {
+opt.list = true
+opt.listchars = {
 	tab = "│ ",
 	trail = "·",
 	extends = "»",
@@ -43,12 +60,12 @@ o.listchars = {
 }
 
 -- disable mouse
-o.mouse = {}
+opt.mouse = {}
 --+ end
 
 -- wrap
-o.wrap = false
-o.linebreak = true
+opt.wrap = false
+opt.linebreak = true
 
 -- colorscheme
 --+ if julian
@@ -58,23 +75,23 @@ vim.cmd.colorscheme "catppuccin-mocha"
 --+ end
 
 -- backups
-o.swapfile = false
-o.backup = false
+opt.swapfile = false
+opt.backup = false
 
 -- scrolloff
 --+ if sergey
-o.scrolloff = 29
+opt.scrolloff = 29
 --+ else
-o.scrolloff = 5
+opt.scrolloff = 5
 --+ end
 
 -- rulers
-o.colorcolumn = { 80, 90 }
+opt.colorcolumn = { 80, 90 }
 
 -- languages
 g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 --+ if sergey
-o.makeprg = "zig build"
+opt.makeprg = "zig build"
 --+ end
 g.loaded_node_provider = 0
 g.loaded_perl_provider = 0
@@ -82,4 +99,4 @@ g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
 -- floating windows
-o.winborder = "rounded"
+opt.winborder = "rounded"
