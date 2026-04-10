@@ -144,16 +144,35 @@ require "lazy".setup({
 		config = function()
 			local telescope = require "telescope"
 			local actions = require "telescope.actions"
+			--+ if sergey
+			local borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+			--+ end
+
 			telescope.setup {
-				defaults = { mappings = { i = { ["<esc>"] = actions.close, } } },
+				defaults = {
+					--+ if sergey
+					borderchars = borderchars,
+					layout_config = { height = 0.7 },
+					--+ end
+					mappings = { i = { ["<esc>"] = actions.close, } }
+				},
 				pickers = {
-					colorscheme = { theme = "dropdown" },
+					colorscheme = {
+						layout_config = {
+							width = 0.3,
+							height = 0.5,
+							preview_cutoff = math.huge
+						}
+					},
 					diagnostics = {
-						theme = "dropdown",
-						layout_config = { width = 0.8 }
+						layout_strategy = "vertical",
+						layout_config = {
+							width = 0.8,
+							height = 0.5,
+							mirror = true
+						}
 					},
 					live_grep = {
-						theme = "dropdown",
 						layout_config = { width = 0.8 }
 					}
 				},
@@ -436,7 +455,10 @@ require "lazy".setup({
 		opts = {
 			preset = "helix",
 			icons = { mappings = false },
-			delay = 300
+			delay = 300,
+			--+ if sergey
+			win = { border = "single" }
+			--+ end
 		}
 	},
 

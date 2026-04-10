@@ -112,7 +112,7 @@ require "which-key".add {
 	--+ if sergey
 	{ "<leader>c",
 		function()
-			builtin.colorscheme { ignore_builtins = true }
+			builtin.colorscheme { enable_preview = true }
 		end, desc = "Change colorscheme" },
 	--+ else
 	{ "<leader>C",
