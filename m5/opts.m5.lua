@@ -29,6 +29,13 @@ vim.o.statusline = table.concat({
 }, " ")
 --+ end
 
+-- colorscheme
+--+ if julian
+vim.cmd.colorscheme "monokai-pro-spectrum"
+--+ else
+vim.cmd.colorscheme "catppuccin-mocha"
+--+ end
+
 -- cursor line
 opt.cursorline = true
 
@@ -67,13 +74,6 @@ opt.mouse = {}
 -- wrap
 opt.wrap = false
 opt.linebreak = true
-
--- colorscheme
---+ if julian
-vim.cmd.colorscheme "monokai-pro-spectrum"
---+ else
-vim.cmd.colorscheme "monokai-pro-spectrum"
---+ end
 
 -- backups
 opt.swapfile = false

@@ -23,34 +23,31 @@ vim.keymap.set("n", "<leader>l", function()
 end, { desc = "Bootstrap lazy.nvim" })
 
 local kind_icons = {
-	Text = "", Method = "󰆧", Function = "󰊕", Constructor = "",
-	Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "",
-	Module = "", Property = "󰜢", Unit = "", Value = "󰎠",
-	Enum = "", Keyword = "󰌋", Snippet = "󰅪", Color = "󰏘",
-	File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "",
+	Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽",
+	Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢",
+	Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅪",
+	Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "",
 	Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕",
 	TypeParameter = "󰅲",
 }
 
 --+ if !danin
---- recolors nvim-cmp windows to use proper colors across colorschemes
---- @return nil
-local function recolor_cmp()
-	local bg = vim.api.nvim_get_hl(
-		0,
-		{ name = "NormalFloat", link = false}
-	).bg
+vim.api.nvim_create_autocmd("ColorScheme", { callback = function()
+	local bg = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false }).bg
+	if not bg then return end
 
 	for kind in pairs(kind_icons) do
 		local hl_name = "CmpItemKind" .. kind
 		local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
-
-		if hl.fg then
+		if hl.bg then
+			-- monokai
+			vim.api.nvim_set_hl(0, hl_name, { fg = bg, bg = hl.bg })
+		elseif hl.fg then
+			-- other themes
 			vim.api.nvim_set_hl(0, hl_name, { fg = bg, bg = hl.fg })
 		end
 	end
-end
-vim.api.nvim_create_autocmd("ColorScheme", { callback = recolor_cmp })
+end })
 --+ end
 
 require "lazy".setup({
