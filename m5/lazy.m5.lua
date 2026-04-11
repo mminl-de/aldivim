@@ -3,7 +3,7 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 vim.opt.rtp:prepend(lazypath)
 
--- bootstrap lazy.nvim for if i lose the nvim share directory
+-- bootstrap lazy.nvim for if we lose the nvim share directory
 vim.keymap.set("n", "<leader>l", function()
 	print "Installing lazy.nvim..."
 	local status = vim.system({
@@ -36,15 +36,15 @@ local kind_icons = {
 --- recolors nvim-cmp windows to use proper colors across colorschemes
 --- @return nil
 local function recolor_cmp()
-	local normal = vim.api.nvim_get_hl(
+	local bg = vim.api.nvim_get_hl(
 		0,
 		{ name = "NormalFloat", link = false}
-	)
-	local bg = normal.bg
+	).bg
 
 	for kind in pairs(kind_icons) do
 		local hl_name = "CmpItemKind" .. kind
 		local hl = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+
 		if hl.fg then
 			vim.api.nvim_set_hl(0, hl_name, { fg = bg, bg = hl.fg })
 		end
@@ -55,8 +55,8 @@ vim.api.nvim_create_autocmd("ColorScheme", { callback = recolor_cmp })
 
 require "lazy".setup({
 	-- colorschemes
-	"alexvzyl/nordic.nvim",
 	"loctvl842/monokai-pro.nvim",
+	"folke/tokyonight.nvim",
 	"mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
@@ -66,11 +66,8 @@ require "lazy".setup({
 	--+ if julian
 	"olimorris/onedarkpro.nvim",
 	"tiagovla/tokyodark.nvim",
-	--+ else
-	"navarasu/onedark.nvim",
 	--+ end
 	{ "catppuccin/nvim", name = "catppuccin" },
-	{ "rose-pine/neovim", name = "rose-pine" },
 
 	--+ if sergey
 	-- plugin i'm developing, DO NOT TOUCH

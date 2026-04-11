@@ -72,7 +72,7 @@ opt.linebreak = true
 --+ if julian
 vim.cmd.colorscheme "monokai-pro-spectrum"
 --+ else
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "monokai-pro-spectrum"
 --+ end
 
 -- backups
