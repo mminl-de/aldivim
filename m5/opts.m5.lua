@@ -6,10 +6,6 @@ local g = vim.g
 opt.title = true
 opt.number = true
 opt.relativenumber = true
---+ if sergey
-opt.laststatus = 3 -- only one status line per session
-opt.showmode = false -- dont print "-- INSERT --"
---+ end
 --+ if !danin
 vim.o.statusline = table.concat({
 	" %<%f %h%w%m%r %{%",
@@ -66,9 +62,6 @@ opt.listchars = {
 	precedes = "«",
 	nbsp = "␣"
 }
-
--- disable mouse
-opt.mouse = {}
 --+ end
 
 -- wrap

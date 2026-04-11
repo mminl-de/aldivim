@@ -53,7 +53,6 @@ end })
 require "lazy".setup({
 	-- colorschemes
 	"loctvl842/monokai-pro.nvim",
-	"folke/tokyonight.nvim",
 	"mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
 	"sainnhe/gruvbox-material",
