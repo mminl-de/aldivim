@@ -83,14 +83,16 @@ opt.scrolloff = 5
 opt.colorcolumn = { 80, 90 }
 
 -- languages
-g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 --+ if sergey
 opt.makeprg = "zig build"
 --+ end
+g.zig_recommended_style = 0 -- disable audacious tab logic overrides by Zig
 g.loaded_node_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
+--+ if !sergey
 -- floating windows
 opt.winborder = "rounded"
+--+ end
