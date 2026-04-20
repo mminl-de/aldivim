@@ -99,9 +99,12 @@ require "which-key".add {
 	{ "<leader>Q", ":restart<cr>", desc = "Restart neovim" },
 	{ "<leader>J",
 		function()
-			local line = vim.api.nvim_get_current_line():gsub("[ \t]*,[ \t]*", ",<cr>")
-			local keys =
-				vim.api.nvim_replace_termcodes("0C" .. line .. "<esc>", true, false, true)
+			local line = vim.api.nvim_get_current_line()
+			local gsubbed = line:gsub("[ \t]*,[ \t]*", ",<cr>")
+			local keys = vim.api.nvim_replace_termcodes(
+				"0C" .. gsubbed .. "<esc>",
+				true, false, true
+			)
 			vim.api.nvim_feedkeys(keys, "n", false)
 		end, desc = "Unjoin a line by comma" },
 	{ "<leader>z", ":wq<cr>", desc = "Save and quit" },

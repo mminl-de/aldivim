@@ -14,7 +14,7 @@ vim.o.statusline = table.concat({
 		"vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin or -1) and",
 		"vim.ui.progress_status()) or",
 		"'''' ')%}%{%",
-	"&showcmdloc == 'statusline' ? '%-10.S ' : '' %}%{%",
+	"'%-10.S ' %}%{%",
 	"exists('b:keymap_name') ? '<'..b:keymap_name..'> ' : '' %}%{%",
 	"&busy > 0 ? '◐ ' : '' %}%{%",
 	"luaeval('(package.loaded[''vim.diagnostic''] and",

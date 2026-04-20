@@ -128,8 +128,7 @@ require "lazy".setup({
 	-- launchers, pickers, prompts and file browser
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
-		event = "VeryLazy",
-		keys = "<leader>e",
+		lazy = false,
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim"
