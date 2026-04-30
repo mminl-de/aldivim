@@ -188,6 +188,7 @@ require "lazy".setup({
 		config = function()
 			local langs = {
 				"c",
+				"cpp",
 				"css",
 				"html",
 				"javascript",
@@ -201,7 +202,6 @@ require "lazy".setup({
 				"norsu",
 				--+ else
 				"bash",
-				"cpp",
 				"dockerfile",
 				"java",
 				"json",
@@ -227,22 +227,6 @@ require "lazy".setup({
 			})
 		end
 	},
-
-	--+ if sergey
-	-- TODO REMOVE
-	-- traverse syntax trees with treesitter
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		branch = "main",
-		init = function() vim.g.no_plugin_maps = true end,
-		config = function()
-			require "nvim-treesitter-textobjects".setup {
-				-- dont pollute the jumplist
-				move = { set_jumps = false }
-			}
-		end
-	},
-	--+ end
 
 	-- always show current scope you're in at the top
 	{

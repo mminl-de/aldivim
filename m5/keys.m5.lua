@@ -93,6 +93,10 @@ require "which-key".add {
 	--+ end
 
 	-- editing
+	--+ if sergey
+	{ "<", "<<", desc = "Indent left" },
+	{ ">", ">>", desc = "Indent right" },
+	--+ end
 	{ "<leader><leader>", ":w<cr>", desc = "Save file" },
 	{ "<leader>s", function() vim.wo.wrap = not vim.wo.wrap end, desc = "Toggle wrap" },
 	{ "<leader>q", ":q!<cr>", desc = "Quit without saving" },
