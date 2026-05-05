@@ -235,7 +235,7 @@ require "lazy".setup({
 		config = function() require "treesitter-context".setup() end
 	},
 
-	--+ if !sergey
+	--+ if danin
 	-- highlight scopes
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -441,7 +441,7 @@ require "lazy".setup({
 		}
 	},
 
-	--+ if !sergey
+	--+ if danin
     -- highlights all occurences of current word
 	{
 		"rrethy/vim-illuminate",
@@ -450,7 +450,9 @@ require "lazy".setup({
 			require "illuminate".configure { min_count_to_highlight = 2 }
 		end
 	},
+	--+ end
 
+	--+ if !sergey
 	"mfussenegger/nvim-dap",
 
 	-- dap UI
