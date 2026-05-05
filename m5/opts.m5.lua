@@ -79,7 +79,7 @@ opt.backup = false
 
 -- scrolloff
 --+ if sergey
-opt.scrolloff = 29
+opt.scrolloff = 32
 --+ else
 opt.scrolloff = 5
 --+ end
