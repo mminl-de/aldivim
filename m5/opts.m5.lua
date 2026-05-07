@@ -32,6 +32,11 @@ vim.cmd.colorscheme "monokai-pro-spectrum"
 vim.cmd.colorscheme "catppuccin-mocha"
 --+ end
 
+--+ if julian
+-- command line
+opt.wildoptions = { "fuzzy" }
+--+ end
+
 -- cursor line
 opt.cursorline = true
 
@@ -74,12 +79,12 @@ opt.backup = false
 
 -- scrolloff
 --+ if sergey
-opt.scrolloff = 29
+opt.scrolloff = 32
 --+ else
 opt.scrolloff = 5
 --+ end
 
--- rulers
+-- column rulers
 opt.colorcolumn = { 80, 90 }
 
 -- languages
