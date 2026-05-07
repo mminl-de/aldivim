@@ -291,6 +291,7 @@ require "lazy".setup({
 					border = "single"
 					--+ end
 				},
+				--+ if !julian
 				signs = {
 					text = {
 						[vim.diagnostic.severity.ERROR] = "",
@@ -299,6 +300,7 @@ require "lazy".setup({
 						[vim.diagnostic.severity.INFO] = "",
 					}
 				},
+				--+ end
 				underline = true,
 				update_in_insert = false,
 			}
