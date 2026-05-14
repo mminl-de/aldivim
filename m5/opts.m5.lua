@@ -56,6 +56,7 @@ opt.expandtab = true
 --+ else
 opt.expandtab = false
 --+ end
+opt.smartindent = true
 
 --+ if sergey
 -- visualize tabs and spaces
@@ -72,6 +73,7 @@ opt.listchars = {
 -- wrap
 opt.wrap = false
 opt.linebreak = true
+opt.breakindent = true
 
 -- backups
 opt.swapfile = false

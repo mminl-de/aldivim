@@ -187,7 +187,8 @@ require "which-key".add {
 		mode = "i",
 
 		-- insert-mode shell behavior
-		{ "<m-backspace>", "<c-w>", desc = "Delete last word" },
+		{ "<m-bs>", "<c-w>", desc = "Delete last word" },
+		{ "<m-s-bs>", "<esc>vBdi", desc = "Delete last WORD" },
 
 		-- navigation
 		{ "<c-h>", "<left>", desc = "Move left" },
@@ -203,8 +204,9 @@ require "which-key".add {
 		end, desc = "Toggle inlay hints" },
 	--+ end
 
+	-- all visual modes
 	{
-		mode = "x", -- all visual modes
+		mode = "x",
 
 		--+ if sergey
 		{ "<f1>",
