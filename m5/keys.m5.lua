@@ -179,7 +179,13 @@ require "which-key".add {
 			vim.cmd.bprev()
 			vim.cmd.bdelete(bufnr)
 		end, desc = "Delete buffer" },
-	{ "<leader>X", ":%bd|e#<cr>", desc = "Delete all other buffers" },
+	{ "<leader>X",
+		function()
+			vim.cmd "%bdelete"
+			local empty_bufnr = vim.api.nvim_win_get_buf(0)
+			vim.cmd.edit "#"
+			vim.cmd.bdelete(empty_bufnr)
+		end, desc = "Delete all other buffers" },
 	--+ if sergey
 	{ "<leader>i", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
 
