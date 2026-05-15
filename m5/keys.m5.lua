@@ -167,6 +167,10 @@ require "which-key".add {
 		end, desc = "Show symbol information" },
 	--+ end
 
+	--+ if !sergey
+	{ "gd", "<c-]>", desc = "Working gd" },
+	--+ end
+
 	-- etc
 	{ "<esc>", ":noh<cr>", desc = "Remove search highlights" },
 	{ "<leader>m", ":make<cr>", desc = "Run compiler command" },
