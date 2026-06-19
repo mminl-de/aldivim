@@ -374,6 +374,15 @@ require "lazy".setup({
 	},
 	--+ end
 
+	--+ if danin
+	-- inline git diff and blame
+	{
+		"lewis6991/gitsigns.nvim",
+		lazy = false,
+		config = true
+	},
+	--+ end
+
 	--+ if !julian
 	-- lsp loading notification
 	{
@@ -394,15 +403,14 @@ require "lazy".setup({
 			ap.setup { check_ts = true }
 
 			-- space expansion: {|} -> { | }
-			local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+			local brackets = { { "(", ")" }, { "{", "}" } }
 			ap.add_rules {
 				Rule(" ", " ")
 				:with_pair(function (opts)
 					local pair = opts.line:sub(opts.col - 1, opts.col)
 					return vim.tbl_contains({
 						brackets[1][1] .. brackets[1][2],
-						brackets[2][1] .. brackets[2][2],
-						brackets[3][1] .. brackets[3][2],
+						brackets[2][1] .. brackets[2][2]
 					}, pair)
 				end)
 			}

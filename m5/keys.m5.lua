@@ -140,13 +140,19 @@ require "which-key".add {
 		end, desc = "View LSP diagnostics" },
 	{ "<leader>e", telescope.extensions.file_browser.file_browser, desc = "Browse files" },
 	{ "<leader>f", builtin.find_files, desc = "Find files in this directory" },
-	{ "<leader>g", builtin.live_grep, desc = "Grep in this directory" },
+	{ "<leader>/", builtin.live_grep, desc = "Grep in this directory" },
 	--+ if sergey
 	{ "<leader>r", builtin.resume, desc = "Open last Telescope picker" },
 	--+ end
+	{ "<leader>g", group = "git" },
+	{ "<leader>gb", builtin.git_branches, desc = "Find git branches" },
+	{ "<leader>gf", builtin.git_files, desc = "Find git-tracked files" },
+	{ "<leader>gs", builtin.git_status, desc = "View git status" },
+	{ "<leader>gl", builtin.git_commits, desc = "Find git commits" },
 
 	-- terminal
-	{ "<leader>t", ":te<cr>", desc = "Open terminal" },
+	{ "<leader>t", ":te<cr>i", desc = "Open terminal" },
+	{ "<leader>T", ":te<cr>:se ls=0<cr>a", desc = "Enter hacker mode" },
 
 	-- lsp
 	--+ if sergey
@@ -185,7 +191,7 @@ require "which-key".add {
 		end, desc = "Delete buffer" },
 	{ "<leader>X",
 		function()
-			vim.cmd "%bdelete"
+			vim.cmd "%bdelete!"
 			local empty_bufnr = vim.api.nvim_win_get_buf(0)
 			vim.cmd.edit "#"
 			vim.cmd.bdelete(empty_bufnr)
@@ -198,13 +204,7 @@ require "which-key".add {
 
 		-- insert-mode shell behavior
 		{ "<m-bs>", "<c-w>", desc = "Delete last word" },
-		{ "<m-s-bs>", "<esc>vBdi", desc = "Delete last WORD" },
-
-		-- navigation
-		{ "<c-h>", "<left>", desc = "Move left" },
-		{ "<c-j>", "<down>", desc = "Move down" },
-		{ "<c-k>", "<up>", desc = "Move up" },
-		{ "<c-l>", "<right>", desc = "Move right" }
+		{ "<m-s-bs>", "<c-o>vBd", desc = "Delete last WORD" },
 	},
 	--+ else
 	{ "<leader>y", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
@@ -236,7 +236,8 @@ require "which-key".add {
 
 		-- lsp
 		{ "<f2>", vim.lsp.buf.rename, desc = "Rename symbol under cursor" },
-		{ "<f1>", function()
+		{ "<f1>",
+			function()
 				vim.cmd.help(vim.fn.expand "<cword>")
 			end, desc = "Open help page for word under cursor" }
 	},
@@ -270,12 +271,12 @@ require "which-key".add {
 		{ "<leader>Db", dap.toggle_breakpoint, desc = "DAP Toggle breakpoint" },
 		{ "<leader>Bb", dap.toggle_breakpoint, desc = "DAP Toggle breakpoint" },
 		{ "<leader>Dt", dap.terminate, desc = "DAP Terminate" },
+		{ "<f1>", dap.run_last, desc = "DAP Run last" },
 		{ "<f4>", dap.run, desc = "DAP Run" },
 		{ "<f5>", dap.step_over, desc = "DAP Step over" },
 		{ "<f6>", dap.step_into, desc = "DAP Step into" },
 		{ "<f7>", dap.continue, desc = "DAP Continue" },
 		{ "<f8>", dap.step_out, desc = "DAP Step out" },
-		{ "<f1>", dap.run_last, desc = "DAP Run last" },
 	},
 	--+ end
 }
