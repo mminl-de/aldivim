@@ -58,6 +58,7 @@ require "which-key".add {
 	{ "<leader>nl", ":e ~/.config/nvim/m5/lsp.m5.lua<cr>", desc = "Open aldivim's lsp config" },
 	{ "<leader>no", ":e ~/.config/nvim/m5/opts.m5.lua<cr>", desc = "Open aldivim's core config" },
 	{ "<leader>np", ":e ~/.config/nvim/m5/lazy.m5.lua<cr>", desc = "Open aldivim's plugin config" },
+	{ "<leader>ns", ":e ~/.config/nvim/m5/statusline.m5.lua<cr>", desc = "Open aldivim's statusline config" },
 
 	-- other configs
 	{ "<leader>,", group = "config" },

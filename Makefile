@@ -15,6 +15,7 @@ j julian:
 	m5 -p:--+ -d:julian -o:lua/aldivim/opts.lua m5/opts.m5.lua
 	m5 -p:--+ -d:julian -o:lua/aldivim/lsp.lua m5/lsp.m5.lua
 	m5 -p:--+ -d:julian -o:lua/aldivim/dap.lua m5/dap.m5.lua
+	m5 -p:--+ -d:julian -o:lua/aldivim/statusline.lua m5/statusline.m5.lua
 
 s sergey:
 	mkdir -p lua/aldivim
@@ -23,6 +24,7 @@ s sergey:
 	m5 -p:--+ -d:sergey -o:lua/aldivim/lazy.lua m5/lazy.m5.lua
 	m5 -p:--+ -d:sergey -o:lua/aldivim/opts.lua m5/opts.m5.lua
 	m5 -p:--+ -d:sergey -o:lua/aldivim/lsp.lua m5/lsp.m5.lua
+	m5 -p:--+ -d:sergey -o:lua/aldivim/statusline.lua m5/statusline.m5.lua
 	rm -f lua/aldivim/dap.lua
 
 root-sergey:
