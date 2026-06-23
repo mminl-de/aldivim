@@ -9,6 +9,7 @@ opt.relativenumber = true
 --+ if !danin
 vim.o.statusline = table.concat({
 	" %<%f %h%w%m%r %{%",
+	"get(b:,'gitsigns_status','') %}%{%",
 	"v:lua.require('vim._core.util').term_exitcode() %}%=%{%",
 	"luaeval('(package.loaded[''vim.ui''] and",
 		"vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin or -1) and",
