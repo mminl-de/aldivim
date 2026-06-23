@@ -149,6 +149,14 @@ require "which-key".add {
 	{ "<leader>gf", builtin.git_files, desc = "Find git-tracked files" },
 	{ "<leader>gs", builtin.git_status, desc = "View git status" },
 	{ "<leader>gl", builtin.git_commits, desc = "Find git commits" },
+	--+ if !julian
+	{ "<leader>gg", group = "gitsigns" },
+	{ "<leader>ggb", ":Gitsigns blame<cr>", desc = "Open blame" },
+	{ "<leader>ggd", ":Gitsigns diffthis HEAD<cr>", desc = "Diff with HEAD" },
+	{ "<leader>ggl", ":Gitsigns toggle_current_line_blame<cr>", desc = "Toggle current line blame" },
+	{ "<leader>ggs", ":Gitsigns toggle_signs<cr>", desc = "Toggle guffer signs" },
+	{ "<leader>ggw", ":Gitsigns toggle_word_diff<cr>", desc = "Toggle word diffs" },
+	--+ end
 
 	-- terminal
 	{ "<leader>t", ":te<cr>i", desc = "Open terminal" },
@@ -204,7 +212,7 @@ require "which-key".add {
 
 		-- insert-mode shell behavior
 		{ "<m-bs>", "<c-w>", desc = "Delete last word" },
-		{ "<m-s-bs>", "<c-o>vBd", desc = "Delete last WORD" },
+		{ "<m-s-bs>", "<c-o>cB", desc = "Delete last WORD" },
 	},
 	--+ else
 	{ "<leader>y", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },

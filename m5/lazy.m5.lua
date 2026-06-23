@@ -372,14 +372,15 @@ require "lazy".setup({
 			hint_enable = false
 		}
 	},
-	--+ end
 
-	--+ if danin
 	-- inline git diff and blame
 	{
 		"lewis6991/gitsigns.nvim",
 		lazy = false,
-		config = true
+		opts = {
+			word_diff = true,
+			current_line_blame_opts = { delay = 0 }
+		}
 	},
 	--+ end
 
