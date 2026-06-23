@@ -212,7 +212,7 @@ require "which-key".add {
 
 		-- insert-mode shell behavior
 		{ "<m-bs>", "<c-w>", desc = "Delete last word" },
-		{ "<m-s-bs>", "<c-o>cB", desc = "Delete last WORD" },
+		{ "<m-s-bs>", "<esc>vBc", desc = "Delete last WORD" },
 	},
 	--+ else
 	{ "<leader>y", ":ColorizerToggle<cr>", desc = "Toggle hex colorizer" },
